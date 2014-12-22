@@ -23,7 +23,7 @@ $(document).ready(function() {
 	
 
 	
-	$('#logout').click(function(){ 
+	$('#loggingout').click(function(){ 
         
 		ref.unauth();
 		location.reload();  

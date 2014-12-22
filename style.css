@@ -6100,6 +6100,54 @@ header .container {
   display: inline-block;
   color: #777777;
 }
+#logout {
+  position: absolute;
+  top: 7px;
+  right: 200px;
+  font-size: 12px;
+  z-index: 101;
+  height: 50px;
+  line-height: 40px;
+  padding-right: 10px;
+}
+#logout i {
+  font-size: 18px;
+  padding: 0 6px;
+  display: inline-block;
+  color: #777777;
+}
+#compare {
+  position: absolute;
+  top: 7px;
+  right: 100px;
+  font-size: 12px;
+  z-index: 101;
+  height: 50px;
+  line-height: 40px;
+  padding-right: 10px;
+}
+#compare i {
+  font-size: 18px;
+  padding: 0 6px;
+  display: inline-block;
+  color: #777777;
+}
+#manage {
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  font-size: 12px;
+  z-index: 101;
+  height: 50px;
+  line-height: 40px;
+  padding-right: 10px;
+}
+#manage i {
+  font-size: 18px;
+  padding: 0 6px;
+  display: inline-block;
+  color: #777777;
+}
 /* =Slider and Large Photo headers
 -------------------------------------------------------------- */
 .flexslider {
