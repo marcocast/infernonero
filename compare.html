@@ -17,6 +17,9 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="apple-touch-fa-57x57-precomposed.png">
 <link rel="shortcut icon" href="favicon.png">
+<link href="twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="jasny-bootstrap/css/jasny-bootstrap.min.css" media="screen">
+   
 <script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
 </head>
 <body>
@@ -26,86 +29,93 @@
                <div class="navbar-header"><a class="navbar-brand" href="index.html"> <img src="images/restart_logo.png" alt="optional logo" height="90" width="90"> <span class="logo_title">Social<strong>Match</strong></span> <span class="logo_subtitle"> compare any <strong>2</strong> things and ask for <strong>your friends</strong> opinion.</span> </a><a class="btn btn-navbar btn-default navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="nb_left pull-left"> <span class="fa fa-reorder"></span></span> <span class="nb_right pull-right">menu</span> </a></div>
                
           </div>
-          <div id="social_media_wrapper"> <a id="login_facebook_up" class="fb" href="#facebook"><i class="fa fa-facebook"></i></a> <a id="login_twitter_up" href="#twitter"><i class="fa fa-twitter"></i></a> <a id="login_google_up" href="#googleplus"><i class="fa fa-google-plus"></i></a> </div>
-          <div id="sign"><a href="register.html"><i class="fa fa-user"></i><span>Register/Sign in</span></a></div>
           <div id="logout"><a id="loggingout" href="#logout"><i class="fa fa-user"></i><span>Logout</span></a></div>
           <div id="compare"><a href="compare.html"><i class="fa fa-user"></i><span>Compare</span></a></div>
           <div id="manage"><a href="manage.html"><i class="fa fa-user"></i><span>Manage</span></a></div>
      </div>
 </header>
-<section id="slider_wrapper" class="slider_wrapper full_page_photo">
-     <div id="main_flexslider" class="flexslider">
-          <ul class="slides">
-               <li class="item" style="background-image: url(images/1.jpg)">
-                    <div class="container">
-                         <div class="carousel-caption">
-                              <p class="lead skincolored">Social<strong>Match</strong> compare any <strong>2</strong> things and ask for <strong>your friends</strong> opinion.</p>
-                              <span class="round_badge"><strong><i class="fa fa-twitter"></i></strong><strong>V3</strong></span> </div>
-                    </div>
-               </li>
-               <li class="item" style="background-image: url(images/2.jpg)">
-                    <div class="container">
-                         <div class="carousel-caption">
-                              <h1>makes <strong>real use</strong><br>
-                                   of the power of <strong>{LESS}</strong> syntax!</h1>
-                              <p class="lead skincolored">Restart was built with heavy use of {less} technology, making the life of the web developer easier!</p>
-                         </div>
-                    </div>
-               </li>
-               <li class="item" style="background-image: url(images/3.jpg)">
-                    <div class="container">
-                         <div class="carousel-caption">
-                              <h1 class="skincolored"><strong>subtle</strong> animations<br>
-                                   &amp; a <strong>fresh</strong> collapsing <strong>header effect</strong></h1>
-                              <p class="lead">if you are looking for <a href="services.html"><strong>a bold approach</strong></a> you will love the header effect,<br>
-                                   but even if you like <a href="page_alternative.html"><strong>a more conservative feel</strong></a>, you can always try the boxed alternative!</p>
-                         </div>
-                    </div>
-               </li>
-          </ul>
-     </div>
-</section>
+
 <div class="main">
      <div class="container">
-          <section class="call_to_action">
-               <h3>focus on what’s important</h3>
-               <h4>and  make the web a little bit  prettier</h4>
-               <a class="btn btn-primary btn-lg" href="#">Buy this theme!</a></section>
-          <section class="features_teasers_wrapper">
+     	<form role="form">
+     	<fieldset>
+     	<section class="hgroup">
+               <h1>Enter a title for your match</h1>
+               <input id="txt_title" type="text" class="form-control" placeholder="One VS Two">
+               
+          </section>
+          <section>
                <div class="row">
-                    <div class="feature_teaser col-sm-4 col-md-4"> <img alt="responsive" src="images/responsive.png">
-                         <h3>Clean, Responsive Design</h3>
-                         <p>A multipurpose but mainly<strong> business oriented</strong> design, built to serve as a foundation for your web projects. Suspendisse nec risus fermentum sapien congue fermentum sed at lorem.</p>
+               
+               
+                    <div class="col-sm-6 col-md-6">
+	                    <div class="fileinput fileinput-new" data-provides="fileinput">
+	                         <div class="signin">
+	                         
+	                         
+							  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 400px; height: 350px;"></div>
+							  <div id="one_box"></div>
+							  <br>
+	                              
+	                          <div class="row">
+	                               <div class="col-lg-6"><input type="text" class="form-control" id="txt_one_box" placeholder="Enter something" name="txt_one_box" /></div>
+	                               <div class="col-lg-6">
+	                          
+	                              <span class="btn btn-default btn-file">
+								    <span class="fileinput-new">Select image</span>
+								    <span class="fileinput-exists">Change</span><input type="file" name="...">
+								 </span>
+							    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+	                                         
+	                               </div>
+	                          </div>
+	                         </div>
+	                    </div>
                     </div>
-                    <div class="feature_teaser col-sm-4 col-md-4"> <img alt="responsive" src="images/git.png">
-                         <h3>Based on Twitter Bootstrap</h3>
-                         <p>The front-end development framework with a <strong>steep learning curve</strong>. It changes the way you develop sites. Suspendisse nec risus fermentum sapien congue fermentum sed at lorem.</p>
+                    
+                    
+                    <div class="col-sm-6 col-md-6">
+	                    <div class="fileinput fileinput-new" data-provides="fileinput">
+	                         <div class="signin">
+	                         
+	                         
+							  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 400px; height: 350px;"></div>
+							  <div id="two_box"></div>
+							  <br>
+	                              
+	                          <div class="row">
+	                               <div class="col-lg-6"><input type="text" class="form-control" id="txt_two_box" placeholder="Enter something" name="txt_two_box" /></div>
+	                               <div class="col-lg-6">
+	                          
+	                              <span class="btn btn-default btn-file">
+								    <span class="fileinput-new">Select image</span>
+								    <span class="fileinput-exists">Change</span><input type="file" name="...">
+								 </span>
+							    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+	                                         
+	                               </div>
+	                          </div>
+	                         </div>
+	                    </div>
                     </div>
-                    <div class="feature_teaser col-sm-4 col-md-4"> <img alt="responsive" src="images/less.png">
-                         <h3>Makes real use of {LESS}</h3>
-                         <p><strong>Restart</strong> comes with a style.less file that tries to use all the power of <strong>{less} and bootstrap combined</strong>. Suspendisse nec risus fermentum sapien congue fermentum sed at lorem.</p>
+                    
+               </div>
+          </section>
+          <section>
+               <div class="row">
+                    <div class="col-sm-12 col-md-12" >
+                    	<a id="save_submit_btn" class="btn btn-primary" name="save">Save</a>
                     </div>
                </div>
           </section>
+          	
+          </fieldset>
+          </form>
           
-          <section class="clients_section wow animated fadeInUp">
-               <h2 class="section_header elegant centered">Our clients<small>all of them are satisfied</small></h2>
-               <div class="clients_list"> <a href="#"><img src="images/clients/wordpress.jpg" alt="client"></a> <a href="#"><img src="images/clients/jquery.jpg" alt="client"></a> <a href="#"><img src="images/clients/microlancer.jpg" alt="client"></a> <a href="#"><img src="images/clients/bbpress.jpg" alt="client"></a> <a href="#"><img src="images/clients/wpml.jpg" alt="client"></a> </div>
-          </section>
+          
      </div>
      <footer>
-          <section class="twitter_feed_wrapper">
-               <div class="container">
-                    <div class="row wow animated fadeInUp">
-                         <div class="twitter_feed_icon col-sm-1 col-md-1"><a href="#twitter"><i class="fa fa-twitter"></i></a></div>
-                         <div class="col-sm-11 col-md-11">
-                              <blockquote>
-                                   <p>This Clean, Flexible, Multipurpose Bootstrap 3.1.1 HTML5 Template will soon become a Wordpress theme with great support!  <a href="#">http://unhub.com/LIot</a></p>
-                                   — LeonArt (@leonartgr) <a href="https://twitter.com/plethorathemes/">April 4, 2014</a></blockquote>
-                         </div>
-                    </div>
-               </div>
-          </section>
+          
           <section id="footer_teasers_wrapper">
                <div class="container">
                     <div class="row">
@@ -160,7 +170,8 @@
 <script type="text/javascript" src="js/restart_theme.js"></script>
 <script type="text/javascript" src="js/collapser.js"></script>
 <script type="text/javascript" src="js/collapser.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+<script type="text/javascript" src="js/compare.js"></script>
 
 </body>
 </html>
