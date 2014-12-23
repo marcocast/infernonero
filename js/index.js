@@ -55,7 +55,7 @@ $(document).ready(function() {
         		console.log("Login Failed!", error);
     		} else {
         		console.log("Authenticated successfully with payload:", authData);
-        		location.reload();
+        		
     		}
     	});
     
@@ -68,7 +68,7 @@ $(document).ready(function() {
         		console.log("Login Failed!", error);
     		} else {
         		console.log("Authenticated successfully with payload:", authData);
-        		location.reload();
+        		
     		}
     	});
     
@@ -82,7 +82,7 @@ $(document).ready(function() {
         		console.log("Login Failed!", error);
     		} else {
         		console.log("Authenticated successfully with payload:", authData);
-        		location.reload();
+        		
     		}
     	});
     
