@@ -21,13 +21,6 @@
 <link rel="stylesheet" href="jasny-bootstrap/css/jasny-bootstrap.min.css" media="screen">
    
 <script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">
-        stLight.options({
-                publisher:'be66f13c-f7cb-4326-82dc-faf93984b835',
-        });
-</script>
 </head>
 <body>
 <header>
@@ -44,9 +37,7 @@
      	<form role="form">
      	<fieldset>
      	<section class="hgroup">
-               <h1>Enter a title for your match</h1>
-               <input id="txt_title" type="text" class="form-control" placeholder="One VS Two">
-               
+               <h1 id="txt_title">Enter a title for your match</h1>               
           </section>
           <section>
                <div class="row">
@@ -58,15 +49,9 @@
 	                         
 	                          <div id="fileDisplayAreaOne" style="width: 400px; height: 300px;"></div>
 							  <div id="one_box"></div>
-							  <br>
+							 
 	                              
-	                          <div class="row">
-	                               <input type="text" class="form-control" id="txt_one_box" placeholder="Enter something" name="txt_one_box" />
 	                          
-										<input type="file" id="fileInputOne">
-									
-	                                         
-	                          </div>
 	                         </div>
 	                    </div>
                     </div>
@@ -79,34 +64,16 @@
 	                         
 							  <div id="fileDisplayAreaTwo" style="width: 400px; height: 300px;"></div>
 							  <div id="two_box"></div>
-							  <br>
+							 
 	                              
-	                          <div class="row">
-	                              <input type="text" class="form-control" id="txt_two_box" placeholder="Enter something" name="txt_two_box" />
-	                             	                          
-	                              <input type="file" id="fileInputTwo">
-	                                         
-	                               
-	                          </div>
+	                          
 	                         </div>
 	                    </div>
                     </div>
                     
                </div>
           </section>
-          <section>
-               <div class="row">
-                    <div class="col-sm-12 col-md-12" >
-                    	<a id="save_submit_btn" class="btn btn-primary" name="save">Save</a>
-                    	<span id="share_facebook_button"></span>
-                    	<span id="share_twitter_button"></span>
-                    	<span id="share_linkedin_button"></span>
-                    	<span id="share_whatsapp_button"></span>
-                    	<span id="share_email_button"></span>
-                    	
-                    </div>
-               </div>
-          </section>
+         
           	
           </fieldset>
           </form>
@@ -170,7 +137,7 @@
 <script type="text/javascript" src="js/collapser.js"></script>
 <script type="text/javascript" src="js/collapser.js"></script>
 <script type="text/javascript" src="jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
-<script type="text/javascript" src="js/compare.js"></script>
+<script type="text/javascript" src="js/vote.js"></script>
 
 </body>
 </html>
