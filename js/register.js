@@ -3,7 +3,11 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 var authData = ref.getAuth();
 if (authData) {
-	window.location.href = "/index.html";  
+	if(authData.provider === "password"){
+		history.go(-1);
+	}else{
+		history.go(-2);
+	}
 }
 
 	

@@ -1,16 +1,20 @@
-var ref = new Firebase("https://infernonero.firebaseio.com");
 
-var authData = ref.getAuth();
 
-$(function() {
+
+$(document).ready(function() {
+	
 	
 	var idx = window.location.href.indexOf('#');
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
 	if (hash === '') {
 	} else {
 		var f = new Firebase('https://infernonero.firebaseio.com/compares/' + hash );
+		var tot_one = 0;
+		var tot_two = 0;
+		
 		f.once('value', function(snap) {
-			
+
+
 		var txt_one = snap.child("txt_one").val();
 		if (txt_one != null) {
 			$('#one_box').html(txt_one);
@@ -25,7 +29,18 @@ $(function() {
 		if (txt_title != null) {
 			$('#txt_title').html(txt_title);
 		} 	
-			
+		
+		var vote_one = snap.child("vote_one").val();
+		if (vote_one != null) {
+			$('#result_one').html(vote_one);
+			tot_one = parseInt(vote_one);
+		} 
+		
+		var vote_two = snap.child("vote_two").val();
+		if (vote_two != null) {
+			$('#result_two').html(vote_two);
+			tot_two = parseInt(vote_two);
+		} 
 			
 			
 		var payloadOne = snap.child("file_one").val();
@@ -42,22 +57,48 @@ $(function() {
 		} 
 		
 		
-		
-
-		
 		});
+		
+		$('#vote_one').click(function(){ 
+			
+			var ref = new Firebase("https://infernonero.firebaseio.com");
+
+			var authData = ref.getAuth();
+			if (authData) {
+				f.update({
+			    	"vote_one" : tot_one + parseInt(1)
+			    });
+			    $('#result_one').html(tot_one + parseInt(1));
+			    $('#vote_one').hide();
+			    $('#vote_two').hide();
+			}else{
+				window.location.href = "/register.html";  
+			}
+
+		    
+	    });
+		
+        $('#vote_two').click(function(){ 
+        	
+        	var ref = new Firebase("https://infernonero.firebaseio.com");
+
+        	var authData = ref.getAuth();
+        	if (authData) {
+        		f.update({
+    		    	"vote_two" : tot_two + parseInt(1)
+    		    });
+    		    $('#result_two').html(tot_two + parseInt(1));
+    		    $('#vote_two').hide();
+    		    $('#vote_one').hide();
+        	}else{
+        		window.location.href = "/register.html";  
+        	}
+        
+	    });
 	}
-});
-
-
-
-
-
-$(document).ready(function() {
-	
 	
 
-   
+	
    
   
 });

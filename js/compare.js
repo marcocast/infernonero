@@ -116,6 +116,8 @@ $(document).ready(function() {
 		  file_one: filePayloadOne,
 		  txt_two: txt_two,
 		  file_two: filePayloadTwo,
+		  vote_one: parseInt(0),
+		  vote_two: parseInt(0)
 	  });
 	  
 	  
