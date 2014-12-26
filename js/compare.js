@@ -106,11 +106,12 @@ $(document).ready(function() {
 	  var txt_two =  $('#txt_two_box').val();
 	  
 	  
-	 
+	 var now = new Date().getTime();
 	  
 	  var postsRef = ref.child("compares");
 	  var newMessageRef = postsRef.push({
 		  user_id: authData.uid,
+		  date: now,
 		  txt_title: txt_title,
 		  txt_one: txt_one,
 		  file_one: filePayloadOne,
@@ -120,8 +121,16 @@ $(document).ready(function() {
 		  vote_two: parseInt(0)
 	  });
 	  
+	 
 	  
 	  var postID = newMessageRef.key();
+	  
+	  ref.child("users-compares").child(authData.uid).push({
+		  compare_id : postID,
+		  compare_date : now
+		});
+	  
+	  
 	  var urlToShare = "https://infernonero.firebaseapp.com/vote.html#"+postID;
   	
 	  stWidget.addEntry({
