@@ -9,6 +9,13 @@ if (authData) {
 
 $(document).ready(function() {
 	
+	$('#loggingout').click(function(){ 
+	        
+			ref.unauth();
+			window.location.href = "/index.html";  
+	        
+	    });
+	
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/"+authData.uid);
 	// Attach an asynchronous callback to read the data at our posts reference
 	refCompares.once("value", function(snapshot) {

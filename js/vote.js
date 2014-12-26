@@ -1,7 +1,17 @@
+var ref = new Firebase("https://infernonero.firebaseio.com");
 
 
 
 $(document).ready(function() {
+	
+	
+	$('#loggingout').click(function(){ 
+        
+		ref.unauth();
+		window.location.href = "/index.html";  
+        
+    });
+
 	
 	
 	var idx = window.location.href.indexOf('#');
@@ -9,7 +19,6 @@ $(document).ready(function() {
 	if (hash === '') {
 	} else {
 		
-		var ref = new Firebase("https://infernonero.firebaseio.com");
 
 		var authData = ref.getAuth();
 		if (authData) {
