@@ -17,6 +17,7 @@ $(document).ready(function() {
 	var idx = window.location.href.indexOf('#');
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
 	if (hash === '') {
+		alert("hash === vuoto");
 		window.location.href = "/404.html";  
 	} else {
 		
@@ -25,16 +26,13 @@ $(document).ready(function() {
 		if (authData) {
 			
 			ref.child("votes").child(authData.uid).child(hash).once("value", function(snap) {
-				    if(snap.val() === null){
-				    	window.location.href = "/404.html";  
-				    }else{
+				    				    	
+		    	if(snap.child("vote").val() === null){
+				}else{
+					$('#vote_one').hide();
+				    $('#vote_two').hide();
+				}
 				    	
-				    	if(snap.child("vote").val() === null){
-						}else{
-							$('#vote_one').hide();
-						    $('#vote_two').hide();
-						}
-				    }			
 					
 			});
 					    
