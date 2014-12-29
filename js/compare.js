@@ -9,6 +9,10 @@ if (authData) {
 
 $(document).ready(function() {
 	
+	$('#ask_submit_btn').hide();
+	$('#edit_submit_btn').hide();
+	$('#remove_submit_btn').hide();
+	
 	var filePayloadOne = "";
 	var fileInputOne = document.getElementById('fileInputOne');
 	fileInputOne.files[0] = null;
@@ -92,12 +96,18 @@ $(document).ready(function() {
 	   $('#two_box').html(description);
        
    });
-    
+   
+   
+  var postID ="";  
+  var usersComparesID ="";  
    
   $('#save_submit_btn').click(function(){ 
 	  
 	  
 	  $('#save_submit_btn').hide();
+	  $('#edit_submit_btn').show();
+	  $('#remove_submit_btn').show();
+	  $('#ask_submit_btn').show();
 	  
 	  var reader = new FileReader();
       
@@ -124,14 +134,85 @@ $(document).ready(function() {
 	 
 	  var description = txt_one + " VS " + txt_two;
 	  
-	  var postID = newMessageRef.key();
+	  postID = newMessageRef.key();
 	  
-	  ref.child("users-compares").child(authData.uid).push({
+	  var newUserComparesRef =ref.child("users-compares").child(authData.uid).push({
 		  compare_id : postID,
 		  compare_date : now
 		});
 	  
 	  
+	  usersComparesID = newUserComparesRef.key();
+        
+    }); 
+  
+  
+  
+  $('#edit_submit_btn').click(function(){ 
+  	  
+      
+  	  var reader = new FileReader();
+        
+  	  var txt_title =  $('#txt_title').val();
+  	  var txt_one =  $('#txt_one_box').val();
+  	  var txt_two =  $('#txt_two_box').val();
+  	  
+  	  
+  	 var now = new Date().getTime();
+  	  
+  	  var postsRef = ref.child("compares").child(postID);
+  	  postsRef.update({
+  		  user_id: authData.uid,
+  		  date: now,
+  		  txt_title: txt_title,
+  		  txt_one: txt_one,
+  		  file_one: filePayloadOne,
+  		  txt_two: txt_two,
+  		  file_two: filePayloadTwo,
+  		  vote_one: parseInt(0),
+  		  vote_two: parseInt(0)
+  	  });
+  	  
+  		  	  
+  	  
+          
+      });  
+    
+    $('#remove_submit_btn').click(function(){ 
+	  	  
+	  	  
+	  	  var comparesRef = ref.child("compares").child(postID);
+	  	  comparesRef.remove();
+	  	  
+	  	  var usersComparesRef = ref.child("users-compares").child(authData.uid).child(usersComparesID);
+	  	  usersComparesRef.remove();
+	  	  
+	  	  var votesRef = ref.child("votes").child(postID);
+	  	  votesRef.remove();	
+	  	  
+	  	  window.location.href = "/user-compares.html";  
+	          
+	     });  
+  
+  
+  
+  
+   $('#ask_submit_btn').click(function(){ 
+	  
+	  $('#edit_submit_btn').hide();
+	  $('#remove_submit_btn').hide();
+	  $('#ask_submit_btn').hide();
+	  
+	  var reader = new FileReader();
+      
+	  var txt_title =  $('#txt_title').val();
+	  var txt_one =  $('#txt_one_box').val();
+	  var txt_two =  $('#txt_two_box').val();
+	  
+	 
+	  var description = txt_one + " VS " + txt_two;
+	  
+  
 	  var urlToShare = "https://infernonero.firebaseapp.com/vote.html#"+postID;
 	  
   	

@@ -4,7 +4,7 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 $(document).ready(function() {
 	
-	
+
 	$('#loggingout').click(function(){ 
         
 		ref.unauth();
@@ -155,9 +155,6 @@ $(document).ready(function() {
 			    
 			    $('#edit_submit_btn').click(function(){ 
 			  	  
-			    	
-			      $('#edit_submit_btn').hide();
-			      $('#remove_submit_btn').hide();
 			  	    	  
 			  	  var reader = new FileReader();
 			        
@@ -181,69 +178,8 @@ $(document).ready(function() {
 			  		  vote_two: parseInt(0)
 			  	  });
 			  	  
-			  	 
-			  	  var description = txt_one + " VS " + txt_two;
+			  		  	  
 			  	  
-			  	  var postID = snap.child("compare_id").val();
-			  	  	  	  
-			  	  var urlToShare = "https://infernonero.firebaseapp.com/vote.html#"+postID;
-			  	  
-			  	  
-			    	
-			  	  stWidget.addEntry({
-			            "service":"facebook",
-			            "element":document.getElementById('share_facebook_button'),
-			            "url":urlToShare,
-			            "title":txt_title,
-			            "type":"large",
-			            "text":txt_title ,
-			            "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
-			            "summary":description
-			  	  });
-			    	
-			    	stWidget.addEntry({
-			          "service":"twitter",
-			          "element":document.getElementById('share_twitter_button'),
-			          "url":urlToShare,
-			          "title":txt_title,
-			          "type":"large",
-			          "text":txt_title ,
-			          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
-			          "summary":description
-			  	  });
-			    	
-			    	stWidget.addEntry({
-			          "service":"linkedin",
-			          "element":document.getElementById('share_linkedin_button'),
-			          "url":urlToShare,
-			          "title":txt_title,
-			          "type":"large",
-			          "text":txt_title ,
-			          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
-			          "summary":description
-			  	  });
-			    	
-			    	stWidget.addEntry({
-			          "service":"whatsapp",
-			          "element":document.getElementById('share_whatsapp_button'),
-			          "url":urlToShare,
-			          "title":txt_title,
-			          "type":"large",
-			          "text":txt_title ,
-			          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
-			          "summary":description
-			  	  });
-			    	
-			    	stWidget.addEntry({
-			          "service":"email",
-			          "element":document.getElementById('share_email_button'),
-			          "url":urlToShare,
-			          "title":txt_title,
-			          "type":"large",
-			          "text":txt_title ,
-			          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
-			          "summary":description
-			  	  });
 			          
 			      });  
 			    
@@ -256,12 +192,94 @@ $(document).ready(function() {
 				  	  var usersComparesRef = ref.child("users-compares").child(authData.uid).child(hash);
 				  	  usersComparesRef.remove();
 				  	  
-				  	  var votesRef = ref.child("votes").child(authData.uid).child(snap.child("compare_id").val());
-				  	  usersComparesRef.remove();	
+				  	  var votesRef = ref.child("votes").child(snap.child("compare_id").val());
+				  	  votesRef.remove();	
 				  	  
 				  	  window.location.href = "/user-compares.html";  
 				          
 				     });  
+			    
+			    $('#ask_submit_btn').click(function(){ 
+				  	  
+			    	
+			    	$('#edit_submit_btn').hide();
+				  	$('#remove_submit_btn').hide();
+				  	$('#ask_submit_btn').hide();
+				  	    	  
+				  	  var reader = new FileReader();
+				        
+				  	  var txt_title =  $('#txt_title').val();
+				  	  var txt_one =  $('#txt_one_box').val();
+				  	  var txt_two =  $('#txt_two_box').val();
+				  	  
+				  	  
+				  	 
+				  	 
+				  	  var description = txt_one + " VS " + txt_two;
+				  	  
+				  	  var postID = snap.child("compare_id").val();
+				  	  	  	  
+				  	  var urlToShare = "https://infernonero.firebaseapp.com/vote.html#"+postID;
+				  	  
+				  	  
+				    	
+				  	  stWidget.addEntry({
+				            "service":"facebook",
+				            "element":document.getElementById('share_facebook_button'),
+				            "url":urlToShare,
+				            "title":txt_title,
+				            "type":"large",
+				            "text":txt_title ,
+				            "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+				            "summary":description
+				  	  });
+				    	
+				    	stWidget.addEntry({
+				          "service":"twitter",
+				          "element":document.getElementById('share_twitter_button'),
+				          "url":urlToShare,
+				          "title":txt_title,
+				          "type":"large",
+				          "text":txt_title ,
+				          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+				          "summary":description
+				  	  });
+				    	
+				    	stWidget.addEntry({
+				          "service":"linkedin",
+				          "element":document.getElementById('share_linkedin_button'),
+				          "url":urlToShare,
+				          "title":txt_title,
+				          "type":"large",
+				          "text":txt_title ,
+				          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+				          "summary":description
+				  	  });
+				    	
+				    	stWidget.addEntry({
+				          "service":"whatsapp",
+				          "element":document.getElementById('share_whatsapp_button'),
+				          "url":urlToShare,
+				          "title":txt_title,
+				          "type":"large",
+				          "text":txt_title ,
+				          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+				          "summary":description
+				  	  });
+				    	
+				    	stWidget.addEntry({
+				          "service":"email",
+				          "element":document.getElementById('share_email_button'),
+				          "url":urlToShare,
+				          "title":txt_title,
+				          "type":"large",
+				          "text":txt_title ,
+				          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+				          "summary":description
+				  	  });
+				          
+				      });
+			    
 				
 				
 			}    	

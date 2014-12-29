@@ -25,7 +25,7 @@ $(document).ready(function() {
 		var authData = ref.getAuth();
 		if (authData) {
 			
-			ref.child("votes").child(authData.uid).child(hash).on("value", function(snap) {
+			ref.child("votes").child(hash).child(authData.uid).on("value", function(snap) {
 				    				    	
 		    	if(snap.child("vote").val() === null){
 				}else{
@@ -46,6 +46,12 @@ $(document).ready(function() {
 		var f = new Firebase('https://infernonero.firebaseio.com/compares/' + hash );
 		var tot_one = 0;
 		var tot_two = 0;
+		
+		
+		f.on("child_removed", function(snap) {
+			window.location.href = "/index.html";  
+			});
+		
 		
 		f.on('value', function(snap) {
 
@@ -107,11 +113,11 @@ $(document).ready(function() {
 				
 				
 				
-				ref.child("votes").child(authData.uid).child(hash).set({
+				ref.child("votes").child(hash).child(authData.uid).set({
 					vote: "1"
 				});
 				
-			    $('#result_one').html(tot_one + parseInt(1));
+			    $('#result_one').html(tot_one);
 			    $('#vote_one').hide();
 			    $('#vote_two').hide();
 			}else{
@@ -129,10 +135,10 @@ $(document).ready(function() {
     		    	"vote_two" : tot_two + parseInt(1)
     		    });
         		
-        		ref.child("votes").child(authData.uid).child(hash).set({
+				ref.child("votes").child(hash).child(authData.uid).set({
 					vote: "2"
 				});
-    		    $('#result_two').html(tot_two + parseInt(1));
+    		    $('#result_two').html(tot_two);
     		    $('#vote_two').hide();
     		    $('#vote_one').hide();
         	}else{
