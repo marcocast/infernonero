@@ -29,7 +29,7 @@ $(document).ready(function() {
 				var dateOfCompare = new Date(snapshot.child("date").val());
 				
 				var table = $("#example tbody");
-		        table.append("<tr>" +
+		        table.prepend("<tr>" +
 		        		"<td><a href='vote.html#"+ss.child("compare_id").val()+"'>"+snapshot.child("txt_title").val()+"</a></td>" +
 		        		"<td>"+snapshot.child("txt_one").val()+" ("+snapshot.child("vote_one").val()+") VS "+snapshot.child("txt_two").val()+" ("+snapshot.child("vote_two").val()+")</td>" +
 		        		"<td>"+dateOfCompare.getDate()+"/"+(parseInt(dateOfCompare.getMonth())+parseInt(1))+"/"+dateOfCompare.getFullYear()+"</td>" +

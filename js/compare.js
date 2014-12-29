@@ -122,6 +122,7 @@ $(document).ready(function() {
 	  });
 	  
 	 
+	  var description = txt_one + " VS " + txt_two;
 	  
 	  var postID = newMessageRef.key();
 	  
@@ -132,60 +133,61 @@ $(document).ready(function() {
 	  
 	  
 	  var urlToShare = "https://infernonero.firebaseapp.com/vote.html#"+postID;
+	  
   	
 	  stWidget.addEntry({
           "service":"facebook",
           "element":document.getElementById('share_facebook_button'),
           "url":urlToShare,
-          "title":"social match",
+          "title":txt_title,
           "type":"large",
-          "text":"Social Match text" ,
-          "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
-          "summary":"la descrizione qua"
+          "text":txt_title ,
+          "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+          "summary":description
 	  });
   	
   	stWidget.addEntry({
         "service":"twitter",
         "element":document.getElementById('share_twitter_button'),
         "url":urlToShare,
-        "title":"social match",
+        "title":txt_title,
         "type":"large",
-        "text":"Social Match text" ,
-        "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
-        "summary":"la descrizione qua"
+        "text":txt_title ,
+        "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+        "summary":description
 	  });
   	
   	stWidget.addEntry({
         "service":"linkedin",
         "element":document.getElementById('share_linkedin_button'),
         "url":urlToShare,
-        "title":"social match",
+        "title":txt_title,
         "type":"large",
-        "text":"Social Match text" ,
-        "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
-        "summary":"la descrizione qua"
+        "text":txt_title ,
+        "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+        "summary":description
 	  });
   	
   	stWidget.addEntry({
         "service":"whatsapp",
         "element":document.getElementById('share_whatsapp_button'),
         "url":urlToShare,
-        "title":"social match",
+        "title":txt_title,
         "type":"large",
-        "text":"Social Match text" ,
-        "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
-        "summary":"la descrizione qua"
+        "text":txt_title ,
+        "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+        "summary":description
 	  });
   	
   	stWidget.addEntry({
         "service":"email",
         "element":document.getElementById('share_email_button'),
         "url":urlToShare,
-        "title":"social match",
+        "title":txt_title,
         "type":"large",
-        "text":"Social Match text" ,
-        "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
-        "summary":"la descrizione qua"
+        "text":txt_title ,
+        "image":"https://infernonero.firebaseapp.com/images/restart_logo.png",
+        "summary":description
 	  });
         
     }); 
