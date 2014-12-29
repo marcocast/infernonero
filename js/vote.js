@@ -25,7 +25,7 @@ $(document).ready(function() {
 		var authData = ref.getAuth();
 		if (authData) {
 			
-			ref.child("votes").child(authData.uid).child(hash).once("value", function(snap) {
+			ref.child("votes").child(authData.uid).child(hash).on("value", function(snap) {
 				    				    	
 		    	if(snap.child("vote").val() === null){
 				}else{
@@ -47,7 +47,7 @@ $(document).ready(function() {
 		var tot_one = 0;
 		var tot_two = 0;
 		
-		f.once('value', function(snap) {
+		f.on('value', function(snap) {
 
 
 		var txt_one = snap.child("txt_one").val();
@@ -77,13 +77,16 @@ $(document).ready(function() {
 			tot_two = parseInt(vote_two);
 		} 
 			
-			
+		
+		$('#fileDisplayAreaOne').html("");
 		var payloadOne = snap.child("file_one").val();
 		if (payloadOne != null) {
 			var img = new Image();
 			img.src = payloadOne;
 			document.getElementById("fileDisplayAreaOne").appendChild(img);
-		} 
+		}
+		
+		$('#fileDisplayAreaTwo').html("");
 		var payloadTwo = snap.child("file_two").val();
 		if (payloadTwo != null) {
 			var img = new Image();

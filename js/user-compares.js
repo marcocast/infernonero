@@ -18,8 +18,9 @@ $(document).ready(function() {
 	
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/"+authData.uid);
 	// Attach an asynchronous callback to read the data at our posts reference
-	refCompares.once("value", function(snapshot) {
-		
+	refCompares.on("value", function(snapshot) {
+		var table = $("#example tbody");
+		table.html("");
 		 // iterate all the elements :((
 		snapshot.forEach(function(ss) {
 					
@@ -28,9 +29,12 @@ $(document).ready(function() {
 				
 				var dateOfCompare = new Date(snapshot.child("date").val());
 				
-				var table = $("#example tbody");
+				
+				
+
+				
 		        table.prepend("<tr>" +
-		        		"<td><a href='vote.html#"+ss.child("compare_id").val()+"'>"+snapshot.child("txt_title").val()+"</a></td>" +
+		        		"<td><a href='edit_compare.html#"+ss.key()+"'>"+snapshot.child("txt_title").val()+"</a></td>" +
 		        		"<td>"+snapshot.child("txt_one").val()+" ("+snapshot.child("vote_one").val()+") VS "+snapshot.child("txt_two").val()+" ("+snapshot.child("vote_two").val()+")</td>" +
 		        		"<td>"+dateOfCompare.getDate()+"/"+(parseInt(dateOfCompare.getMonth())+parseInt(1))+"/"+dateOfCompare.getFullYear()+"</td>" +
 		        	"</tr>");
