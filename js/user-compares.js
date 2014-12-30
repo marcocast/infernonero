@@ -22,8 +22,9 @@ $(document).ready(function() {
 		table.html("");
 		// iterate all the elements :((
 		snapshot.forEach(function(ss) {
-
-			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.child("compare_id").val());
+			
+			if(ss.child("compare_id").val() === null){}else{
+				var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.child("compare_id").val());
 			refCompare.once("value", function(snapshot) {
 
 				var dateOfCompare = new Date(snapshot.child("date").val());
@@ -32,6 +33,10 @@ $(document).ready(function() {
 
 			}, function(errorObject) {
 			});
+				
+			}
+			
+			
 		});
 	}, function(errorObject) {
 	});

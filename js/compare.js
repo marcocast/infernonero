@@ -97,6 +97,36 @@ $(document).ready(function() {
 
 	$('#save_submit_btn').click(function() {
 
+		var userComparesRef = ref.child("users-compares").child(authData.uid);
+
+		var tot_compares_so_far = 0;
+
+		userComparesRef.on("value", function(snapshot) {
+			
+			tot_compares_so_far = 0;
+			
+			snapshot.forEach(function(childSnapshot) {
+				tot_compares_so_far = tot_compares_so_far + parseInt(1);
+			});
+
+		});
+		userComparesRef.once('value', function(snap) {
+
+			if (tot_compares_so_far > 5) {
+				userComparesRef.orderByKey().limitToFirst(1).once("child_added", function(snapshot) {
+					var comparesRef = ref.child("compares").child(snapshot.child("compare_id").val());
+					comparesRef.remove();
+
+					var usersComparesRef = ref.child("users-compares").child(authData.uid).child(snapshot.key());
+					usersComparesRef.remove();
+
+					var votesRef = ref.child("votes").child(snapshot.child("compare_id").val());
+					votesRef.remove();
+				});
+			}
+
+		});
+
 		$('#save_submit_btn').hide();
 		$('#edit_submit_btn').show();
 		$('#remove_submit_btn').show();
@@ -108,12 +138,12 @@ $(document).ready(function() {
 		var txt_one = $('#txt_one_box').val();
 		var txt_two = $('#txt_two_box').val();
 
-		var now = new Date().getTime();
+		usersComparesID = new Date().getTime();
 
 		var postsRef = ref.child("compares");
 		var newMessageRef = postsRef.push({
 			user_id : authData.uid,
-			date : now,
+			date : usersComparesID,
 			txt_title : txt_title,
 			txt_one : txt_one,
 			file_one : filePayloadOne,
@@ -127,12 +157,11 @@ $(document).ready(function() {
 
 		postID = newMessageRef.key();
 
-		var newUserComparesRef = ref.child("users-compares").child(authData.uid).push({
-			compare_id : postID,
-			compare_date : now
-		});
+		userComparesRef.child(usersComparesID).set({
 
-		usersComparesID = newUserComparesRef.key();
+			compare_id : postID
+
+		});
 
 	});
 
@@ -249,4 +278,4 @@ $(document).ready(function() {
 
 	});
 
-}); 
+});
