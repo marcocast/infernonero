@@ -8020,3 +8020,7 @@ blockquote p {
     display: none;
   }
 }
+.compare-container {
+width: 100%;
+}
+
