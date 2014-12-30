@@ -89,6 +89,8 @@ $(document).ready(function() {
 			}
 
 		});
+		
+		reset(hash, "http://commentscompare/#!/"+hash, "Title", 'en');
 
 		$('#vote_one').click(function() {
 

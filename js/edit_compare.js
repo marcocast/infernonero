@@ -25,11 +25,15 @@ $(document).ready(function() {
 					$('#edit_submit_btn').hide();
 				} else {
 
-					var f = new Firebase('https://infernonero.firebaseio.com/compares/' + snap.child("compare_id").val());
+					var compare_id = snap.child("compare_id").val();
+
+					var f = new Firebase('https://infernonero.firebaseio.com/compares/' + compare_id);
 					var tot_one = 0;
 					var tot_two = 0;
 
 					f.once('value', function(snap) {
+
+						reset(compare_id, "http://commentscompare/#!/"+compare_id, "Title", 'en');
 
 						var txt_one = snap.child("txt_one").val();
 						if (txt_one != null) {
@@ -264,4 +268,4 @@ $(document).ready(function() {
 
 	}
 
-}); 
+});
