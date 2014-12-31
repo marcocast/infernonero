@@ -28,9 +28,15 @@ $(document).ready(function() {
 			refCompare.once("value", function(snapshot) {
 
 				var dateOfCompare = new Date(snapshot.child("date").val());
-
-				table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td>" + snapshot.child("txt_one").val() + " (" + snapshot.child("vote_one").val() + ") VS " + snapshot.child("txt_two").val() + " (" + snapshot.child("vote_two").val() + ")</td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td>" + "</tr>");
-
+				
+				var oneBadge = "badge badge-success";
+				
+				table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" 
+				+ snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='"+ oneBadge+"'>"
+				+ snapshot.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " 
+				+ snapshot.child("txt_two").val() + " <span class='"+ oneBadge+"'>" 
+				+ snapshot.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() 
+				+ "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td>" + "</tr>");
 			}, function(errorObject) {
 			});
 				
