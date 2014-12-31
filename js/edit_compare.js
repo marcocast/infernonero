@@ -63,12 +63,14 @@ $(document).ready(function() {
 
 					fImages.once('value', function(snap) {
 						var payloadOne = snap.child("file_one").val();
+						$('#loadone').hide();
 						if (payloadOne != null) {
 							var img = new Image();
 							img.src = payloadOne;
 							document.getElementById("fileDisplayAreaOne").appendChild(img);
 						}
 						var payloadTwo = snap.child("file_two").val();
+						$('#loadtwo').hide();
 						if (payloadTwo != null) {
 							var img = new Image();
 							img.src = payloadTwo;

@@ -86,6 +86,7 @@ $(document).ready(function() {
 			
 			$('#fileDisplayAreaOne').html("");
 			var payloadOne = snap.child("file_one").val();
+			$('#loadone').hide();
 			if (payloadOne != null) {
 				var img = new Image();
 				img.src = payloadOne;
@@ -94,6 +95,7 @@ $(document).ready(function() {
 
 			$('#fileDisplayAreaTwo').html("");
 			var payloadTwo = snap.child("file_two").val();
+			$('#loadtwo').hide();
 			if (payloadTwo != null) {
 				var img = new Image();
 				img.src = payloadTwo;
