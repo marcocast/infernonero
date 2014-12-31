@@ -54,6 +54,7 @@ $(document).ready(function() {
 				ref.authWithPassword({
 					email : $('#txtEmailr').val(),
 					password : $('#txtPassr').val()
+
 				}, function(error, authData) {
 					if (error) {
 						console.log("Login Failed!", error);
@@ -122,4 +123,4 @@ $(document).ready(function() {
 
 	});
 
-}); 
+});
