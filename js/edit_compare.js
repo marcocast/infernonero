@@ -1,5 +1,7 @@
 var ref = new Firebase("https://infernonero.firebaseio.com");
 
+$('#disqus_thread').hide();
+
 $(document).ready(function() {
 
 	$('#loggingout').click(function() {
@@ -34,6 +36,8 @@ $(document).ready(function() {
 					f.once('value', function(snap) {
 
 						reset(compare_id, "http://commentscompare/#!/"+compare_id, "Title", 'en');
+						
+						$('#disqus_thread').show();
 
 						var txt_one = snap.child("txt_one").val();
 						if (txt_one != null) {

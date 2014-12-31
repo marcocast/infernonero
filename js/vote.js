@@ -1,5 +1,8 @@
 var ref = new Firebase("https://infernonero.firebaseio.com");
 
+$('#disqus_thread').hide();
+
+
 $(document).ready(function() {
 
 	$('#loggingout').click(function() {
@@ -91,6 +94,7 @@ $(document).ready(function() {
 		});
 		
 		reset(hash, "http://commentscompare/#!/"+hash, "Title", 'en');
+		$('#disqus_thread').show();
 
 		$('#vote_one').click(function() {
 
