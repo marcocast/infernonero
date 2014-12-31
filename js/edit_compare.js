@@ -35,8 +35,8 @@ $(document).ready(function() {
 
 					f.once('value', function(snap) {
 
-						reset(compare_id, "http://commentscompare/#!/"+compare_id, "Title", 'en');
-						
+						reset(compare_id, "http://commentscompare/#!/" + compare_id, "Title", 'en');
+
 						$('#disqus_thread').show();
 
 						var txt_one = snap.child("txt_one").val();
@@ -57,6 +57,11 @@ $(document).ready(function() {
 							$('#txt_title').val(txt_title);
 						}
 
+					});
+
+					var fImages = new Firebase('https://infernonero.firebaseio.com/compares-images/' + compare_id);
+
+					fImages.once('value', function(snap) {
 						var payloadOne = snap.child("file_one").val();
 						if (payloadOne != null) {
 							var img = new Image();
@@ -69,7 +74,6 @@ $(document).ready(function() {
 							img.src = payloadTwo;
 							document.getElementById("fileDisplayAreaTwo").appendChild(img);
 						}
-
 					});
 
 					var filePayloadOne = "";
@@ -161,11 +165,15 @@ $(document).ready(function() {
 							date : now,
 							txt_title : txt_title,
 							txt_one : txt_one,
-							file_one : filePayloadOne,
 							txt_two : txt_two,
-							file_two : filePayloadTwo,
 							vote_one : parseInt(0),
 							vote_two : parseInt(0)
+						});
+
+						var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
+						postsRefImages.update({
+							file_one : filePayloadOne,
+							file_two : filePayloadTwo
 						});
 
 					});
@@ -174,6 +182,9 @@ $(document).ready(function() {
 
 						var comparesRef = ref.child("compares").child(snap.child("compare_id").val());
 						comparesRef.remove();
+						
+						var comparesImagesRef = ref.child("compares-images").child(snap.child("compare_id").val());
+						comparesImagesRef.remove();
 
 						var usersComparesRef = ref.child("users-compares").child(authData.uid).child(hash);
 						usersComparesRef.remove();

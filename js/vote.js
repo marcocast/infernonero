@@ -75,6 +75,15 @@ $(document).ready(function() {
 				tot_two = parseInt(vote_two);
 			}
 
+			
+
+		});
+		
+		
+		var fImages = new Firebase('https://infernonero.firebaseio.com/compares-images/' + hash);
+		
+		fImages.on('value', function(snap) {
+			
 			$('#fileDisplayAreaOne').html("");
 			var payloadOne = snap.child("file_one").val();
 			if (payloadOne != null) {
@@ -92,6 +101,7 @@ $(document).ready(function() {
 			}
 
 		});
+		
 		
 		reset(hash, "http://commentscompare/#!/"+hash, "Title", 'en');
 		$('#disqus_thread').show();
