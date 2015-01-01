@@ -102,9 +102,9 @@ $(document).ready(function() {
 		var tot_compares_so_far = 0;
 
 		userComparesRef.on("value", function(snapshot) {
-			
+
 			tot_compares_so_far = 0;
-			
+
 			snapshot.forEach(function(childSnapshot) {
 				tot_compares_so_far = tot_compares_so_far + parseInt(1);
 			});
@@ -116,10 +116,10 @@ $(document).ready(function() {
 				userComparesRef.orderByKey().limitToFirst(1).once("child_added", function(snapshot) {
 					var comparesRef = ref.child("compares").child(snapshot.child("compare_id").val());
 					comparesRef.remove();
-					
+
 					var comparesImagesRef = ref.child("compares-images").child(snapshot.child("compare_id").val());
 					comparesImagesRef.remove();
-					
+
 					var usersComparesRef = ref.child("users-compares").child(authData.uid).child(snapshot.key());
 					usersComparesRef.remove();
 
@@ -153,21 +153,16 @@ $(document).ready(function() {
 			vote_one : parseInt(0),
 			vote_two : parseInt(0)
 		});
-	
-	
-		
-	
+
 		var description = txt_one + " VS " + txt_two;
 
 		postID = newMessageRef.key();
-		
-		
+
 		var postsRefImages = ref.child("compares-images").child(postID);
 		postsRefImages.set({
 			file_one : filePayloadOne,
 			file_two : filePayloadTwo
 		});
-		
 
 		userComparesRef.child(usersComparesID).set({
 
@@ -197,13 +192,22 @@ $(document).ready(function() {
 			vote_one : parseInt(0),
 			vote_two : parseInt(0)
 		});
-		
+
 		var postsRefImages = ref.child("compares-images").child(postID);
-		postsRefImages.update({
-			file_one : filePayloadOne,
-			file_two : filePayloadTwo
-		});
-		
+
+		if (filePayloadOne !== "") {
+
+			postsRefImages.update({
+				file_one : filePayloadOne
+			});
+		}
+
+		if (filePayloadTwo !== "") {
+
+			postsRefImages.update({
+				file_two : filePayloadTwo
+			});
+		}
 
 	});
 
@@ -211,7 +215,7 @@ $(document).ready(function() {
 
 		var comparesRef = ref.child("compares").child(postID);
 		comparesRef.remove();
-		
+
 		var comparesImagesRef = ref.child("compares-images").child(postID);
 		comparesImagesRef.remove();
 

@@ -183,12 +183,23 @@ $(document).ready(function() {
 							vote_one : parseInt(0),
 							vote_two : parseInt(0)
 						});
-
+						
 						var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
-						postsRefImages.update({
-							file_one : filePayloadOne,
-							file_two : filePayloadTwo
-						});
+
+						
+						if(filePayloadOne !== "" ){
+						
+							postsRefImages.update({
+								file_one : filePayloadOne
+							});
+						}
+						
+						if(filePayloadTwo !== "" ){
+						
+							postsRefImages.update({
+								file_two : filePayloadTwo
+							});
+						}
 
 					});
 
