@@ -65,13 +65,13 @@ $(document).ready(function() {
 
 			var vote_one = snap.child("vote_one").val();
 			if (vote_one != null) {
-				$('#result_one').html(vote_one);
+				$('#result_one').html("<span class='badge'>"+vote_one+"</span>");
 				tot_one = parseInt(vote_one);
 			}
 
 			var vote_two = snap.child("vote_two").val();
 			if (vote_two != null) {
-				$('#result_two').html(vote_two);
+				$('#result_two').html("<span class='badge'>"+vote_two+"</span>");
 				tot_two = parseInt(vote_two);
 			}
 
@@ -119,7 +119,7 @@ $(document).ready(function() {
 					vote : "1"
 				});
 
-				$('#result_one').html(tot_one);
+				$('#result_one').html("<span class='badge'>"+tot_one+"</span>");
 				$('#vote_one').hide();
 				$('#vote_two').hide();
 			} else {
@@ -138,7 +138,7 @@ $(document).ready(function() {
 				ref.child("votes").child(hash).child(authData.uid).set({
 					vote : "2"
 				});
-				$('#result_two').html(tot_two);
+				$('#result_two').html("<span class='badge'>"+tot_two+"</span>");
 				$('#vote_two').hide();
 				$('#vote_one').hide();
 			} else {
