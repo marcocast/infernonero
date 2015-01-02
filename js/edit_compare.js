@@ -20,7 +20,8 @@ $(document).ready(function() {
 
 		var authData = ref.getAuth();
 		if (authData) {
-
+			setUserName();
+			
 			ref.child("users-compares").child(authData.uid).child(hash).once("value", function(snap) {
 
 				if (snap.child("compare_id").val() === null) {

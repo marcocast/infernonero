@@ -2,11 +2,14 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 var authData = ref.getAuth();
 if (authData) {
+	
 } else {
 	window.location.href = "/register.html";
 }
 
 $(document).ready(function() {
+	
+	setUserName();
 
 	$('#loggingout').click(function() {
 

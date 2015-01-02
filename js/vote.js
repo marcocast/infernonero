@@ -21,6 +21,8 @@ $(document).ready(function() {
 
 		var authData = ref.getAuth();
 		if (authData) {
+			
+			setUserName();
 
 			ref.child("votes").child(hash).child(authData.uid).on("value", function(snap) {
 

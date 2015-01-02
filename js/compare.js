@@ -2,12 +2,17 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 var authData = ref.getAuth();
 if (authData) {
+	
 } else {
 	window.location.href = "/register.html";
 }
 
-$(document).ready(function() {
 
+
+$(document).ready(function() {
+	
+	setUserName();
+	
 	$('#ask_submit_btn').hide();
 	$('#edit_submit_btn').hide();
 	$('#remove_submit_btn').hide();

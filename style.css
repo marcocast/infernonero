@@ -6118,6 +6118,24 @@ header .container {
   color: #777777;
 }
 
+#username {
+  position: absolute;
+  top: 7px;
+  right: 100px;
+  font-size: 12px;
+  z-index: 101;
+  height: 50px;
+  line-height: 40px;
+  padding-right: 10px;
+}
+#username i {
+  font-size: 18px;
+  padding: 0 6px;
+  display: inline-block;
+  color: #777777;
+}
+
+
 /* =Slider and Large Photo headers
 -------------------------------------------------------------- */
 .flexslider {
