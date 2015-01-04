@@ -20,15 +20,16 @@ $(document).ready(function() {
 
 		var authData = ref.getAuth();
 		if (authData) {
-			setUserName();
-			
-			ref.child("users-compares").child(authData.uid).child(hash).once("value", function(snap) {
+	
+				ref.child("users-compares").child(authData.uid).child(hash).once("value", function(snap) {
 
 				if (snap.child("compare_id").val() === null) {
 					$('#edit_submit_btn').hide();
 				} else {
 
 					var compare_id = snap.child("compare_id").val();
+					
+					setUserNameWithDisqus(compare_id);
 
 					var f = new Firebase('https://infernonero.firebaseio.com/compares/' + compare_id);
 					var tot_one = 0;
@@ -36,7 +37,7 @@ $(document).ready(function() {
 
 					f.once('value', function(snap) {
 
-						reset(compare_id, "http://commentscompare/#!/" + compare_id, "Title", 'en');
+						
 
 						$('#disqus_thread').show();
 
