@@ -21,6 +21,8 @@ $(document).ready(function() {
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/" + authData.uid);
 	// Attach an asynchronous callback to read the data at our posts reference
 	refCompares.on("value", function(snapshot) {
+		
+		$('#loadone').hide();
 		var table = $("#example tbody");
 		table.html("");
 		// iterate all the elements :((
