@@ -12,8 +12,14 @@ $(document).ready(function() {
 
 	});
 
+	
 	var idx = window.location.href.indexOf('#');
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
+	var idxComment = hash.indexOf('#comment');
+	if (idxComment > 0) {
+		hash = hash.substring(0, idxComment); 
+	}
+	
 	if (hash === '') {
 		alert("hash === vuoto");
 		window.location.href = "/404.html";
@@ -25,7 +31,6 @@ $(document).ready(function() {
 
 			ref.child("votes").child(hash).child(authData.uid).on("value", function(snap) {
 				
-				setUserNameWithDisqus(hash);
 
 				if (snap.child("vote").val() === null) {
 				} else {
@@ -77,6 +82,12 @@ $(document).ready(function() {
 				$('#result_two').html("<span class='badge'>"+vote_two+"</span>");
 				tot_two = parseInt(vote_two);
 			}
+			
+			if (authData) {
+				setUserNameWithDisqus(hash, "vote.html",txt_title);
+				
+				$('#disqus_thread').show();
+			}
 
 			
 
@@ -108,8 +119,6 @@ $(document).ready(function() {
 		});
 		
 		
-		reset(hash, "http://commentscompare/#!/"+hash, "Title", 'en');
-		$('#disqus_thread').show();
 
 		$('#vote_one').click(function() {
 

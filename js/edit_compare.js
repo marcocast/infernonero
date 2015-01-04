@@ -13,6 +13,15 @@ $(document).ready(function() {
 
 	var idx = window.location.href.indexOf('#');
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
+	var idxComment = hash.indexOf('#comment');
+	if (idxComment > 0) {
+		alert("found comment : " + hash);
+		hash = hash.substring(0, idxComment); 
+		alert("after comment : " + hash);
+
+	}
+	
+	
 	if (hash === '') {
 		alert("hash === vuoto");
 		window.location.href = "/404.html";
@@ -29,17 +38,13 @@ $(document).ready(function() {
 
 					var compare_id = snap.child("compare_id").val();
 					
-					setUserNameWithDisqus(compare_id);
+					
 
 					var f = new Firebase('https://infernonero.firebaseio.com/compares/' + compare_id);
 					var tot_one = 0;
 					var tot_two = 0;
 
 					f.once('value', function(snap) {
-
-						
-
-						$('#disqus_thread').show();
 
 						var txt_one = snap.child("txt_one").val();
 						if (txt_one != null) {
@@ -70,6 +75,10 @@ $(document).ready(function() {
 							$('#two_votes_so_far').html("<span class='badge'>"+vote_two+"</span>");
 							tot_two = parseInt(vote_two);
 						}
+						
+						setUserNameWithDisqus(compare_id, "edit_compare.html", snap.child("txt_title").val());
+
+						$('#disqus_thread').show();
 
 					});
 

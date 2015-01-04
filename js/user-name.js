@@ -1,36 +1,36 @@
 var ref = new Firebase("https://infernonero.firebaseio.com");
 
-function setUserNameWithDisqus(compare_id) {
+function setUserNameWithDisqus(compare_id,page,title) {
 	var authData = ref.getAuth();
 	if (authData) {
 		if (authData.provider === "facebook") {
 			ref.child("users").child(authData.uid).child("facebook").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#username').html("Hi " + username);
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = username.replace(" ","")+"@infernonero.firebaseapp.com";
-				reset(compare_id, "http://commentscompare/#!/" + compare_id, "Title", 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "https://infernonero.firebaseapp.com/"+page+"#" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 			});
 		} else if (authData.provider === "google") {
 			ref.child("users").child(authData.uid).child("google").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#username').html("Hi " + username);
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = username.replace(" ","")+"@infernonero.firebaseapp.com";
-				reset(compare_id, "http://commentscompare/#!/" + compare_id, "Title", 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "https://infernonero.firebaseapp.com/"+page+"#" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 			});
 		} else if (authData.provider === "twitter") {
 			ref.child("users").child(authData.uid).child("twitter").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#username').html("Hi " + username);
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = username.replace(" ","")+"@infernonero.firebaseapp.com";
-				reset(compare_id, "http://commentscompare/#!/" + compare_id, "Title", 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "https://infernonero.firebaseapp.com/"+page+"#" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 			});
 		} else if (authData.provider === "password") {
 			ref.child("users").child(authData.uid).child("password").once("value", function(snap) {
 				email = snap.child("email").val();
 				username = email.substr(0, email.indexOf("@"));
-				$('#username').html("Hi " + username);
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = username+"@infernonero.firebaseapp.com";
-				reset(compare_id, "http://commentscompare/#!/" + compare_id, "Title", 'en', disqusSignon(authData.uid,username,email ), getPubKey());
+				reset(compare_id, "https://infernonero.firebaseapp.com/"+page+"#" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 			});
 		}
 
@@ -44,23 +44,23 @@ function setUserName() {
 		if (authData.provider === "facebook") {
 			ref.child("users").child(authData.uid).child("facebook").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#username').html("Hi " + username);
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 			});
 		} else if (authData.provider === "google") {
 			ref.child("users").child(authData.uid).child("google").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#username').html("Hi " + username);
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 			});
 		} else if (authData.provider === "twitter") {
 			ref.child("users").child(authData.uid).child("twitter").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#username').html("Hi " + username);
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 			});
 		} else if (authData.provider === "password") {
 			ref.child("users").child(authData.uid).child("password").once("value", function(snap) {
 				email = snap.child("email").val();
 				username = email.substr(0, email.indexOf("@"));
-				$('#username').html("Hi " + username);
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 			});
 		}
 
