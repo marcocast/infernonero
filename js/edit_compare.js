@@ -15,10 +15,7 @@ $(document).ready(function() {
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
 	var idxComment = hash.indexOf('#comment');
 	if (idxComment > 0) {
-		alert("found comment : " + hash);
 		hash = hash.substring(0, idxComment); 
-		alert("after comment : " + hash);
-
 	}
 	
 	

@@ -8,21 +8,21 @@ function setUserNameWithDisqus(compare_id,title) {
 				username = snap.child("displayName").val();
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = username.replace(" ","")+"@infernonero.firebaseapp.com";
-				reset(compare_id, "https://infernonero.firebaseapp.com/disqus.html!#" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html/#!/" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 			});
 		} else if (authData.provider === "google") {
 			ref.child("users").child(authData.uid).child("google").once("value", function(snap) {
 				username = snap.child("displayName").val();
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = username.replace(" ","")+"@infernonero.firebaseapp.com";
-				reset(compare_id, "https://infernonero.firebaseapp.com/disqus.html!#" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html/#!/" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 			});
 		} else if (authData.provider === "twitter") {
 			ref.child("users").child(authData.uid).child("twitter").once("value", function(snap) {
 				username = snap.child("displayName").val();
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = username.replace(" ","")+"@infernonero.firebaseapp.com";
-				reset(compare_id, "https://infernonero.firebaseapp.com/disqus.html!#" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html/#!/" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 			});
 		} else if (authData.provider === "password") {
 			ref.child("users").child(authData.uid).child("password").once("value", function(snap) {
@@ -30,7 +30,7 @@ function setUserNameWithDisqus(compare_id,title) {
 				username = email.substr(0, email.indexOf("@"));
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = username+"@infernonero.firebaseapp.com";
-				reset(compare_id, "https://infernonero.firebaseapp.com/disqus.html!#" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html/#!/" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 			});
 		}
 
