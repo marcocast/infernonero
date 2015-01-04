@@ -84,7 +84,7 @@ $(document).ready(function() {
 			}
 			
 			if (authData) {
-				setUserNameWithDisqus(hash, "vote.html",txt_title);
+				setUserNameWithDisqus(hash, txt_title);
 				
 				$('#disqus_thread').show();
 			}

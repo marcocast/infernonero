@@ -31,7 +31,7 @@ $(document).ready(function() {
 			if(ss.child("compare_id").val() === null){}else{
 				var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.child("compare_id").val());
 			refCompare.on("value", function(snapshot) {
-				table.html("");
+				
 				var dateOfCompare = new Date(snapshot.child("date").val());
 								
 				table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" 

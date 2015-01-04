@@ -76,7 +76,7 @@ $(document).ready(function() {
 							tot_two = parseInt(vote_two);
 						}
 						
-						setUserNameWithDisqus(compare_id, "edit_compare.html", snap.child("txt_title").val());
+						setUserNameWithDisqus(compare_id, snap.child("txt_title").val());
 
 						$('#disqus_thread').show();
 
