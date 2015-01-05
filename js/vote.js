@@ -132,6 +132,13 @@ $(document).ready(function() {
 				$('#result_one').html("<span class='badge'>"+tot_one+"</span>");
 				$('#vote_one').hide();
 				$('#vote_two').hide();
+				$.growl("Thanks for voting", {
+					type : "success",
+					placement : {
+						from : "top",
+						align : "left"
+					}
+				});
 			} else {
 				window.location.href = "/register.html";
 			}
@@ -151,6 +158,13 @@ $(document).ready(function() {
 				$('#result_two').html("<span class='badge'>"+tot_two+"</span>");
 				$('#vote_two').hide();
 				$('#vote_one').hide();
+				$.growl("Thanks for voting", {
+					type : "success",
+					placement : {
+						from : "top",
+						align : "right"
+					}
+				});
 			} else {
 				window.location.href = "/register.html";
 			}

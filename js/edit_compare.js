@@ -98,8 +98,6 @@ $(document).ready(function() {
 
 					});
 
-					
-
 					var filePayloadOne = "";
 					var fileInputOne = document.getElementById('fileInputOne');
 					fileInputOne.files[0] = null;
@@ -158,8 +156,7 @@ $(document).ready(function() {
 							fileDisplayAreaTwo.innerHTML = "File not supported!"
 						}
 					});
-					
-					
+
 					$('#edit_submit_btn').show();
 					$('#remove_submit_btn').show();
 					$('#ask_submit_btn').show();
@@ -197,6 +194,12 @@ $(document).ready(function() {
 							txt_two : txt_two,
 							vote_one : parseInt(0),
 							vote_two : parseInt(0)
+						}, function(error) {
+							if (error) {
+								alert("Data could not be saved." + error);
+							} else {
+
+							}
 						});
 
 						var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
@@ -214,6 +217,14 @@ $(document).ready(function() {
 								file_two : filePayloadTwo
 							});
 						}
+
+						$.growl("Updated successfully", {
+							type : "success",
+							placement : {
+								from : "top",
+								align : "center"
+							}
+						});
 
 					});
 

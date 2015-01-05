@@ -34,8 +34,23 @@ $(document).ready(function() {
 			password : $('#txtPass').val()
 		}, function(error, authData) {
 			if (error) {
+				$.growl("Login Failed!" + error, {
+					type : "danger",
+					placement : {
+						from : "bottom",
+						align : "center"
+					}
+				});
+
 				console.log("Login Failed!", error);
 			} else {
+				$.growl("Authenticated successfully", {
+					type : "success",
+					placement : {
+						from : "bottom",
+						align : "center"
+					}
+				});
 				console.log("Authenticated successfully with payload:", authData);
 				location.reload();
 			}
