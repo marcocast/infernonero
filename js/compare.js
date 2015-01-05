@@ -13,10 +13,7 @@ $(document).ready(function() {
 	
 	setUserName();
 	
-	$('#ask_submit_btn').hide();
-	$('#edit_submit_btn').hide();
-	$('#remove_submit_btn').hide();
-
+	
 	var filePayloadOne = "";
 	var fileInputOne = document.getElementById('fileInputOne');
 	fileInputOne.files[0] = null;
@@ -104,41 +101,9 @@ $(document).ready(function() {
 
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
 
-		var tot_compares_so_far = 0;
-
-		userComparesRef.on("value", function(snapshot) {
-
-			tot_compares_so_far = 0;
-
-			snapshot.forEach(function(childSnapshot) {
-				tot_compares_so_far = tot_compares_so_far + parseInt(1);
-			});
-
-		});
-		userComparesRef.once('value', function(snap) {
-
-			if (tot_compares_so_far > 5) {
-				userComparesRef.orderByKey().limitToFirst(1).once("child_added", function(snapshot) {
-					var comparesRef = ref.child("compares").child(snapshot.child("compare_id").val());
-					comparesRef.remove();
-
-					var comparesImagesRef = ref.child("compares-images").child(snapshot.child("compare_id").val());
-					comparesImagesRef.remove();
-
-					var usersComparesRef = ref.child("users-compares").child(authData.uid).child(snapshot.key());
-					usersComparesRef.remove();
-
-					var votesRef = ref.child("votes").child(snapshot.child("compare_id").val());
-					votesRef.remove();
-				});
-			}
-
-		});
-
+		
 		$('#save_submit_btn').hide();
-		$('#edit_submit_btn').show();
-		$('#remove_submit_btn').show();
-		$('#ask_submit_btn').show();
+		
 
 		var reader = new FileReader();
 
@@ -174,137 +139,47 @@ $(document).ready(function() {
 			compare_id : postID
 
 		});
+		
+		var tot_compares_so_far = 0;
+				
+		userComparesRef.once("value", function(snapshot) {
+			
 
-	});
+			tot_compares_so_far = 0;
 
-	$('#edit_submit_btn').click(function() {
-
-		var reader = new FileReader();
-
-		var txt_title = $('#txt_title').val();
-		var txt_one = $('#txt_one_box').val();
-		var txt_two = $('#txt_two_box').val();
-
-		var now = new Date().getTime();
-
-		var postsRef = ref.child("compares").child(postID);
-		postsRef.update({
-			user_id : authData.uid,
-			date : now,
-			txt_title : txt_title,
-			txt_one : txt_one,
-			txt_two : txt_two,
-			vote_one : parseInt(0),
-			vote_two : parseInt(0)
-		});
-
-		var postsRefImages = ref.child("compares-images").child(postID);
-
-		if (filePayloadOne !== "") {
-
-			postsRefImages.update({
-				file_one : filePayloadOne
+			snapshot.forEach(function(childSnapshot) {
+				tot_compares_so_far = tot_compares_so_far + parseInt(1);
 			});
-		}
+			
+			
+			if (tot_compares_so_far > 5) {
+				userComparesRef.orderByKey().limitToFirst(1).once("child_added", function(snapshot) {
+					var comparesRef = ref.child("compares").child(snapshot.child("compare_id").val());
+					comparesRef.remove();
 
-		if (filePayloadTwo !== "") {
+					var comparesImagesRef = ref.child("compares-images").child(snapshot.child("compare_id").val());
+					comparesImagesRef.remove();
 
-			postsRefImages.update({
-				file_two : filePayloadTwo
-			});
-		}
+					var usersComparesRef = ref.child("users-compares").child(authData.uid).child(snapshot.key());
+					usersComparesRef.remove();
+
+					var votesRef = ref.child("votes").child(snapshot.child("compare_id").val());
+					votesRef.remove();
+					
+					window.location.href = "/edit_compare.html#"+usersComparesID;
+				});
+			}else{
+				window.location.href = "/edit_compare.html#"+usersComparesID;
+			}
+			
+			
+
+		});
+		
+		
 
 	});
 
-	$('#remove_submit_btn').click(function() {
-
-		var comparesRef = ref.child("compares").child(postID);
-		comparesRef.remove();
-
-		var comparesImagesRef = ref.child("compares-images").child(postID);
-		comparesImagesRef.remove();
-
-		var usersComparesRef = ref.child("users-compares").child(authData.uid).child(usersComparesID);
-		usersComparesRef.remove();
-
-		var votesRef = ref.child("votes").child(postID);
-		votesRef.remove();
-
-		window.location.href = "/user-compares.html";
-
-	});
-
-	$('#ask_submit_btn').click(function() {
-
-		$('#edit_submit_btn').hide();
-		$('#remove_submit_btn').hide();
-		$('#ask_submit_btn').hide();
-
-		var reader = new FileReader();
-
-		var txt_title = $('#txt_title').val();
-		var txt_one = $('#txt_one_box').val();
-		var txt_two = $('#txt_two_box').val();
-
-		var description = txt_one + " VS " + txt_two;
-
-		var urlToShare = "https://infernonero.firebaseapp.com/vote.html#" + postID;
-
-		stWidget.addEntry({
-			"service" : "facebook",
-			"element" : document.getElementById('share_facebook_button'),
-			"url" : urlToShare,
-			"title" : txt_title,
-			"type" : "large",
-			"text" : txt_title,
-			"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
-			"summary" : description
-		});
-
-		stWidget.addEntry({
-			"service" : "twitter",
-			"element" : document.getElementById('share_twitter_button'),
-			"url" : urlToShare,
-			"title" : txt_title,
-			"type" : "large",
-			"text" : txt_title,
-			"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
-			"summary" : description
-		});
-
-		stWidget.addEntry({
-			"service" : "linkedin",
-			"element" : document.getElementById('share_linkedin_button'),
-			"url" : urlToShare,
-			"title" : txt_title,
-			"type" : "large",
-			"text" : txt_title,
-			"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
-			"summary" : description
-		});
-
-		stWidget.addEntry({
-			"service" : "whatsapp",
-			"element" : document.getElementById('share_whatsapp_button'),
-			"url" : urlToShare,
-			"title" : txt_title,
-			"type" : "large",
-			"text" : txt_title,
-			"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
-			"summary" : description
-		});
-
-		stWidget.addEntry({
-			"service" : "email",
-			"element" : document.getElementById('share_email_button'),
-			"url" : urlToShare,
-			"title" : txt_title,
-			"type" : "large",
-			"text" : txt_title,
-			"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
-			"summary" : description
-		});
-
-	});
+	
 
 });
