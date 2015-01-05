@@ -2,18 +2,15 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 var authData = ref.getAuth();
 if (authData) {
-	
+
 } else {
 	window.location.href = "/register.html";
 }
 
-
-
 $(document).ready(function() {
-	
+
 	setUserName();
-	
-	
+
 	var filePayloadOne = "";
 	var fileInputOne = document.getElementById('fileInputOne');
 	fileInputOne.files[0] = null;
@@ -101,9 +98,7 @@ $(document).ready(function() {
 
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
 
-		
 		$('#save_submit_btn').hide();
-		
 
 		var reader = new FileReader();
 
@@ -139,47 +134,9 @@ $(document).ready(function() {
 			compare_id : postID
 
 		});
-		
-		var tot_compares_so_far = 0;
-				
-		userComparesRef.once("value", function(snapshot) {
-			
 
-			tot_compares_so_far = 0;
-
-			snapshot.forEach(function(childSnapshot) {
-				tot_compares_so_far = tot_compares_so_far + parseInt(1);
-			});
-			
-			
-			if (tot_compares_so_far > 5) {
-				userComparesRef.orderByKey().limitToFirst(1).once("child_added", function(snapshot) {
-					var comparesRef = ref.child("compares").child(snapshot.child("compare_id").val());
-					comparesRef.remove();
-
-					var comparesImagesRef = ref.child("compares-images").child(snapshot.child("compare_id").val());
-					comparesImagesRef.remove();
-
-					var usersComparesRef = ref.child("users-compares").child(authData.uid).child(snapshot.key());
-					usersComparesRef.remove();
-
-					var votesRef = ref.child("votes").child(snapshot.child("compare_id").val());
-					votesRef.remove();
-					
-					window.location.href = "/edit_compare.html#"+usersComparesID;
-				});
-			}else{
-				window.location.href = "/edit_compare.html#"+usersComparesID;
-			}
-			
-			
-
-		});
-		
-		
+		window.location.href = "/edit_compare.html#" + usersComparesID;
 
 	});
-
-	
 
 });
