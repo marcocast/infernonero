@@ -99,6 +99,7 @@ $(document).ready(function() {
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
 
 		$('#save_submit_btn').hide();
+		$('#savediv').html("<img src='images/468.GIF' />");
 
 		var reader = new FileReader();
 
@@ -117,25 +118,35 @@ $(document).ready(function() {
 			txt_two : txt_two,
 			vote_one : parseInt(0),
 			vote_two : parseInt(0)
+		}, function(error) {
+			if (error) {
+				alert("Data could not be saved." + error);
+			} else {
+				var description = txt_one + " VS " + txt_two;
+
+				postID = newMessageRef.key();
+
+				var postsRefImages = ref.child("compares-images").child(postID);
+				postsRefImages.set({
+					file_one : filePayloadOne,
+					file_two : filePayloadTwo
+				}, function(error) {
+					if (error) {
+						alert("Data could not be saved." + error);
+					} else {
+						userComparesRef.child(usersComparesID).set({
+							compare_id : postID
+						}, function(error) {
+							if (error) {
+								alert("Data could not be saved." + error);
+							} else {
+								window.location.href = "/edit_compare.html#" + usersComparesID;
+							}
+						});
+					}
+				});
+			}
 		});
-
-		var description = txt_one + " VS " + txt_two;
-
-		postID = newMessageRef.key();
-
-		var postsRefImages = ref.child("compares-images").child(postID);
-		postsRefImages.set({
-			file_one : filePayloadOne,
-			file_two : filePayloadTwo
-		});
-
-		userComparesRef.child(usersComparesID).set({
-
-			compare_id : postID
-
-		});
-
-		window.location.href = "/edit_compare.html#" + usersComparesID;
 
 	});
 

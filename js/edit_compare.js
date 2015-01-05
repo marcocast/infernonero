@@ -4,6 +4,10 @@ $('#disqus_thread').hide();
 
 $(document).ready(function() {
 
+	$('#edit_submit_btn').hide();
+	$('#remove_submit_btn').hide();
+	$('#ask_submit_btn').hide();
+
 	$('#loggingout').click(function() {
 
 		ref.unauth();
@@ -15,10 +19,9 @@ $(document).ready(function() {
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
 	var idxComment = hash.indexOf('#comment');
 	if (idxComment > 0) {
-		hash = hash.substring(0, idxComment); 
+		hash = hash.substring(0, idxComment);
 	}
-	
-	
+
 	if (hash === '') {
 		alert("hash === vuoto");
 		window.location.href = "/404.html";
@@ -26,16 +29,14 @@ $(document).ready(function() {
 
 		var authData = ref.getAuth();
 		if (authData) {
-	
-				ref.child("users-compares").child(authData.uid).child(hash).once("value", function(snap) {
+
+			ref.child("users-compares").child(authData.uid).child(hash).once("value", function(snap) {
 
 				if (snap.child("compare_id").val() === null) {
 					$('#edit_submit_btn').hide();
 				} else {
 
 					var compare_id = snap.child("compare_id").val();
-					
-					
 
 					var f = new Firebase('https://infernonero.firebaseio.com/compares/' + compare_id);
 					var tot_one = 0;
@@ -63,16 +64,16 @@ $(document).ready(function() {
 
 						var vote_one = snap.child("vote_one").val();
 						if (vote_one != null) {
-							$('#one_votes_so_far').html("<span class='badge'>"+vote_one+"</span>");
+							$('#one_votes_so_far').html("<span class='badge'>" + vote_one + "</span>");
 							tot_one = parseInt(vote_one);
 						}
 
 						var vote_two = snap.child("vote_two").val();
 						if (vote_two != null) {
-							$('#two_votes_so_far').html("<span class='badge'>"+vote_two+"</span>");
+							$('#two_votes_so_far').html("<span class='badge'>" + vote_two + "</span>");
 							tot_two = parseInt(vote_two);
 						}
-						
+
 						setUserNameWithDisqus(compare_id, snap.child("txt_title").val());
 
 						$('#disqus_thread').show();
@@ -96,7 +97,10 @@ $(document).ready(function() {
 							img.src = payloadTwo;
 							document.getElementById("fileDisplayAreaTwo").appendChild(img);
 						}
+
 					});
+
+					
 
 					var filePayloadOne = "";
 					var fileInputOne = document.getElementById('fileInputOne');
@@ -156,6 +160,11 @@ $(document).ready(function() {
 							fileDisplayAreaTwo.innerHTML = "File not supported!"
 						}
 					});
+					
+					
+					$('#edit_submit_btn').show();
+					$('#remove_submit_btn').show();
+					$('#ask_submit_btn').show();
 
 					$('#txt_one_box').keyup(function() {
 
@@ -191,19 +200,18 @@ $(document).ready(function() {
 							vote_one : parseInt(0),
 							vote_two : parseInt(0)
 						});
-						
+
 						var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
 
-						
-						if(filePayloadOne !== "" ){
-						
+						if (filePayloadOne !== "") {
+
 							postsRefImages.update({
 								file_one : filePayloadOne
 							});
 						}
-						
-						if(filePayloadTwo !== "" ){
-						
+
+						if (filePayloadTwo !== "") {
+
 							postsRefImages.update({
 								file_two : filePayloadTwo
 							});
