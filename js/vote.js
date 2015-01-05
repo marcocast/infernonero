@@ -85,8 +85,6 @@ $(document).ready(function() {
 			
 			if (authData) {
 				setUserNameWithDisqus(hash, txt_title);
-				
-				$('#disqus_thread').show();
 			}
 
 			

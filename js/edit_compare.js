@@ -76,8 +76,6 @@ $(document).ready(function() {
 
 						setUserNameWithDisqus(compare_id, snap.child("txt_title").val());
 
-						$('#disqus_thread').show();
-
 					});
 
 					var fImages = new Firebase('https://infernonero.firebaseio.com/compares-images/' + compare_id);
