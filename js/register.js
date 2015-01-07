@@ -68,6 +68,8 @@ $(document).ready(function() {
 
 	$('#register_submit_btn').click(function() {
 
+		var rememberVal = "sessionOnly";
+
 		ref.createUser({
 			email : $('#txtEmailr').val(),
 			password : $('#txtPassr').val()
@@ -85,6 +87,8 @@ $(document).ready(function() {
 						console.log("Authenticated successfully with payload:", authData);
 						location.reload();
 					}
+				}, {
+					remember : rememberVal
 				});
 			} else {
 				console.log("Error creating user:", error);
