@@ -29,6 +29,12 @@ $(document).ready(function() {
 
 	$('#login_submit_btn').click(function() {
 
+		var rememberVal = "sessionOnly";
+
+		if ($("#rememberme").is(":checked")) {
+			rememberVal = "default";
+		}
+
 		ref.authWithPassword({
 			email : $('#txtEmail').val(),
 			password : $('#txtPass').val()
@@ -54,6 +60,8 @@ $(document).ready(function() {
 				console.log("Authenticated successfully with payload:", authData);
 				location.reload();
 			}
+		}, {
+			remember : rememberVal
 		});
 
 	});
@@ -101,6 +109,12 @@ $(document).ready(function() {
 
 	$('#login_facebook').click(function() {
 
+		var rememberVal = "sessionOnly";
+
+		if ($("#rememberme").is(":checked")) {
+			rememberVal = "default";
+		}
+
 		ref.authWithOAuthPopup("facebook", function(error, authData) {
 			if (error) {
 				console.log("Login Failed!", error);
@@ -108,11 +122,19 @@ $(document).ready(function() {
 				console.log("Authenticated successfully with payload:", authData);
 				location.reload();
 			}
+		}, {
+			remember : rememberVal
 		});
 
 	});
 
 	$('#login_google').click(function() {
+
+		var rememberVal = "sessionOnly";
+
+		if ($("#rememberme").is(":checked")) {
+			rememberVal = "default";
+		}
 
 		ref.authWithOAuthPopup("google", function(error, authData) {
 			if (error) {
@@ -121,11 +143,19 @@ $(document).ready(function() {
 				console.log("Authenticated successfully with payload:", authData);
 				location.reload();
 			}
+		}, {
+			remember : rememberVal
 		});
 
 	});
 
 	$('#login_twitter').click(function() {
+
+		var rememberVal = "sessionOnly";
+
+		if ($("#rememberme").is(":checked")) {
+			rememberVal = "default";
+		}
 
 		ref.authWithOAuthPopup("twitter", function(error, authData) {
 			if (error) {
@@ -133,6 +163,29 @@ $(document).ready(function() {
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
 				location.reload();
+			}
+		}, {
+			remember : rememberVal
+		});
+
+	});
+
+	$('#forget_email_btn').click(function() {
+
+		ref.resetPassword({
+			email : $('#txtEmailr').val()
+		}, function(error) {
+			if (error === null) {
+				$.growl("Password reset email sent successfully", {
+					type : "success",
+					placement : {
+						from : "bottom",
+						align : "center"
+					}
+				});
+				console.log("Password reset email sent successfully");
+			} else {
+				console.log("Error sending password reset email:", error);
 			}
 		});
 
