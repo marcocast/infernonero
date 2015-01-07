@@ -25,9 +25,12 @@
 		</script>
 		<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
 		<script type="text/javascript">
-			stLight.options({
-				publisher : 'be66f13c-f7cb-4326-82dc-faf93984b835',
+			new Firebase("https://infernonero.firebaseio.com/keys").once("value", function(data) {
+				stLight.options({
+					publisher : data.child("sharethis-publisher").val()
+				});
 			});
+
 		</script>
 
 	</head>
