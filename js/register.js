@@ -28,6 +28,46 @@ $(document).ready(function() {
 	});
 
 	$('#login_submit_btn').click(function() {
+		
+		var email = $('#txtEmail').val();
+		
+		if(email === ""){
+			$.growl("Please enter an email", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}else{
+			var atpos = email.indexOf("@");
+		    var dotpos = email.lastIndexOf(".");
+		    if (atpos< 1 || dotpos<atpos+2 || dotpos+2>=email.length) {
+		    	$.growl("Please enter a valid email", {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+		        return false;
+		    }
+		}
+		
+		if($('#txtPass').val() === ""){
+			$.growl("Please enter a password", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
+		
 
 		var rememberVal = "sessionOnly";
 
@@ -67,6 +107,62 @@ $(document).ready(function() {
 	});
 
 	$('#register_submit_btn').click(function() {
+		
+		var email = $('#txtEmailr').val();
+		
+		if(email === ""){
+			$.growl("Please enter an email", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}else{
+			var atpos = email.indexOf("@");
+		    var dotpos = email.lastIndexOf(".");
+		    if (atpos< 1 || dotpos<atpos+2 || dotpos+2>=email.length) {
+		    	$.growl("Please enter a valid email", {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+		        return false;
+		    }
+		}
+		
+		if($('#txtPassr').val() === ""){
+			$.growl("Please enter a password", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
+		
+		
+		if ($("#termsandcondition").is(":checked")) {
+		}else{
+			$.growl("Please read and accept the terms and conditions", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
+
+		
+		
 
 		var rememberVal = "sessionOnly";
 
@@ -91,6 +187,13 @@ $(document).ready(function() {
 					remember : rememberVal
 				});
 			} else {
+				$.growl("Error creating user : "+error, {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
 				console.log("Error creating user:", error);
 			}
 		});

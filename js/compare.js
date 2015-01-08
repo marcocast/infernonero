@@ -101,6 +101,47 @@ $(document).ready(function() {
 
 	$('#save_submit_btn').click(function() {
 
+		
+		var txt_title = $('#txt_title').val();
+		var txt_one = $('#txt_one_box').val();
+		var txt_two = $('#txt_two_box').val();
+		
+		if(txt_title === ""){
+			$.growl("Please enter a title for this compare", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
+		
+		if(txt_one === ""){
+			$.growl("Please enter a value for the first compare", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
+		
+		if(txt_two === ""){
+			$.growl("Please enter a value for the second compare", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
+		
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
 
 		$('#save_submit_btn').hide();
@@ -108,9 +149,6 @@ $(document).ready(function() {
 
 		var reader = new FileReader();
 
-		var txt_title = $('#txt_title').val();
-		var txt_one = $('#txt_one_box').val();
-		var txt_two = $('#txt_two_box').val();
 
 		usersComparesID = new Date().getTime();
 
@@ -166,6 +204,42 @@ $(document).ready(function() {
 		var txt_title = $('#txt_title').val();
 		var txt_one = $('#txt_one_box').val();
 		var txt_two = $('#txt_two_box').val();
+		
+		if(txt_title === ""){
+			$.growl("Please enter a title for this compare", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
+		
+		if(txt_one === ""){
+			$.growl("Please enter a value for the first compare", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
+		
+		if(txt_two === ""){
+			$.growl("Please enter a value for the second compare", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			
+			return false;
+		}
 
 		var now = new Date().getTime();
 
