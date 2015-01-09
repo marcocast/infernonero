@@ -65,6 +65,7 @@ $(document).ready(function() {
 			$('#logout').hide();
 			$('#compare').hide();
 			$('#manage').hide();
+			$('#manage-voted').hide();
 		}
 
 		var f = new Firebase('https://infernonero.firebaseio.com/compares/' + hash);
@@ -185,6 +186,11 @@ $(document).ready(function() {
 					vote : "1"
 				});
 
+				
+				ref.child("voted-user-compares").child(authData.uid).push({
+					compare_id : hash
+				});
+		
 				$('#result_one').html("<span class='badge'>"+tot_one+"</span>");
 				$('#vote_one').hide();
 				$('#vote_two').hide();
@@ -211,6 +217,11 @@ $(document).ready(function() {
 				ref.child("votes").child(hash).child(authData.uid).set({
 					vote : "2"
 				});
+				
+				ref.child("voted-user-compares").child(authData.uid).push({
+					compare_id : hash
+				});
+				
 				$('#result_two').html("<span class='badge'>"+tot_two+"</span>");
 				$('#vote_two').hide();
 				$('#vote_one').hide();

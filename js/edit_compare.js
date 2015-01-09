@@ -187,7 +187,6 @@ $(document).ready(function() {
 					  $('#feed2').append(html);
     			}
   	
-
 						setUserNameWithDisqus(compare_id, snap.child("txt_title").val());
 
 					});
@@ -479,6 +478,7 @@ $(document).ready(function() {
 			$('#logout').hide();
 			$('#compare').hide();
 			$('#manage').hide();
+			$('#manage-voted').hide();
 		}
 
 	}

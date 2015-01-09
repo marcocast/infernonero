@@ -23,12 +23,15 @@ function authDataCallback(authData) {
 		$('#username').show();
 		$('#compare').show();
 		$('#manage').show();
+		$('#manage-voted').show();
+
 	} else {
 		console.log("User is logged out");
 		$('#logout').hide();
 		$('#username').hide();
 		$('#compare').hide();
 		$('#manage').hide();
+		$('#manage-voted').hide();
 		$('#social_media_wrapper').show();
 		$('#sign').show();
 
