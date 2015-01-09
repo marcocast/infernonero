@@ -121,6 +121,7 @@ $(document).ready(function() {
 				    }
 				    return true;
 				  });
+				  $('#feed1').empty();
 				  $('#feed1').append(html);
 	  			}
 				
@@ -137,6 +138,7 @@ $(document).ready(function() {
 					    }
 					    return true;
 					  });
+				$('#feed2').empty();
 				$('#feed2').append(html);
     			}
     			
