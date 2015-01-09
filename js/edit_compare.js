@@ -365,6 +365,7 @@ $(document).ready(function() {
 			$('#logout').hide();
 			$('#compare').hide();
 			$('#manage').hide();
+			$('#manage-voted').hide();
 		}
 
 	}

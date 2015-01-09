@@ -49,20 +49,24 @@
 							<li id="manage">
 								<a href="user-compares.html"><i class="fa fa-bars"></i><span> Manage</span></a>
 							</li>
-
+							<li id="manage-voted">
+								<a href="voted-user-compares.html"><i class="fa fa-bars"></i><span> Voted</span></a>
+							</li>
 						</ul>
 					</div>
 				</div>
-		  <div id="logout" class="dropdown">
-			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-			    
-			    <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-			    <li role="presentation"><a role="menuitem" tabindex="-1" id="loggingout" href="#logout">Logout</a></li>
-			    
-			  </ul>
-			</div>
+				<div id="logout" class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" id="loggingout" href="#logout">Logout</a>
+						</li>
+
+					</ul>
+				</div>
 			</div>
 		</header>
 
@@ -82,7 +86,8 @@
 									<div class="compare-container fileinput fileinput-new" data-provides="fileinput">
 										<div class="signin">
 
-											<div id="fileDisplayAreaOne"><img id="loadone" src="images/468.GIF" /></div>
+											<div id="fileDisplayAreaOne"><img id="loadone" src="images/468.GIF" />
+											</div>
 											<div id="one_box"></div>
 											<br>
 
@@ -93,8 +98,7 @@
 
 											</div>
 											<div class="row">
-													Votes so far <div id="one_votes_so_far"></div>
-
+												Votes so far <div id="one_votes_so_far"></div>
 
 											</div>
 										</div>
@@ -105,7 +109,8 @@
 									<div class="compare-container fileinput fileinput-new" data-provides="fileinput">
 										<div class="signin">
 
-											<div id="fileDisplayAreaTwo"><img id="loadtwo" src="images/468.GIF" /></div>
+											<div id="fileDisplayAreaTwo"><img id="loadtwo" src="images/468.GIF" />
+											</div>
 											<div id="two_box"></div>
 											<br>
 
@@ -116,8 +121,7 @@
 
 											</div>
 											<div class="row">
-													Votes so far <div id="two_votes_so_far"></div>
-
+												Votes so far <div id="two_votes_so_far"></div>
 
 											</div>
 										</div>
@@ -146,7 +150,7 @@
 							<div id="disqus_thread"></div>
 							<script type="text/javascript">
 								/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-								
+
 								var disqus_shortname = 'infernonero';
 								var disqus_identifier = 'infernonero';
 								var disqus_config = function() {
@@ -166,17 +170,17 @@
 										reload : true,
 										config : function() {
 											this.page.remote_auth_s3 = message;
-										    this.page.api_key = pubKey;
+											this.page.api_key = pubKey;
 											this.page.identifier = newIdentifier;
 											this.page.url = newUrl;
 											this.page.title = newTitle;
 											this.language = newLanguage;
 											// This adds the custom login/logout functionality
-										    this.sso = {
-										          name:   "Infernonero",
-										          url:     "https://infernonero.firebaseapp.com/register.html",
-										          logout:  "https://infernonero.firebaseapp.com/logout.html"
-										    };
+											this.sso = {
+												name : "Infernonero",
+												url : "https://infernonero.firebaseapp.com/register.html",
+												logout : "https://infernonero.firebaseapp.com/logout.html"
+											};
 										}
 									});
 								};
@@ -199,7 +203,9 @@
 							<div class="col-sm-6 col-md-6">
 								Copyright ©2014 all rights reserved
 							</div>
-                         <div class="text-right col-sm-6 col-md-6"> Designed by <a href="http://ie.linkedin.com/pub/marco-castigliego/0/797/a26/">Marcocast</a> </div>
+							<div class="text-right col-sm-6 col-md-6">
+								Designed by <a href="http://ie.linkedin.com/pub/marco-castigliego/0/797/a26/">Marcocast</a>
+							</div>
 
 						</div>
 					</div>
