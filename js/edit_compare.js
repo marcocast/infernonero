@@ -342,7 +342,9 @@ $(document).ready(function() {
 							txt_one : txt_one,
 							txt_two : txt_two,
 							vote_one : parseInt(0),
-							vote_two : parseInt(0)
+							vote_two : parseInt(0),
+							preview_one: $('#txt_one_box').data('preview'),
+							preview_two: $('#txt_two_box').data('preview')
 						}, function(error) {
 							if (error) {
 								alert("Data could not be saved." + error);
