@@ -2,6 +2,78 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 $('#disqus_thread').hide();
 
+var te = document.querySelector('textarea');
+te.addEventListener('keydown', resizeTextarea);
+
+function resizeTextarea(ev) {
+     this.style.height = '24px';
+     this.style.height = this.scrollHeight + 14 + 'px';
+}
+
+function objToString (obj) {
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str += p + '::' + obj[p] + '\n';
+        }
+    }
+    return str;
+}
+
+var template = ['<div class="row">',
+    '<div class="col-sm-4 columns">',
+      '<img class="thumb" src="{{thumbnail_url}}"></img>',
+    '</div>',
+    '<div class="col-sm-7 column">',
+      '<a href="{{original_url}}">{{title}}</a>',
+      '<p>{{description}}</p>',
+    '</div>',
+  '</div>'].join('');
+  
+
+var render1 = function(data, options){
+  var preview = $('#txt_one_box').data('preview');
+
+  html = $(Mustache.to_html(template, preview));
+  html.data('preview', preview);
+  html.on('click', function(){
+    var data = $(this).data('preview');
+    // Insert the video or rich object.
+    if (data.media.type === 'video' || data.media.type === 'rich'){
+      $(this).html(data.media.html);
+      return false;
+    }
+    return true;
+  });
+  // Display the item in the feed.
+  $('#feed1').clean();
+  $('#feed1').append(html);
+  return false;
+};
+
+
+var render2 = function(data, options){
+  var preview = $('#txt_two_box').data('preview');
+  // Create a post using mustache, i.e. the nice way.
+
+  html = $(Mustache.to_html(template, preview));
+  html.data('preview', preview);
+  html.on('click', function(){
+    var data = $(this).data('preview');
+    // Insert the video or rich object.
+    if (data.media.type === 'video' || data.media.type === 'rich'){
+      $(this).html(data.media.html);
+      return false;
+    }
+    return true;
+  });
+  // Display the item in the feed.
+  $('#feed2').clean();
+  $('#feed2').append(html);
+  return false;
+};
+
+
 $(document).ready(function() {
 
 	$('#edit_submit_btn').hide();
@@ -15,6 +87,13 @@ $(document).ready(function() {
 
 	});
 
+	// Set up preview.
+	$('#txt_one_box').preview({key:'0079fbf00cf74fdc8204cc8c611c2c08',
+	    render:render1});
+						
+	$('#txt_two_box').preview({key:'0079fbf00cf74fdc8204cc8c611c2c08',
+	    render:render2});
+	    
 	var idx = window.location.href.indexOf('#');
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
 	var idxComment = hash.indexOf('#comment');
@@ -73,6 +152,41 @@ $(document).ready(function() {
 							$('#two_votes_so_far').html("<span class='badge'>" + vote_two + "</span>");
 							tot_two = parseInt(vote_two);
 						}
+						
+										
+				var p1 = snap.child("preview_one").val();
+				if (p1 != null) {	
+	
+				  html = $(Mustache.to_html(template, p1));
+				  html.data('preview', p1);
+				  html.on('click', function(){
+				    var data = $(this).data('preview');
+				    // Insert the video or rich object.
+				    if (data.media.type === 'video' || data.media.type === 'rich'){
+				      $(this).html(data.media.html);
+				      return false;
+				    }
+				    return true;
+				  });
+				  $('#feed1').append(html);
+	  			}
+				
+				var p2 = snap.child("preview_two").val();
+	  			if (p2 != null) {	
+					  html = $(Mustache.to_html(template, p2));
+					  html.data('preview', p2);
+					  html.on('click', function(){
+					    var data = $(this).data('preview');
+					    // Insert the video or rich object.
+					    if (data.media.type === 'video' || data.media.type === 'rich'){
+					      $(this).html(data.media.html);
+					      return false;
+					    }
+					    return true;
+					  });
+					  $('#feed2').append(html);
+    			}
+  	
 
 						setUserNameWithDisqus(compare_id, snap.child("txt_title").val());
 

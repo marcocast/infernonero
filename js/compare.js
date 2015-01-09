@@ -7,6 +7,64 @@ if (authData) {
 	window.location.href = "/register.html";
 }
 
+
+var te = document.querySelector('textarea');
+te.addEventListener('keydown', resizeTextarea);
+
+function resizeTextarea(ev) {
+     this.style.height = '24px';
+     this.style.height = this.scrollHeight + 14 + 'px';
+}
+
+  var template = ['<div class="row">',
+    '<div class="col-sm-4 columns">',
+      '<img class="thumb" src="{{thumbnail_url}}"></img>',
+    '</div>',
+    '<div class="col-sm-7 column">',
+      '<a href="{{original_url}}">{{title}}</a>',
+      '<p>{{description}}</p>',
+    '</div>',
+  '</div>'].join('');
+  
+
+var render1 = function(data, options){
+  var preview = $('#txt_one_box').data('preview');
+  html = $(Mustache.to_html(template, preview));
+  html.data('preview', preview);
+  html.on('click', function(){
+    var data = $(this).data('preview');
+    // Insert the video or rich object.
+    if (data.media.type === 'video' || data.media.type === 'rich'){
+      $(this).html(data.media.html);
+      return false;
+    }
+    return true;
+  });
+  // Display the item in the feed.
+  $('#feed1').append(html);
+  return false;
+};
+
+
+var render2 = function(data, options){
+  var preview = $('#txt_two_box').data('preview');
+  html = $(Mustache.to_html(template, preview));
+  html.data('preview', preview);
+  html.on('click', function(){
+    var data = $(this).data('preview');
+    // Insert the video or rich object.
+    if (data.media.type === 'video' || data.media.type === 'rich'){
+      $(this).html(data.media.html);
+      return false;
+    }
+    return true;
+  });
+  // Display the item in the feed.
+  $('#feed2').append(html);
+  return false;
+};
+
+
 $(document).ready(function() {
 
 	$('#edit_submit_btn').hide();
@@ -16,6 +74,14 @@ $(document).ready(function() {
 
 	setUserName();
 
+    // Set up preview.
+    $('#txt_one_box').preview({key:'0079fbf00cf74fdc8204cc8c611c2c08',
+     render:render1});
+
+    $('#txt_two_box').preview({key:'0079fbf00cf74fdc8204cc8c611c2c08',
+    render:render2});
+    
+    
 	var filePayloadOne = "";
 	var fileInputOne = document.getElementById('fileInputOne');
 	fileInputOne.files[0] = null;
@@ -160,7 +226,9 @@ $(document).ready(function() {
 			txt_one : txt_one,
 			txt_two : txt_two,
 			vote_one : parseInt(0),
-			vote_two : parseInt(0)
+			vote_two : parseInt(0),
+			preview_one: $('#txt_one_box').data('preview'),
+			preview_two: $('#txt_two_box').data('preview')
 		}, function(error) {
 			if (error) {
 				alert("Data could not be saved." + error);

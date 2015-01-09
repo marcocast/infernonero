@@ -2,6 +2,27 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 $('#disqus_thread').hide();
 
+var template = ['<div class="row">',
+    '<div class="col-sm-4 columns">',
+      '<img class="thumb" src="{{thumbnail_url}}"></img>',
+    '</div>',
+    '<div class="col-sm-7 column">',
+      '<a href="{{original_url}}">{{title}}</a>',
+      '<p>{{description}}</p>',
+    '</div>',
+  '</div>'].join('');
+  
+  
+ function objToString (obj) {
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str += p + '::' + obj[p] + '\n';
+        }
+    }
+    return str;
+}
+
 
 $(document).ready(function() {
 
@@ -82,6 +103,41 @@ $(document).ready(function() {
 				$('#result_two').html("<span class='badge'>"+vote_two+"</span>");
 				tot_two = parseInt(vote_two);
 			}
+			
+				var p1 = snap.child("preview_one").val();
+				//alert("P1::"+objToString(p1));
+				if (p1 != null) {	
+	
+				  html = $(Mustache.to_html(template, p1));
+				  html.data('preview', p1);
+				  html.on('click', function(){
+				    var data = $(this).data('preview');
+				    // Insert the video or rich object.
+				    if (data.media.type === 'video' || data.media.type === 'rich'){
+				      $(this).html(data.media.html);
+				      return false;
+				    }
+				    return true;
+				  });
+				  $('#feed1').append(html);
+	  			}
+				
+				var p2 = snap.child("preview_two").val();
+	  			if (p2 != null) {	
+					  html = $(Mustache.to_html(template, p2));
+					  html.data('preview', p2);
+					  html.on('click', function(){
+					    var data = $(this).data('preview');
+					    // Insert the video or rich object.
+					    if (data.media.type === 'video' || data.media.type === 'rich'){
+					      $(this).html(data.media.html);
+					      return false;
+					    }
+					    return true;
+					  });
+				$('#feed2').append(html);
+    			}
+    			
 			
 			if (authData) {
 				setUserNameWithDisqus(hash, txt_title);

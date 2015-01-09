@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+* {
+overflow: hidden;
+resize: none;
+box-sizing: border-box;
+}
+
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
+
+
+.fileupload { 
+float:left;
+width: 32px !important;
+height: 32px !important;
+background-image: url(img/32-128.png) !important;  
+background-repeat: no-repeat;
+}
+
+.input-text {
+overflow: hidden;
+resize: none;
+box-sizing: border-box;
+}
+
+.form-control {
+display: block;
+width: 100%;
+height: 2em;
+padding: 6px 12px;
+margin-right: 5px;
+font-size: 1em;
+line-height: 1.42857143;
+color: #555;
+background-color: #fff;
+background-image: none;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.compare-container {
+width: 100%;
+}
+
+.ui-widget-content {
+border: none;
+background: #ffffff/*{bgColorContent}*/ url(images/ui-bg_flat_75_ffffff_40x100.png)/*{bgImgUrlContent}*/ 50%/*{bgContentXPos}*/ 50%/*{bgContentYPos}*/ repeat-x/*{bgContentRepeat}*/;
+}
+
+.ui-widget-header {
+border:none;	
+color: #222222/*{fcHeader}*/;
+background:none;
+}
+
+.input-no-border {
+border:none;	
+}
+
+.picture-input {
+border: 1px solid #ccc;
+border-radius: 4px;
+width: 100%;
+}
+
