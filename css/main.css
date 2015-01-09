@@ -46,6 +46,8 @@ resize: none;
 box-sizing: border-box;
 }
 
+
+
 .form-control {
 display: block;
 width: 100%;
@@ -85,6 +87,8 @@ border:none;
 .picture-input {
 border: 1px solid #ccc;
 border-radius: 4px;
+overflow: hidden;
+resize: none;
 width: 100%;
 }
 

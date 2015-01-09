@@ -78,6 +78,8 @@ $(document).ready(function() {
 
 		f.on('value', function(snap) {
 
+			
+
 			var txt_one = snap.child("txt_one").val();
 			if (txt_one != null) {
 				$('#one_box').html(txt_one);
@@ -106,7 +108,6 @@ $(document).ready(function() {
 			}
 			
 				var p1 = snap.child("preview_one").val();
-				//alert("P1::"+objToString(p1));
 				if (p1 != null) {	
 	
 				  html = $(Mustache.to_html(template, p1));
