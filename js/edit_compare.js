@@ -46,7 +46,7 @@ var render1 = function(data, options){
     return true;
   });
   // Display the item in the feed.
-  $('#feed1').clean();
+  $('#feed1').empty();
   $('#feed1').append(html);
   return false;
 };
@@ -68,7 +68,7 @@ var render2 = function(data, options){
     return true;
   });
   // Display the item in the feed.
-  $('#feed2').clean();
+  $('#feed2').empty();
   $('#feed2').append(html);
   return false;
 };
