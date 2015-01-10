@@ -6,73 +6,62 @@ var te = document.querySelector('textarea');
 te.addEventListener('keydown', resizeTextarea);
 
 function resizeTextarea(ev) {
-     this.style.height = '24px';
-     this.style.height = this.scrollHeight + 14 + 'px';
+	this.style.height = '24px';
+	this.style.height = this.scrollHeight + 14 + 'px';
 }
 
-function objToString (obj) {
-    var str = '';
-    for (var p in obj) {
-        if (obj.hasOwnProperty(p)) {
-            str += p + '::' + obj[p] + '\n';
-        }
-    }
-    return str;
+function objToString(obj) {
+	var str = '';
+	for (var p in obj) {
+		if (obj.hasOwnProperty(p)) {
+			str += p + '::' + obj[p] + '\n';
+		}
+	}
+	return str;
 }
 
-var template = ['<div class="row">',
-    '<div class="col-sm-4 columns">',
-      '<img class="thumb" src="{{thumbnail_url}}"></img>',
-    '</div>',
-    '<div class="col-sm-7 column">',
-      '<a href="{{original_url}}">{{title}}</a>',
-      '<p>{{description}}</p>',
-    '</div>',
-  '</div>'].join('');
-  
+var template = ['<div class="row">', '<div class="col-sm-4 columns">', '<img class="thumb" src="{{thumbnail_url}}"></img>', '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
 
-var render1 = function(data, options){
-  var preview = $('#txt_one_box').data('preview');
+var render1 = function(data, options) {
+	var preview = $('#txt_one_box').data('preview');
 
-  html = $(Mustache.to_html(template, preview));
-  html.data('preview', preview);
-  html.on('click', function(){
-    var data = $(this).data('preview');
-    // Insert the video or rich object.
-    if (data.media.type === 'video' || data.media.type === 'rich'){
-      $(this).html(data.media.html);
-      return false;
-    }
-    return true;
-  });
-  // Display the item in the feed.
-  $('#feed1').empty();
-  $('#feed1').append(html);
-  return false;
+	html = $(Mustache.to_html(template, preview));
+	html.data('preview', preview);
+	html.on('click', function() {
+		var data = $(this).data('preview');
+		// Insert the video or rich object.
+		if (data.media.type === 'video' || data.media.type === 'rich') {
+			$(this).html(data.media.html);
+			return false;
+		}
+		return true;
+	});
+	// Display the item in the feed.
+	$('#feed1').empty();
+	$('#feed1').append(html);
+	return false;
 };
 
+var render2 = function(data, options) {
+	var preview = $('#txt_two_box').data('preview');
+	// Create a post using mustache, i.e. the nice way.
 
-var render2 = function(data, options){
-  var preview = $('#txt_two_box').data('preview');
-  // Create a post using mustache, i.e. the nice way.
-
-  html = $(Mustache.to_html(template, preview));
-  html.data('preview', preview);
-  html.on('click', function(){
-    var data = $(this).data('preview');
-    // Insert the video or rich object.
-    if (data.media.type === 'video' || data.media.type === 'rich'){
-      $(this).html(data.media.html);
-      return false;
-    }
-    return true;
-  });
-  // Display the item in the feed.
-  $('#feed2').empty();
-  $('#feed2').append(html);
-  return false;
+	html = $(Mustache.to_html(template, preview));
+	html.data('preview', preview);
+	html.on('click', function() {
+		var data = $(this).data('preview');
+		// Insert the video or rich object.
+		if (data.media.type === 'video' || data.media.type === 'rich') {
+			$(this).html(data.media.html);
+			return false;
+		}
+		return true;
+	});
+	// Display the item in the feed.
+	$('#feed2').empty();
+	$('#feed2').append(html);
+	return false;
 };
-
 
 $(document).ready(function() {
 
@@ -88,12 +77,16 @@ $(document).ready(function() {
 	});
 
 	// Set up preview.
-	$('#txt_one_box').preview({key:'0079fbf00cf74fdc8204cc8c611c2c08',
-	    render:render1});
-						
-	$('#txt_two_box').preview({key:'0079fbf00cf74fdc8204cc8c611c2c08',
-	    render:render2});
-	    
+	$('#txt_one_box').preview({
+		key : '0079fbf00cf74fdc8204cc8c611c2c08',
+		render : render1
+	});
+
+	$('#txt_two_box').preview({
+		key : '0079fbf00cf74fdc8204cc8c611c2c08',
+		render : render2
+	});
+
 	var idx = window.location.href.indexOf('#');
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
 	var idxComment = hash.indexOf('#comment');
@@ -152,41 +145,40 @@ $(document).ready(function() {
 							$('#two_votes_so_far').html("<span class='badge'>" + vote_two + "</span>");
 							tot_two = parseInt(vote_two);
 						}
-						
-										
-				var p1 = snap.child("preview_one").val();
-				if (p1 != null) {	
-	
-				  html = $(Mustache.to_html(template, p1));
-				  html.data('preview', p1);
-				  html.on('click', function(){
-				    var data = $(this).data('preview');
-				    // Insert the video or rich object.
-				    if (data.media.type === 'video' || data.media.type === 'rich'){
-				      $(this).html(data.media.html);
-				      return false;
-				    }
-				    return true;
-				  });
-				  $('#feed1').append(html);
-	  			}
-				
-				var p2 = snap.child("preview_two").val();
-	  			if (p2 != null) {	
-					  html = $(Mustache.to_html(template, p2));
-					  html.data('preview', p2);
-					  html.on('click', function(){
-					    var data = $(this).data('preview');
-					    // Insert the video or rich object.
-					    if (data.media.type === 'video' || data.media.type === 'rich'){
-					      $(this).html(data.media.html);
-					      return false;
-					    }
-					    return true;
-					  });
-					  $('#feed2').append(html);
-    			}
-  	
+
+						var p1 = snap.child("preview_one").val();
+						if (p1 != null) {
+
+							html = $(Mustache.to_html(template, p1));
+							html.data('preview', p1);
+							html.on('click', function() {
+								var data = $(this).data('preview');
+								// Insert the video or rich object.
+								if (data.media.type === 'video' || data.media.type === 'rich') {
+									$(this).html(data.media.html);
+									return false;
+								}
+								return true;
+							});
+							$('#feed1').append(html);
+						}
+
+						var p2 = snap.child("preview_two").val();
+						if (p2 != null) {
+							html = $(Mustache.to_html(template, p2));
+							html.data('preview', p2);
+							html.on('click', function() {
+								var data = $(this).data('preview');
+								// Insert the video or rich object.
+								if (data.media.type === 'video' || data.media.type === 'rich') {
+									$(this).html(data.media.html);
+									return false;
+								}
+								return true;
+							});
+							$('#feed2').append(html);
+						}
+
 						setUserNameWithDisqus(compare_id, snap.child("txt_title").val());
 
 					});
@@ -295,8 +287,8 @@ $(document).ready(function() {
 						var txt_title = $('#txt_title').val();
 						var txt_one = $('#txt_one_box').val();
 						var txt_two = $('#txt_two_box').val();
-						
-						if(txt_title === ""){
+
+						if (txt_title === "") {
 							$.growl("Please enter a title for this compare", {
 								type : "danger",
 								placement : {
@@ -304,11 +296,11 @@ $(document).ready(function() {
 									align : "center"
 								}
 							});
-							
+
 							return false;
 						}
-						
-						if(txt_one === ""){
+
+						if (txt_one === "") {
 							$.growl("Please enter a value for the first compare", {
 								type : "danger",
 								placement : {
@@ -316,11 +308,11 @@ $(document).ready(function() {
 									align : "center"
 								}
 							});
-							
+
 							return false;
 						}
-						
-						if(txt_two === ""){
+
+						if (txt_two === "") {
 							$.growl("Please enter a value for the second compare", {
 								type : "danger",
 								placement : {
@@ -328,7 +320,7 @@ $(document).ready(function() {
 									align : "center"
 								}
 							});
-							
+
 							return false;
 						}
 
@@ -343,8 +335,8 @@ $(document).ready(function() {
 							txt_two : txt_two,
 							vote_one : parseInt(0),
 							vote_two : parseInt(0),
-							preview_one: $('#txt_one_box').data('preview'),
-							preview_two: $('#txt_two_box').data('preview')
+							preview_one : $('#txt_one_box').data('preview'),
+							preview_two : $('#txt_two_box').data('preview')
 						}, function(error) {
 							if (error) {
 								alert("Data could not be saved." + error);
@@ -391,6 +383,7 @@ $(document).ready(function() {
 						usersComparesRef.remove();
 
 						var votesRef = ref.child("votes").child(snap.child("compare_id").val());
+
 						votesRef.remove();
 
 						window.location.href = "/user-compares.html";
@@ -480,7 +473,6 @@ $(document).ready(function() {
 			$('#logout').hide();
 			$('#compare').hide();
 			$('#manage').hide();
-			$('#manage-voted').hide();
 		}
 
 	}

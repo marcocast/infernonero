@@ -2,25 +2,16 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 $('#disqus_thread').hide();
 
-var template = ['<div class="row">',
-    '<div class="col-sm-4 columns">',
-      '<img class="thumb" src="{{thumbnail_url}}"></img>',
-    '</div>',
-    '<div class="col-sm-7 column">',
-      '<a href="{{original_url}}">{{title}}</a>',
-      '<p>{{description}}</p>',
-    '</div>',
-  '</div>'].join('');
-  
-  
- function objToString (obj) {
-    var str = '';
-    for (var p in obj) {
-        if (obj.hasOwnProperty(p)) {
-            str += p + '::' + obj[p] + '\n';
-        }
-    }
-    return str;
+var template = ['<div class="row">', '<div class="col-sm-4 columns">', '<img class="thumb" src="{{thumbnail_url}}"></img>', '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
+
+function objToString(obj) {
+	var str = '';
+	for (var p in obj) {
+		if (obj.hasOwnProperty(p)) {
+			str += p + '::' + obj[p] + '\n';
+		}
+	}
+	return str;
 }
 
 
@@ -33,14 +24,13 @@ $(document).ready(function() {
 
 	});
 
-	
 	var idx = window.location.href.indexOf('#');
 	var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
 	var idxComment = hash.indexOf('#comment');
 	if (idxComment > 0) {
-		hash = hash.substring(0, idxComment); 
+		hash = hash.substring(0, idxComment);
 	}
-	
+
 	if (hash === '') {
 		alert("hash === vuoto");
 		window.location.href = "/404.html";
@@ -48,10 +38,8 @@ $(document).ready(function() {
 
 		var authData = ref.getAuth();
 		if (authData) {
-			
 
 			ref.child("votes").child(hash).child(authData.uid).on("value", function(snap) {
-				
 
 				if (snap.child("vote").val() === null) {
 				} else {
@@ -65,7 +53,6 @@ $(document).ready(function() {
 			$('#logout').hide();
 			$('#compare').hide();
 			$('#manage').hide();
-			$('#manage-voted').hide();
 		}
 
 		var f = new Firebase('https://infernonero.firebaseio.com/compares/' + hash);
@@ -77,8 +64,6 @@ $(document).ready(function() {
 		});
 
 		f.on('value', function(snap) {
-
-			
 
 			var txt_one = snap.child("txt_one").val();
 			if (txt_one != null) {
@@ -97,65 +82,61 @@ $(document).ready(function() {
 
 			var vote_one = snap.child("vote_one").val();
 			if (vote_one != null) {
-				$('#result_one').html("<span class='badge'>"+vote_one+"</span>");
+				$('#result_one').html("<span class='badge'>" + vote_one + "</span>");
 				tot_one = parseInt(vote_one);
 			}
 
 			var vote_two = snap.child("vote_two").val();
 			if (vote_two != null) {
-				$('#result_two').html("<span class='badge'>"+vote_two+"</span>");
+				$('#result_two').html("<span class='badge'>" + vote_two + "</span>");
 				tot_two = parseInt(vote_two);
 			}
-			
-				var p1 = snap.child("preview_one").val();
-				if (p1 != null) {	
-	
-				  html = $(Mustache.to_html(template, p1));
-				  html.data('preview', p1);
-				  html.on('click', function(){
-				    var data = $(this).data('preview');
-				    // Insert the video or rich object.
-				    if (data.media.type === 'video' || data.media.type === 'rich'){
-				      $(this).html(data.media.html);
-				      return false;
-				    }
-				    return true;
-				  });
-				  $('#feed1').empty();
-				  $('#feed1').append(html);
-	  			}
-				
-				var p2 = snap.child("preview_two").val();
-	  			if (p2 != null) {	
-					  html = $(Mustache.to_html(template, p2));
-					  html.data('preview', p2);
-					  html.on('click', function(){
-					    var data = $(this).data('preview');
-					    // Insert the video or rich object.
-					    if (data.media.type === 'video' || data.media.type === 'rich'){
-					      $(this).html(data.media.html);
-					      return false;
-					    }
-					    return true;
-					  });
+
+			var p1 = snap.child("preview_one").val();
+			if (p1 != null) {
+
+				html = $(Mustache.to_html(template, p1));
+				html.data('preview', p1);
+				html.on('click', function() {
+					var data = $(this).data('preview');
+					// Insert the video or rich object.
+					if (data.media.type === 'video' || data.media.type === 'rich') {
+						$(this).html(data.media.html);
+						return false;
+					}
+					return true;
+				});
+				$('#feed1').empty();
+				$('#feed1').append(html);
+			}
+
+			var p2 = snap.child("preview_two").val();
+			if (p2 != null) {
+				html = $(Mustache.to_html(template, p2));
+				html.data('preview', p2);
+				html.on('click', function() {
+					var data = $(this).data('preview');
+					// Insert the video or rich object.
+					if (data.media.type === 'video' || data.media.type === 'rich') {
+						$(this).html(data.media.html);
+						return false;
+					}
+					return true;
+				});
 				$('#feed2').empty();
 				$('#feed2').append(html);
-    			}
-    			
-			
+			}
+
 			if (authData) {
 				setUserNameWithDisqus(hash, txt_title);
 			}
 
-			
-
 		});
-		
-		
+
 		var fImages = new Firebase('https://infernonero.firebaseio.com/compares-images/' + hash);
-		
+
 		fImages.on('value', function(snap) {
-			
+
 			$('#fileDisplayAreaOne').html("");
 			var payloadOne = snap.child("file_one").val();
 			$('#loadone').hide();
@@ -175,8 +156,6 @@ $(document).ready(function() {
 			}
 
 		});
-		
-		
 
 		$('#vote_one').click(function() {
 
@@ -189,12 +168,7 @@ $(document).ready(function() {
 					vote : "1"
 				});
 
-				
-				ref.child("voted-user-compares").child(authData.uid).push({
-					compare_id : hash
-				});
-		
-				$('#result_one').html("<span class='badge'>"+tot_one+"</span>");
+				$('#result_one').html("<span class='badge'>" + tot_one + "</span>");
 				$('#vote_one').hide();
 				$('#vote_two').hide();
 				$.growl("Thanks for voting", {
@@ -220,12 +194,8 @@ $(document).ready(function() {
 				ref.child("votes").child(hash).child(authData.uid).set({
 					vote : "2"
 				});
-				
-				ref.child("voted-user-compares").child(authData.uid).push({
-					compare_id : hash
-				});
-				
-				$('#result_two').html("<span class='badge'>"+tot_two+"</span>");
+
+				$('#result_two').html("<span class='badge'>" + tot_two + "</span>");
 				$('#vote_two').hide();
 				$('#vote_one').hide();
 				$.growl("Thanks for voting", {
@@ -242,4 +212,4 @@ $(document).ready(function() {
 		});
 	}
 
-}); 
+});
