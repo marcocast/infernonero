@@ -56,6 +56,9 @@ $(document).ready(function() {
 				console.log("Authenticated successfully with payload:", authData);
 
 			}
+		}, {
+			remember : "default",
+			scope : "email"
 		});
 
 	});
@@ -69,21 +72,13 @@ $(document).ready(function() {
 				console.log("Authenticated successfully with payload:", authData);
 
 			}
+		}, {
+			remember : "default",
+			scope : "email"
 		});
 
 	});
 
-	$('#login_twitter_up').click(function() {
 
-		ref.authWithOAuthPopup("twitter", function(error, authData) {
-			if (error) {
-				console.log("Login Failed!", error);
-			} else {
-				console.log("Authenticated successfully with payload:", authData);
-
-			}
-		});
-
-	});
 
 }); 
