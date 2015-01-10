@@ -13,8 +13,8 @@ $(document).ready(function() {
 	});
 
 	
-	var idx = window.location.href.indexOf('#!');
-	var hash = (idx > 0) ? window.location.href.slice(idx + 3) : '';
+	var idx = window.location.href.indexOf('?id=');
+	var hash = (idx > 0) ? window.location.href.slice(idx + 4) : '';
 	var idxComment = hash.indexOf('#comment');
 	if (idxComment > 0) {
 		hash = hash.substring(0, idxComment); 

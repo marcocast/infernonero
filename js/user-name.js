@@ -8,7 +8,8 @@ function setUserNameWithDisqus(compare_id,title) {
 				username = snap.child("displayName").val();
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = snap.child("email").val();
-				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html/#!/" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				https://infernonero.firebaseapp.com/edit_compare.html?txt_one_box=&txt_two_box=notexistent
+				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html?id=" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 				$('#disqus_thread').show();
 			});
 		} else if (authData.provider === "google") {
@@ -16,7 +17,7 @@ function setUserNameWithDisqus(compare_id,title) {
 				username = snap.child("displayName").val();
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				var useremail  = snap.child("email").val();
-				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html/#!/" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html?id=" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 				$('#disqus_thread').show();
 			});
 		} else if (authData.provider === "password") {
@@ -24,7 +25,7 @@ function setUserNameWithDisqus(compare_id,title) {
 				var useremail = snap.child("email").val();
 				username = useremail.substr(0, useremail.indexOf("@"));
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
-				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html/#!/" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html?id=" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 				$('#disqus_thread').show();
 			});
 		}
