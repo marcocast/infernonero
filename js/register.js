@@ -196,13 +196,53 @@ $(document).ready(function() {
 	});
 
 	$('#forget_email_btn').click(function() {
+		var email = $('#txtEmail').val();
+
+		if (email === "") {
+			$.growl("Please enter an email", {
+				type : "danger",
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+
+			return false;
+		} else {
+			var atpos = email.indexOf("@");
+			var dotpos = email.lastIndexOf(".");
+			if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+				$.growl("Please enter a valid email", {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+				return false;
+			}
+		}
 
 		ref.resetPassword({
 			email : $('#txtEmail').val()
 		}, function(error) {
 			if (error === null) {
 				console.log("Password reset email sent successfully");
+				$.growl("Password reset email sent successfully", {
+					type : "success",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
 			} else {
+				$.growl("Error sending password reset email : " + error, {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
 				console.log("Error sending password reset email:", error);
 			}
 		});
@@ -255,25 +295,6 @@ $(document).ready(function() {
 
 	
 
-	$('#forget_email_btn').click(function() {
-
-		ref.resetPassword({
-			email : $('#txtEmailr').val()
-		}, function(error) {
-			if (error === null) {
-				$.growl("Password reset email sent successfully", {
-					type : "success",
-					placement : {
-						from : "bottom",
-						align : "center"
-					}
-				});
-				console.log("Password reset email sent successfully");
-			} else {
-				console.log("Error sending password reset email:", error);
-			}
-		});
-
-	});
+	
 
 });
