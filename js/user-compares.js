@@ -17,19 +17,19 @@ $(document).ready(function() {
 		window.location.href = "/index.html";
 
 	});
-	
+
 	var table = $("#example tbody");
-	
-    table.html("<img src='images/468.GIF' />");
+
+	table.html("<img src='images/468.GIF' />");
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/" + authData.uid);
 	// Attach an asynchronous callback to read the data at our posts reference
 	refCompares.on("value", function(snapshot) {
 
 		$('#loadone').hide();
-		
+
 		table.html("");
-		
+
 		// iterate all the elements :((
 		snapshot.forEach(function(ss) {
 
@@ -38,9 +38,17 @@ $(document).ready(function() {
 				var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.child("compare_id").val());
 				refCompare.once("value", function(snapshot) {
 
-					var dateOfCompare = new Date(snapshot.child("date").val());
+					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + ss.child("compare_id").val());
+					refCompareVotes.once("value", function(snapshotvotes) {
 
-					table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='badge'>" + snapshot.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='badge'>" + snapshot.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td>" + "</tr>");
+						var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.child("compare_id").val());
+
+						var dateOfCompare = new Date(snapshot.child("date").val());
+
+						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='badge'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='badge'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td>" + "</tr>");
+					}, function(errorObject) {
+					});
+
 				}, function(errorObject) {
 				});
 

@@ -214,22 +214,19 @@ $(document).ready(function() {
 			txt_title : txt_title,
 			txt_one : txt_one,
 			txt_two : txt_two,
-			vote_one : parseInt(0),
-			vote_two : parseInt(0),
 			preview_one : $('#txt_one_box').data('preview'),
 			preview_two : $('#txt_two_box').data('preview')
 		}, function(error) {
 			if (error) {
 				alert("Data could not be saved." + error);
 			} else {
-				var description = txt_one + " VS " + txt_two;
-
+				
 				postID = newMessageRef.key();
 
-				var postsRefImages = ref.child("compares-images").child(postID);
-				postsRefImages.set({
-					file_one : filePayloadOne,
-					file_two : filePayloadTwo
+				ref.child("compares-votes").child(postID).set({
+					user_id : authData.uid,
+					vote_one : parseInt(0),
+					vote_two : parseInt(0)
 				}, function(error) {
 					if (error) {
 						alert("Data could not be saved." + error);
@@ -240,15 +237,37 @@ $(document).ready(function() {
 							if (error) {
 								alert("Data could not be saved." + error);
 							} else {
-								$('#savediv').html("");
-								$('#edit_submit_btn').show();
-								$('#remove_submit_btn').show();
-								$('#ask_submit_btn').show();
-								setUserNameWithDisqus(postID, txt_title);
+								var description = txt_one + " VS " + txt_two;
+
+
+								var postsRefImages = ref.child("compares-images").child(postID);
+								postsRefImages.set({
+									file_one : filePayloadOne,
+									file_two : filePayloadTwo
+								}, function(error) {
+									if (error) {
+										alert("Data could not be saved." + error);
+									} else {
+										userComparesRef.child(usersComparesID).set({
+											compare_id : postID
+										}, function(error) {
+											if (error) {
+												alert("Data could not be saved." + error);
+											} else {
+												$('#savediv').html("");
+												$('#edit_submit_btn').show();
+												$('#remove_submit_btn').show();
+												$('#ask_submit_btn').show();
+												setUserNameWithDisqus(postID, txt_title);
+											}
+										});
+									}
+								});
 							}
 						});
 					}
 				});
+
 			}
 		});
 
@@ -347,6 +366,9 @@ $(document).ready(function() {
 
 		var comparesRef = ref.child("compares").child(postID);
 		comparesRef.remove();
+		
+		var comparesRef = ref.child("compares-votes").child(postID);
+		comparesRef.remove();
 
 		var comparesImagesRef = ref.child("compares-images").child(postID);
 		comparesImagesRef.remove();
@@ -355,7 +377,7 @@ $(document).ready(function() {
 		usersComparesRef.remove();
 
 		var votesRef = ref.child("votes").child(postID);
-		
+
 		votesRef.remove();
 
 		window.location.href = "/user-compares.html";

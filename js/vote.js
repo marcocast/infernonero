@@ -56,8 +56,6 @@ $(document).ready(function() {
 		}
 
 		var f = new Firebase('https://infernonero.firebaseio.com/compares/' + hash);
-		var tot_one = 0;
-		var tot_two = 0;
 
 		f.on("child_removed", function(snap) {
 			window.location.href = "/index.html";
@@ -78,18 +76,6 @@ $(document).ready(function() {
 			var txt_title = snap.child("txt_title").val();
 			if (txt_title != null) {
 				$('#txt_title').html(txt_title);
-			}
-
-			var vote_one = snap.child("vote_one").val();
-			if (vote_one != null) {
-				$('#result_one').html("<span class='badge'>" + vote_one + "</span>");
-				tot_one = parseInt(vote_one);
-			}
-
-			var vote_two = snap.child("vote_two").val();
-			if (vote_two != null) {
-				$('#result_two').html("<span class='badge'>" + vote_two + "</span>");
-				tot_two = parseInt(vote_two);
 			}
 
 			var p1 = snap.child("preview_one").val();
@@ -127,8 +113,32 @@ $(document).ready(function() {
 				$('#feed2').append(html);
 			}
 
+		});
+
+		f.once('value', function(snap) {
+
 			if (authData) {
-				setUserNameWithDisqus(hash, txt_title);
+				setUserNameWithDisqus(hash, snap.child("txt_title").val());
+			}
+
+		});
+
+		var comparesVotesRef = new Firebase('https://infernonero.firebaseio.com/compares-votes/' + hash);
+		var tot_one = 0;
+		var tot_two = 0;
+
+		comparesVotesRef.on('value', function(snap) {
+
+			var vote_one = snap.child("vote_one").val();
+			if (vote_one != null) {
+				$('#result_one').html("<span class='badge'>" + vote_one + "</span>");
+				tot_one = parseInt(vote_one);
+			}
+
+			var vote_two = snap.child("vote_two").val();
+			if (vote_two != null) {
+				$('#result_two').html("<span class='badge'>" + vote_two + "</span>");
+				tot_two = parseInt(vote_two);
 			}
 
 		});
@@ -160,7 +170,7 @@ $(document).ready(function() {
 		$('#vote_one').click(function() {
 
 			if (authData) {
-				f.update({
+				comparesVotesRef.update({
 					"vote_one" : tot_one + parseInt(1)
 				});
 
@@ -187,7 +197,7 @@ $(document).ready(function() {
 		$('#vote_two').click(function() {
 
 			if (authData) {
-				f.update({
+				comparesVotesRef.update({
 					"vote_two" : tot_two + parseInt(1)
 				});
 
