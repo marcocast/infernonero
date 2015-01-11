@@ -134,18 +134,6 @@ $(document).ready(function() {
 			}
 		}
 
-		if ($('#txtPassr').val() === "") {
-			$.growl("Please enter a password", {
-				type : "danger",
-				placement : {
-					from : "top",
-					align : "center"
-				}
-			});
-
-			return false;
-		}
-
 		if ($("#termsandcondition").is(":checked")) {
 		} else {
 			$.growl("Please read and accept the terms and conditions", {
@@ -163,23 +151,31 @@ $(document).ready(function() {
 
 		ref.createUser({
 			email : $('#txtEmailr').val(),
-			password : $('#txtPassr').val()
+			password : "tempPassword"
 		}, function(error) {
 			if (error === null) {
-				console.log("User created successfully");
-				ref.authWithPassword({
-					email : $('#txtEmailr').val(),
-					password : $('#txtPassr').val()
-
-				}, function(error, authData) {
-					if (error) {
-						console.log("Login Failed!", error);
+				ref.resetPassword({
+					email : $('#txtEmailr').val()
+				}, function(error) {
+					if (error === null) {
+						console.log("Email confirmtion sent successfully");
+						$.growl("Email confirmtion sent successfully", {
+							type : "success",
+							placement : {
+								from : "top",
+								align : "center"
+							}
+						});
 					} else {
-						console.log("Authenticated successfully with payload:", authData);
-						location.reload();
+						$.growl("Error sending Email confirmtion : " + error, {
+							type : "danger",
+							placement : {
+								from : "top",
+								align : "center"
+							}
+						});
+						console.log("Error sending Email confirmtion:", error);
 					}
-				}, {
-					remember : rememberVal
 				});
 			} else {
 				$.growl("Error creating user : " + error, {
@@ -292,9 +288,5 @@ $(document).ready(function() {
 		});
 
 	});
-
-	
-
-	
 
 });
