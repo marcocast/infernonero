@@ -212,6 +212,7 @@ $(document).ready(function() {
 			user_id : authData.uid,
 			date : usersComparesID,
 			txt_title : txt_title,
+			closed : false,
 			txt_one : txt_one,
 			txt_two : txt_two,
 			preview_one : $('#txt_one_box').data('preview'),

@@ -7,6 +7,43 @@ if (authData) {
 	window.location.href = "/register.html";
 }
 
+function closeOpenVotes(id) {
+	var refOpenclose = new Firebase("https://infernonero.firebaseio.com/compares/" + id);
+
+	var closedOrOpen = false;
+
+	refOpenclose.once('value', function(snap) {
+		if (snap.child("closed").val()) {
+			refOpenclose.update({
+				closed : false
+			}, function(error) {
+				if (error) {
+					alert(error);
+				} else {
+					$('#action' + id).text("Close Voting");
+					$('#action' + id).removeClass("btn-sucess");
+					$('#action' + id).addClass("btn-danger");
+				}
+			});
+		}else{
+			refOpenclose.update({
+				closed : true
+			}, function(error) {
+				if (error) {
+					alert(error);
+				} else {
+					$('#action' + id).text("Open Voting");
+					$('#action' + id).removeClass("btn-danger");
+					$('#action' + id).addClass("btn-success");
+				}
+			});
+		}
+
+	});
+
+}
+
+
 $(document).ready(function() {
 
 	setUserName();
@@ -42,8 +79,14 @@ $(document).ready(function() {
 					refCompareVotes.once("value", function(snapshotvotes) {
 
 						var dateOfCompare = new Date(snapshot.child("date").val());
+						
+						var button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Close Voting</a>";
+						
+						if (snapshot.child("closed").val()) {
+							button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-success' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Open Voting</a>";
+						}
 
-						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='badge'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='badge'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td>" + "</tr>");
+						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='badge'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='badge'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>"+button+"</td></tr>");
 					}, function(errorObject) {
 					});
 

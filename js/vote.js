@@ -65,6 +65,14 @@ $(document).ready(function() {
 
 		f.on('value', function(snap) {
 
+			if (snap.child("closed").val()) {
+				$('#vote_one').hide();
+				$('#vote_two').hide();
+			}else{
+				$('#vote_one').show();
+				$('#vote_two').show();
+			}
+
 			var txt_one = snap.child("txt_one").val();
 			if (txt_one != null) {
 				$('#one_box').html(txt_one);
