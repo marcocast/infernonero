@@ -34,6 +34,8 @@ $(document).ready(function() {
 		if (email === "") {
 			$.growl("Please enter an email", {
 				type : "danger",
+				delay : 10000,
+				timer : 1000,
 				placement : {
 					from : "top",
 					align : "center"
@@ -81,6 +83,8 @@ $(document).ready(function() {
 			if (error) {
 				$.growl("Login Failed!" + error, {
 					type : "danger",
+					delay : 10000,
+					timer : 1000,
 					placement : {
 						from : "bottom",
 						align : "center"
@@ -112,6 +116,8 @@ $(document).ready(function() {
 		if (email === "") {
 			$.growl("Please enter an email", {
 				type : "danger",
+				delay : 10000,
+				timer : 1000,
 				placement : {
 					from : "top",
 					align : "center"
@@ -125,6 +131,8 @@ $(document).ready(function() {
 			if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
 				$.growl("Please enter a valid email", {
 					type : "danger",
+					delay : 10000,
+					timer : 1000,
 					placement : {
 						from : "top",
 						align : "center"
@@ -138,6 +146,8 @@ $(document).ready(function() {
 		} else {
 			$.growl("Please read and accept the terms and conditions", {
 				type : "danger",
+				delay : 10000,
+				timer : 1000,
 				placement : {
 					from : "top",
 					align : "center"
@@ -158,9 +168,11 @@ $(document).ready(function() {
 					email : $('#txtEmailr').val()
 				}, function(error) {
 					if (error === null) {
-						console.log("Email confirmtion sent successfully");
-						$.growl("Email confirmtion sent successfully", {
+						console.log("Email confirmtion sent successfully.");
+						$.growl("Email confirmtion sent successfully. Follow the instruction in the email to activate your account", {
 							type : "success",
+							delay : 35000,
+							timer : 1000,
 							placement : {
 								from : "top",
 								align : "center"
@@ -169,6 +181,8 @@ $(document).ready(function() {
 					} else {
 						$.growl("Error sending Email confirmtion : " + error, {
 							type : "danger",
+							delay : 10000,
+							timer : 1000,
 							placement : {
 								from : "top",
 								align : "center"
@@ -180,6 +194,8 @@ $(document).ready(function() {
 			} else {
 				$.growl("Error creating user : " + error, {
 					type : "danger",
+					delay : 10000,
+					timer : 1000,
 					placement : {
 						from : "top",
 						align : "center"
@@ -197,6 +213,8 @@ $(document).ready(function() {
 		if (email === "") {
 			$.growl("Please enter an email", {
 				type : "danger",
+				delay : 10000,
+				timer : 1000,
 				placement : {
 					from : "top",
 					align : "center"
@@ -210,6 +228,8 @@ $(document).ready(function() {
 			if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
 				$.growl("Please enter a valid email", {
 					type : "danger",
+					delay : 10000,
+					timer : 1000,
 					placement : {
 						from : "top",
 						align : "center"
@@ -234,6 +254,8 @@ $(document).ready(function() {
 			} else {
 				$.growl("Error sending password reset email : " + error, {
 					type : "danger",
+					delay : 10000,
+					timer : 1000,
 					placement : {
 						from : "top",
 						align : "center"
