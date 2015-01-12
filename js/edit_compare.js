@@ -64,6 +64,8 @@ var render2 = function(data, options) {
 };
 
 $(document).ready(function() {
+	
+	setUserName();
 
 	$('#edit_submit_btn').hide();
 	$('#remove_submit_btn').hide();

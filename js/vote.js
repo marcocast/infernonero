@@ -17,6 +17,8 @@ function objToString(obj) {
 
 $(document).ready(function() {
 
+	setUserName();
+
 	$('#loggingout').click(function() {
 
 		ref.unauth();

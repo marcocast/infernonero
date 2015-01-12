@@ -54,13 +54,13 @@ var render2 = function(data, options) {
 };
 
 $(document).ready(function() {
+	
+	setUserName();
 
 	$('#edit_submit_btn').hide();
 	$('#remove_submit_btn').hide();
 	$('#ask_submit_btn').hide();
 	$('#disqus_thread').hide();
-
-	setUserName();
 
 	// Set up preview.
 	$('#txt_one_box').preview({
