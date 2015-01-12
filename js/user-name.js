@@ -46,8 +46,7 @@ function setUserName() {
 		} else if (authData.provider === "password") {
 			ref.child("users").child(authData.uid).child("password").once("value", function(snap) {
 				email = snap.child("email").val();
-				username = email.substr(0, email.indexOf("@"));
-				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
+				$('#dropdownMenu1').html(email +" <span class='caret'></span>");
 			});
 		}
 
