@@ -16,29 +16,42 @@ function closeOpenVotes(id) {
 		if (snap.child("closed").val()) {
 			refOpenclose.update({
 				closed : false
-			}, function(error) {
-				if (error) {
-					alert(error);
-				} else {
-					$('#action' + id).text("Close Voting");
-					$('#action' + id).removeClass("btn-sucess");
-					$('#action' + id).addClass("btn-danger");
-				}
 			});
-		}else{
+		} else {
 			refOpenclose.update({
 				closed : true
-			}, function(error) {
-				if (error) {
-					alert(error);
-				} else {
-					$('#action' + id).text("Open Voting");
-					$('#action' + id).removeClass("btn-danger");
-					$('#action' + id).addClass("btn-success");
-				}
 			});
 		}
 
+	});
+
+}
+
+function listenOnChanges(id) {
+
+	var refOpenclose = new Firebase("https://infernonero.firebaseio.com/compares/" + id);
+
+	refOpenclose.on('child_changed', function(snapshot) {
+		var changedCompare = snapshot.val();
+		if (snapshot.val()) {
+			$('#action' + id).text("Open Voting");
+			$('#action' + id).removeClass("btn-danger");
+			$('#action' + id).addClass("btn-success");
+		} else {
+			$('#action' + id).text("Close Voting");
+			$('#action' + id).removeClass("btn-sucess");
+			$('#action' + id).addClass("btn-danger");
+		}
+
+	});
+
+	var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + id);
+
+	refCompareVotes.on('child_changed', function(snapshot) {
+		refCompareVotes.once('value', function(snap) {
+			$('#vote_one' + id).text(snap.child("vote_one").val());
+			$('#vote_two' + id).text(snap.child("vote_two").val());
+		});
 	});
 
 }
@@ -73,20 +86,22 @@ $(document).ready(function() {
 			if (ss.child("compare_id").val() === null) {
 			} else {
 				var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.child("compare_id").val());
+
 				refCompare.once("value", function(snapshot) {
 
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + ss.child("compare_id").val());
 					refCompareVotes.once("value", function(snapshotvotes) {
 
 						var dateOfCompare = new Date(snapshot.child("date").val());
-						
+
 						var button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Close Voting</a>";
-						
+
 						if (snapshot.child("closed").val()) {
 							button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-success' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Open Voting</a>";
 						}
 
-						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='badge'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='badge'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>"+button+"</td></tr>");
+						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='badge' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='badge' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + button + "</td></tr>");
+						listenOnChanges(ss.child("compare_id").val());
 					}, function(errorObject) {
 					});
 
