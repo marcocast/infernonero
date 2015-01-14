@@ -141,13 +141,13 @@ $(document).ready(function() {
 
 			var vote_one = snap.child("vote_one").val();
 			if (vote_one != null) {
-				$('#one_votes_so_far').html("<span id='labelVoteOne' class='label'>" + vote_one + "</span>");
+				$('#result_one').html("<span id='labelVoteOne' class='label'>" + vote_one + "</span>");
 				tot_one = parseInt(vote_one);
 			}
 
 			var vote_two = snap.child("vote_two").val();
 			if (vote_two != null) {
-				$('#two_votes_so_far').html("<span id='labelVoteTwo' class='label'>" + vote_two + "</span>");
+				$('#result_two').html("<span id='labelVoteTwo' class='label'>" + vote_two + "</span>");
 				tot_two = parseInt(vote_two);
 			}
 
