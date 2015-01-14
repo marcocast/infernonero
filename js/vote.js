@@ -41,15 +41,7 @@ $(document).ready(function() {
 		var authData = ref.getAuth();
 		if (authData) {
 
-			ref.child("votes").child(hash).child(authData.uid).on("value", function(snap) {
-
-				if (snap.child("vote").val() === null) {
-				} else {
-					$('#vote_one').hide();
-					$('#vote_two').hide();
-				}
-
-			});
+			
 
 		} else {
 			$('#logout').hide();
@@ -69,8 +61,17 @@ $(document).ready(function() {
 				$('#vote_one').hide();
 				$('#vote_two').hide();
 			} else {
-				$('#vote_one').show();
-				$('#vote_two').show();
+				ref.child("votes").child(hash).child(authData.uid).once("value", function(snap) {
+				if (snap.child("vote").val() === null) {
+					$('#vote_one').show();
+					$('#vote_two').show();
+				} else {
+					$('#vote_one').hide();
+					$('#vote_two').hide();
+				}
+
+			});
+				
 			}
 
 			var txt_one = snap.child("txt_one").val();
@@ -197,9 +198,8 @@ $(document).ready(function() {
 
 				ref.child("votes").child(hash).child(authData.uid).set({
 					vote : "1"
-				});
-
-				$('#result_one').html("<span class='badge'>" + tot_one + "</span>");
+				});	
+				
 				$('#vote_one').hide();
 				$('#vote_two').hide();
 				$.growl("Thanks for voting", {
@@ -226,7 +226,6 @@ $(document).ready(function() {
 					vote : "2"
 				});
 
-				$('#result_two').html("<span class='badge'>" + tot_two + "</span>");
 				$('#vote_two').hide();
 				$('#vote_one').hide();
 				$.growl("Thanks for voting", {

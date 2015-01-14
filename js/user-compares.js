@@ -27,6 +27,24 @@ function closeOpenVotes(id) {
 
 }
 
+function removeCompare(id,userComparesId) {
+	var comparesRef = ref.child("compares").child(id);
+	comparesRef.remove();
+
+	var comparesRef = ref.child("compares-votes").child(id);
+	comparesRef.remove();
+
+	var comparesImagesRef = ref.child("compares-images").child(id);
+	comparesImagesRef.remove();
+
+	var usersComparesRef = ref.child("users-compares").child(authData.uid).child(userComparesId);
+	usersComparesRef.remove();
+
+	var votesRef = ref.child("votes").child(id);
+	votesRef.remove();
+
+}
+
 function listenOnChanges(id) {
 
 	var refOpenclose = new Firebase("https://infernonero.firebaseio.com/compares/" + id);
@@ -57,7 +75,7 @@ function listenOnChanges(id) {
 }
 
 function setVotes(id, voteOne, voteTwo) {
-	
+
 	if (voteOne === voteTwo) {
 		$('#vote_one' + id).removeClass("label-danger");
 		$('#vote_one' + id).removeClass("label-success");
@@ -66,7 +84,7 @@ function setVotes(id, voteOne, voteTwo) {
 		$('#vote_two' + id).removeClass("label-danger");
 		$('#vote_two' + id).removeClass("label-success");
 		$('#vote_two' + id).addClass("label-primary");
-	}else if(voteOne > voteTwo) {
+	} else if (voteOne > voteTwo) {
 		$('#vote_one' + id).removeClass("label-primary");
 		$('#vote_one' + id).removeClass("label-danger");
 		$('#vote_one' + id).addClass("label-success");
@@ -74,7 +92,7 @@ function setVotes(id, voteOne, voteTwo) {
 		$('#vote_two' + id).removeClass("label-primary");
 		$('#vote_two' + id).removeClass("label-success");
 		$('#vote_two' + id).addClass("label-danger");
-	}else if(voteOne < voteTwo) {
+	} else if (voteOne < voteTwo) {
 		$('#vote_one' + id).removeClass("label-primary");
 		$('#vote_one' + id).removeClass("label-success");
 		$('#vote_one' + id).addClass("label-danger");
@@ -111,9 +129,13 @@ $(document).ready(function() {
 		$('#loadone').hide();
 
 		table.html("");
+		
 
 		// iterate all the elements :((
 		snapshot.forEach(function(ss) {
+			
+			var userComparesId = ss.key();
+
 
 			if (ss.child("compare_id").val() === null) {
 			} else {
@@ -126,14 +148,16 @@ $(document).ready(function() {
 
 						var dateOfCompare = new Date(snapshot.child("date").val());
 
-						var button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-success' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Open</a>";
+						var buttonRemove = "<a class='btn btn-danger' onclick=\"removeCompare('" + ss.child("compare_id").val() + "','"+userComparesId+"');\"><i class='fa fa-remove'></i> Remove</a>";
+
+						var buttonVoting = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-success' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Open</a>";
 
 						if (snapshot.child("closed").val()) {
-							button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Closed</a>";
+							buttonVoting = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Closed</a>";
 						}
 
-						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='label label-primary' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='label label-primary' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + button + "</td></tr>");
-						setVotes(ss.child("compare_id").val(),snapshotvotes.child("vote_one").val(), snapshotvotes.child("vote_two").val());
+						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='label label-primary' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='label label-primary' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
+						setVotes(ss.child("compare_id").val(), snapshotvotes.child("vote_one").val(), snapshotvotes.child("vote_two").val());
 						listenOnChanges(ss.child("compare_id").val());
 					}, function(errorObject) {
 					});
