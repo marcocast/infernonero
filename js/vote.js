@@ -41,8 +41,6 @@ $(document).ready(function() {
 		var authData = ref.getAuth();
 		if (authData) {
 
-			
-
 		} else {
 			$('#logout').hide();
 			$('#compare').hide();
@@ -61,17 +59,19 @@ $(document).ready(function() {
 				$('#vote_one').hide();
 				$('#vote_two').hide();
 			} else {
-				ref.child("votes").child(hash).child(authData.uid).once("value", function(snap) {
-				if (snap.child("vote").val() === null) {
-					$('#vote_one').show();
-					$('#vote_two').show();
-				} else {
-					$('#vote_one').hide();
-					$('#vote_two').hide();
+				if (authData) {
+					ref.child("votes").child(hash).child(authData.uid).once("value", function(snap) {
+						if (snap.child("vote").val() === null) {
+							$('#vote_one').show();
+							$('#vote_two').show();
+						} else {
+							$('#vote_one').hide();
+							$('#vote_two').hide();
+						}
+
+					});
 				}
 
-			});
-				
 			}
 
 			var txt_one = snap.child("txt_one").val();
@@ -198,8 +198,8 @@ $(document).ready(function() {
 
 				ref.child("votes").child(hash).child(authData.uid).set({
 					vote : "1"
-				});	
-				
+				});
+
 				$('#vote_one').hide();
 				$('#vote_two').hide();
 				$.growl("Thanks for voting", {
