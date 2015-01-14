@@ -68,7 +68,7 @@ $(document).ready(function() {
 			if (snap.child("closed").val()) {
 				$('#vote_one').hide();
 				$('#vote_two').hide();
-			}else{
+			} else {
 				$('#vote_one').show();
 				$('#vote_two').show();
 			}
@@ -141,14 +141,25 @@ $(document).ready(function() {
 
 			var vote_one = snap.child("vote_one").val();
 			if (vote_one != null) {
-				$('#result_one').html("<span class='badge'>" + vote_one + "</span>");
+				$('#one_votes_so_far').html("<span id='labelVoteOne' class='label'>" + vote_one + "</span>");
 				tot_one = parseInt(vote_one);
 			}
 
 			var vote_two = snap.child("vote_two").val();
 			if (vote_two != null) {
-				$('#result_two').html("<span class='badge'>" + vote_two + "</span>");
+				$('#two_votes_so_far').html("<span id='labelVoteTwo' class='label'>" + vote_two + "</span>");
 				tot_two = parseInt(vote_two);
+			}
+
+			if (vote_one === vote_two) {
+				$('#labelVoteOne').addClass("label-primary");
+				$('#labelVoteTwo').addClass("label-primary");
+			} else if (vote_one > vote_two) {
+				$('#labelVoteOne').addClass("label-success");
+				$('#labelVoteTwo').addClass("label-danger");
+			} else if (vote_one < vote_two) {
+				$('#labelVoteOne').addClass("label-danger");
+				$('#labelVoteTwo').addClass("label-success");
 			}
 
 		});

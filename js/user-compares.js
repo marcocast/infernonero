@@ -34,13 +34,13 @@ function listenOnChanges(id) {
 	refOpenclose.on('child_changed', function(snapshot) {
 		refOpenclose.once('value', function(snap) {
 			if (snap.child("closed").val()) {
-				$('#action' + id).text("Open Voting");
+				$('#action' + id).text("Closed");
+				$('#action' + id).removeClass("btn-success");
+				$('#action' + id).addClass("btn-danger");
+			} else {
+				$('#action' + id).text("Open");
 				$('#action' + id).removeClass("btn-danger");
 				$('#action' + id).addClass("btn-success");
-			} else {
-				$('#action' + id).text("Close Voting");
-				$('#action' + id).removeClass("btn-sucess");
-				$('#action' + id).addClass("btn-danger");
 			}
 		});
 
@@ -50,11 +50,42 @@ function listenOnChanges(id) {
 
 	refCompareVotes.on('child_changed', function(snapshot) {
 		refCompareVotes.once('value', function(snap) {
-			$('#vote_one' + id).text(snap.child("vote_one").val());
-			$('#vote_two' + id).text(snap.child("vote_two").val());
+			setVotes(id, snap.child("vote_one").val(), snap.child("vote_two").val());
 		});
 	});
 
+}
+
+function setVotes(id, voteOne, voteTwo) {
+	
+	if (voteOne === voteTwo) {
+		$('#vote_one' + id).removeClass("label-danger");
+		$('#vote_one' + id).removeClass("label-success");
+		$('#vote_one' + id).addClass("label-primary");
+
+		$('#vote_two' + id).removeClass("label-danger");
+		$('#vote_two' + id).removeClass("label-success");
+		$('#vote_two' + id).addClass("label-primary");
+	}else if(voteOne > voteTwo) {
+		$('#vote_one' + id).removeClass("label-primary");
+		$('#vote_one' + id).removeClass("label-danger");
+		$('#vote_one' + id).addClass("label-success");
+
+		$('#vote_two' + id).removeClass("label-primary");
+		$('#vote_two' + id).removeClass("label-success");
+		$('#vote_two' + id).addClass("label-danger");
+	}else if(voteOne < voteTwo) {
+		$('#vote_one' + id).removeClass("label-primary");
+		$('#vote_one' + id).removeClass("label-success");
+		$('#vote_one' + id).addClass("label-danger");
+
+		$('#vote_two' + id).removeClass("label-primary");
+		$('#vote_two' + id).removeClass("label-danger");
+		$('#vote_two' + id).addClass("label-success");
+	}
+
+	$('#vote_one' + id).text(voteOne);
+	$('#vote_two' + id).text(voteTwo);
 }
 
 
@@ -95,13 +126,14 @@ $(document).ready(function() {
 
 						var dateOfCompare = new Date(snapshot.child("date").val());
 
-						var button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Close Voting</a>";
+						var button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-success' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Open</a>";
 
 						if (snapshot.child("closed").val()) {
-							button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-success' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Open Voting</a>";
+							button = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Closed</a>";
 						}
 
-						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='badge' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='badge' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + button + "</td></tr>");
+						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='label label-primary' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='label label-primary' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + button + "</td></tr>");
+						setVotes(ss.child("compare_id").val(),snapshotvotes.child("vote_one").val(), snapshotvotes.child("vote_two").val());
 						listenOnChanges(ss.child("compare_id").val());
 					}, function(errorObject) {
 					});

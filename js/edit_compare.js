@@ -64,7 +64,7 @@ var render2 = function(data, options) {
 };
 
 $(document).ready(function() {
-	
+
 	setUserName();
 
 	$('#edit_submit_btn').hide();
@@ -113,7 +113,6 @@ $(document).ready(function() {
 					var compare_id = snap.child("compare_id").val();
 
 					var f = new Firebase('https://infernonero.firebaseio.com/compares/' + compare_id);
-					
 
 					f.once('value', function(snap) {
 
@@ -135,17 +134,7 @@ $(document).ready(function() {
 							$('#txt_title').val(txt_title);
 						}
 
-						var vote_one = snap.child("vote_one").val();
-						if (vote_one != null) {
-							$('#one_votes_so_far').html("<span class='badge'>" + vote_one + "</span>");
-							tot_one = parseInt(vote_one);
-						}
-
-						var vote_two = snap.child("vote_two").val();
-						if (vote_two != null) {
-							$('#two_votes_so_far').html("<span class='badge'>" + vote_two + "</span>");
-							tot_two = parseInt(vote_two);
-						}
+						
 
 						var p1 = snap.child("preview_one").val();
 						if (p1 != null) {
@@ -183,32 +172,39 @@ $(document).ready(function() {
 						setUserNameWithDisqus(compare_id, snap.child("txt_title").val());
 
 					});
-					
+
 					var comparesVotesRef = new Firebase('https://infernonero.firebaseio.com/compares-votes/' + compare_id);
 					var tot_one = 0;
 					var tot_two = 0;
-					
+
 					comparesVotesRef.on('value', function(snap) {
-			
+
 						var vote_one = snap.child("vote_one").val();
 						if (vote_one != null) {
-							$('#one_votes_so_far').html("<span class='badge'>" + vote_one + "</span>");
+							$('#one_votes_so_far').html("<span id='labelVoteOne' class='label'>" + vote_one + "</span>");
 							tot_one = parseInt(vote_one);
 						}
-						
+
 						var vote_two = snap.child("vote_two").val();
 						if (vote_two != null) {
-							$('#two_votes_so_far').html("<span class='badge'>" + vote_two + "</span>");
+							$('#two_votes_so_far').html("<span id='labelVoteTwo' class='label'>" + vote_two + "</span>");
 							tot_two = parseInt(vote_two);
 						}
-
+						
 						
 
+						if (vote_one === vote_two) {
+							$('#labelVoteOne').addClass("label-primary");
+							$('#labelVoteTwo').addClass("label-primary");
+						} else if (vote_one > vote_two) {
+							$('#labelVoteOne').addClass("label-success");
+							$('#labelVoteTwo').addClass("label-danger");
+						} else if (vote_one < vote_two) {
+							$('#labelVoteOne').addClass("label-danger");
+							$('#labelVoteTwo').addClass("label-success");
+						}
+
 					});
-					
-					
-					
-					
 
 					var fImages = new Firebase('https://infernonero.firebaseio.com/compares-images/' + compare_id);
 
@@ -402,7 +398,7 @@ $(document).ready(function() {
 
 						var comparesRef = ref.child("compares").child(snap.child("compare_id").val());
 						comparesRef.remove();
-						
+
 						var comparesRef = ref.child("compares-votes").child(snap.child("compare_id").val());
 						comparesRef.remove();
 
