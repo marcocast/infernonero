@@ -54,7 +54,7 @@ var render2 = function(data, options) {
 };
 
 $(document).ready(function() {
-	
+
 	setUserName();
 
 	$('#edit_submit_btn').hide();
@@ -221,7 +221,7 @@ $(document).ready(function() {
 			if (error) {
 				alert("Data could not be saved." + error);
 			} else {
-				
+
 				postID = newMessageRef.key();
 
 				ref.child("compares-votes").child(postID).set({
@@ -239,7 +239,6 @@ $(document).ready(function() {
 								alert("Data could not be saved." + error);
 							} else {
 								var description = txt_one + " VS " + txt_two;
-
 
 								var postsRefImages = ref.child("compares-images").child(postID);
 								postsRefImages.set({
@@ -367,7 +366,7 @@ $(document).ready(function() {
 
 		var comparesRef = ref.child("compares").child(postID);
 		comparesRef.remove();
-		
+
 		var comparesRef = ref.child("compares-votes").child(postID);
 		comparesRef.remove();
 
@@ -448,6 +447,39 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "email",
 			"element" : document.getElementById('share_email_button'),
+			"url" : urlToShare,
+			"title" : txt_title,
+			"type" : "large",
+			"text" : txt_title,
+			"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+			"summary" : description
+		});
+
+		stWidget.addEntry({
+			"service" : "googleplus",
+			"element" : document.getElementById('share_googleplus_button'),
+			"url" : urlToShare,
+			"title" : txt_title,
+			"type" : "large",
+			"text" : txt_title,
+			"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+			"summary" : description
+		});
+
+		stWidget.addEntry({
+			"service" : "pinterest",
+			"element" : document.getElementById('share_pinterest_button'),
+			"url" : urlToShare,
+			"title" : txt_title,
+			"type" : "large",
+			"text" : txt_title,
+			"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+			"summary" : description
+		});
+
+		stWidget.addEntry({
+			"service" : "reddit",
+			"element" : document.getElementById('share_reddit_button'),
 			"url" : urlToShare,
 			"title" : txt_title,
 			"type" : "large",

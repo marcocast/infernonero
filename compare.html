@@ -27,7 +27,7 @@
 		<script type="text/javascript">
 			new Firebase("https://infernonero.firebaseio.com/keys").once("value", function(data) {
 				stLight.options({
-					publisher : data.child("sharethis-publisher").val()
+					publisher : data.child("sharethis-publisher").val(), doNotHash: false, doNotCopy: false, hashAddressBar: true
 				});
 			});
 
@@ -136,8 +136,11 @@
 									<a id="remove_submit_btn" class="btn btn-danger" name="remove_submit_btn">Remove</a>
 									<a id="ask_submit_btn" class="btn btn-success" name="ask_submit_btn">Ask your friends</a>
 									<span id="share_facebook_button"></span>
+									<span id="share_googleplus_button"></span>
 									<span id="share_twitter_button"></span>
 									<span id="share_linkedin_button"></span>
+									<span id="share_pinterest_button"></span>
+									<span id="share_reddit_button"></span>
 									<span id="share_whatsapp_button"></span>
 									<span id="share_email_button"></span>
 								</div>

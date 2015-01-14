@@ -488,6 +488,41 @@ $(document).ready(function() {
 							"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
 							"summary" : description
 						});
+						
+						stWidget.addEntry({
+							"service" : "googleplus",
+							"element" : document.getElementById('share_googleplus_button'),
+							"url" : urlToShare,
+							"title" : txt_title,
+							"type" : "large",
+							"text" : txt_title,
+							"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+							"summary" : description
+						});
+						
+						stWidget.addEntry({
+							"service" : "pinterest",
+							"element" : document.getElementById('share_pinterest_button'),
+							"url" : urlToShare,
+							"title" : txt_title,
+							"type" : "large",
+							"text" : txt_title,
+							"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+							"summary" : description
+						});
+						
+						stWidget.addEntry({
+							"service" : "reddit",
+							"element" : document.getElementById('share_reddit_button'),
+							"url" : urlToShare,
+							"title" : txt_title,
+							"type" : "large",
+							"text" : txt_title,
+							"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+							"summary" : description
+						});
+
+		
 
 					});
 
