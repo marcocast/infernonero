@@ -32,16 +32,17 @@ function listenOnChanges(id) {
 	var refOpenclose = new Firebase("https://infernonero.firebaseio.com/compares/" + id);
 
 	refOpenclose.on('child_changed', function(snapshot) {
-		var changedCompare = snapshot.val();
-		if (snapshot.val()) {
-			$('#action' + id).text("Open Voting");
-			$('#action' + id).removeClass("btn-danger");
-			$('#action' + id).addClass("btn-success");
-		} else {
-			$('#action' + id).text("Close Voting");
-			$('#action' + id).removeClass("btn-sucess");
-			$('#action' + id).addClass("btn-danger");
-		}
+		refOpenclose.once('value', function(snap) {
+			if (snap.child("closed").val()) {
+				$('#action' + id).text("Open Voting");
+				$('#action' + id).removeClass("btn-danger");
+				$('#action' + id).addClass("btn-success");
+			} else {
+				$('#action' + id).text("Close Voting");
+				$('#action' + id).removeClass("btn-sucess");
+				$('#action' + id).addClass("btn-danger");
+			}
+		});
 
 	});
 
