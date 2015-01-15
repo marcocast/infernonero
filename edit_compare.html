@@ -27,7 +27,10 @@
 		<script type="text/javascript">
 			new Firebase("https://infernonero.firebaseio.com/keys").once("value", function(data) {
 				stLight.options({
-					publisher : data.child("sharethis-publisher").val(), doNotHash: false, doNotCopy: false, hashAddressBar: true
+					publisher : data.child("sharethis-publisher").val(),
+					doNotHash : false,
+					doNotCopy : false,
+					hashAddressBar : true
 				});
 			});
 
@@ -89,10 +92,10 @@
 
 											<div class="picture-input">
 												<textarea rows="3" cols="40" id="txt_one_box" name="txt_one_box" class="form-control input-text input-no-border"
-												 placeholder="Enter something" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 14 + 'px';"></textarea>																								
+												 placeholder="Enter something" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 14 + 'px';"></textarea>																																				
    	
 
- <span class="btn  fileinput-button"> <img src="css/img/32-128.png" width="32" height="32"> <!-- The file input field used as target for the file upload widget -->
+ <span class="btn  fileinput-button"> <i class="fa fa-image"></i> <!-- The file input field used as target for the file upload widget -->
 													<input id="fileInputOne" type="file" name="files[]" multiple>
 												</span>
 												<br>
@@ -118,10 +121,10 @@
 
 											<div class="picture-input">
 												<textarea rows="3" cols="40" id="txt_two_box" name="txt_two_box" class="form-control input-text input-no-border"
-												 placeholder="Enter something" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 14 + 'px';"></textarea>												
+												 placeholder="Enter something" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 14 + 'px';"></textarea>																								
 												
    	  	
- <span class="btn  fileinput-button"> <img src="css/img/32-128.png" width="32" height="32"> <!-- The file input field used as target for the file upload widget -->
+ <span class="btn  fileinput-button"> <i class="fa fa-image"></i> <!-- The file input field used as target for the file upload widget -->
 													<input id="fileInputTwo" type="file" name="files[]" multiple>
 												</span>
 												<br>
