@@ -15,8 +15,7 @@ function resizeTextarea(ev) {
 	this.style.height = this.scrollHeight + 14 + 'px';
 }
 
-var template = ['<div class="row">', '<div class="col-sm-4 column">', '<img class="thumb" src="{{thumbnail_url}}"></img>',
- '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
+var template = ['<div class="row">', '<div class="col-sm-4 column">', '<img class="thumb" src="{{thumbnail_url}}"></img>', '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
 
 var render1 = function(data, options) {
 	var preview = $('#txt_one_box').data('preview');
@@ -54,83 +53,77 @@ var render2 = function(data, options) {
 	return false;
 };
 
+var mainCanvas;
 
+/*
+ * Creates a new image object from the src
+ * Uses the deferred pattern
+ */
+var createImage = function(src) {
+	var deferred = $.Deferred();
+	var img = new Image();
 
-    var mainCanvas;
+	img.onload = function() {
+		deferred.resolve(img);
+	};
+	img.src = src;
+	return deferred.promise();
+};
 
+/*
+ * Create an Image, when loaded pass it on to the resizer
+ */
+var startResize = function() {
+	$.when(createImage($("#inputImage").attr('src'))).then(resize, function() {
+		console.log('error')
+	});
+};
 
-    /* 
-     * Creates a new image object from the src
-     * Uses the deferred pattern
-     */
-    var createImage = function (src) {
-        var deferred = $.Deferred();
-        var img = new Image();
+/*
+ * Draw the image object on a new canvas and half the size of the canvas
+ * until the darget size has been reached
+ * Afterwards put the base64 data into the target image
+ */
+var resize1 = function(image) {
+	mainCanvas = document.createElement("canvas");
+	WIDTH = 800;
+	if (image.width > WIDTH) {
+		ratio = image.width / image.height;
+		mainCanvas.width = WIDTH;
+		mainCanvas.height = WIDTH / ratio;
+		var ctx = mainCanvas.getContext("2d");
+		ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
+		$('#src1').attr('src', mainCanvas.toDataURL("image/jpeg"));
+	}
+};
 
-        img.onload = function() {
-            deferred.resolve(img);
-        };
-        img.src = src;
-        return deferred.promise();
-    };
-
-    /* 
-     * Create an Image, when loaded pass it on to the resizer
-     */
-    var startResize = function () {
-        $.when(
-            createImage($("#inputImage").attr('src'))
-        ).then(resize, function () {console.log('error')});
-    };
-
-    /*
-     * Draw the image object on a new canvas and half the size of the canvas
-     * until the darget size has been reached
-     * Afterwards put the base64 data into the target image
-     */
-    var resize1 = function (image) {
-        mainCanvas = document.createElement("canvas");
-        WIDTH = 800;
-        if (image.width>WIDTH) {
-	        ratio = image.width/image.height;
-	        mainCanvas.width = WIDTH;
-	        mainCanvas.height = WIDTH/ratio;
-	        var ctx = mainCanvas.getContext("2d");
-	        ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
-	        $('#src1').attr('src', mainCanvas.toDataURL("image/jpeg"));
-        }
-    };
-
-    var resize2 = function (image) {
-        mainCanvas = document.createElement("canvas");
-        WIDTH = 800;
-        if (image.width>WIDTH) {
-	        ratio = image.width/image.height;
-	        mainCanvas.width = WIDTH;
-	        mainCanvas.height = WIDTH/ratio;
-	        var ctx = mainCanvas.getContext("2d");
-	        ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
-	        $('#src2').attr('src', mainCanvas.toDataURL("image/jpeg"));
-        }
-    };
-    /*
-     * Draw initial canvas on new canvas and half it's size
-     */
-    var halfSize = function (i) {
-        var canvas = document.createElement("canvas");
-        canvas.width = i.width / 2;
-        canvas.height = i.height / 2;
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(i, 0, 0, canvas.width, canvas.height);
-        return canvas;
-    };
-
-
+var resize2 = function(image) {
+	mainCanvas = document.createElement("canvas");
+	WIDTH = 800;
+	if (image.width > WIDTH) {
+		ratio = image.width / image.height;
+		mainCanvas.width = WIDTH;
+		mainCanvas.height = WIDTH / ratio;
+		var ctx = mainCanvas.getContext("2d");
+		ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
+		$('#src2').attr('src', mainCanvas.toDataURL("image/jpeg"));
+	}
+};
+/*
+ * Draw initial canvas on new canvas and half it's size
+ */
+var halfSize = function(i) {
+	var canvas = document.createElement("canvas");
+	canvas.width = i.width / 2;
+	canvas.height = i.height / 2;
+	var ctx = canvas.getContext("2d");
+	ctx.drawImage(i, 0, 0, canvas.width, canvas.height);
+	return canvas;
+};
 
 $(document).ready(function() {
 
 	setUserName();
-
 
 	$('#edit_submit_btn').hide();
 	$('#remove_submit_btn').hide();
@@ -148,7 +141,6 @@ $(document).ready(function() {
 		render : render2
 	});
 
-	
 	var filePayloadOne = "";
 	var fileInputOne = document.getElementById('fileInputOne');
 	fileInputOne.files[0] = null;
@@ -167,17 +159,17 @@ $(document).ready(function() {
 				var img = new Image();
 
 				filePayloadOne = reader.result;
-				
+
 				img.src = reader.result;
-				img.id="src1";
+				img.id = "src1";
 
 				fileDisplayAreaOne.appendChild(img);
- 		
-		 		$.when(
-		            createImage(img.src)
-		        ).then(resize1, function () {console.log('error')});
-        
-        	}
+
+				$.when(createImage(img.src)).then(resize1, function() {
+					console.log('error')
+				});
+
+			}
 
 			reader.readAsDataURL(file);
 		} else {
@@ -205,13 +197,13 @@ $(document).ready(function() {
 
 				img.src = reader.result;
 
-				img.id="src2";
+				img.id = "src2";
 
 				fileDisplayAreaTwo.appendChild(img);
- 		
-		 		$.when(
-		            createImage(img.src)
-		        ).then(resize2, function () {console.log('error')});
+
+				$.when(createImage(img.src)).then(resize2, function() {
+					console.log('error')
+				});
 			}
 
 			reader.readAsDataURL(file);
@@ -329,9 +321,17 @@ $(document).ready(function() {
 								var description = txt_one + " VS " + txt_two;
 
 								var postsRefImages = ref.child("compares-images").child(postID);
+								var scr1scr = $('#src1').attr('src');
+								if (scr1scr === undefined) {
+									scr1scr = "";
+								}
+								var scr2scr = $('#src2').attr('src');
+								if (scr2scr === undefined) {
+									scr2scr = "";
+								}
 								postsRefImages.set({
-									file_one : $('#src1').attr('src'), //filePayloadOne,
-									file_two : $('#src2').attr('src') //,filePayloadTwo
+									file_one : scr1scr, //filePayloadOne,
+									file_two : scr2scr //,filePayloadTwo
 								}, function(error) {
 									if (error) {
 										alert("Data could not be saved." + error);

@@ -27,7 +27,7 @@ function closeOpenVotes(id) {
 
 }
 
-function removeCompare(id,userComparesId) {
+function removeCompare(id, userComparesId) {
 	var comparesRef = ref.child("compares").child(id);
 	comparesRef.remove();
 
@@ -102,6 +102,38 @@ function setVotes(id, voteOne, voteTwo) {
 		$('#vote_two' + id).addClass("label-success");
 	}
 
+	var refVotes = new Firebase("https://infernonero.firebaseio.com/votes/" + id);
+
+	refVotes.on('value', function(snapshot) {
+
+		var voters_one = "";
+		var voters_two = "";
+
+		snapshot.forEach(function(ss) {
+			ref.child("users").child(ss.key()).once('value', function(usersnap) {
+
+				var usernameLocation = "displayName";
+
+				var provider = usersnap.child("provider").val();
+
+				if (provider === "password") {
+					usernameLocation = "email";
+				}
+				if (ss.child("vote").val() === "1") {
+					voters_one = voters_one + "   " + usersnap.child(provider).child(usernameLocation).val();
+					$('#vote_one' + id).removeAttr("data-original-title");
+					$('#vote_one' + id).attr("data-original-title", voters_one);
+				} else {
+					voters_two = voters_two + "   " + usersnap.child(provider).child(usernameLocation).val();
+					$('#vote_two' + id).removeAttr("data-original-title");
+					$('#vote_two' + id).attr("data-original-title", voters_one);
+				}
+
+			});
+		});
+
+	});
+
 	$('#vote_one' + id).text(voteOne);
 	$('#vote_two' + id).text(voteTwo);
 }
@@ -129,13 +161,11 @@ $(document).ready(function() {
 		$('#loadone').hide();
 
 		table.html("");
-		
 
 		// iterate all the elements :((
 		snapshot.forEach(function(ss) {
-			
-			var userComparesId = ss.key();
 
+			var userComparesId = ss.key();
 
 			if (ss.child("compare_id").val() === null) {
 			} else {
@@ -148,7 +178,7 @@ $(document).ready(function() {
 
 						var dateOfCompare = new Date(snapshot.child("date").val());
 
-						var buttonRemove = "<a class='btn btn-danger' onclick=\"removeCompare('" + ss.child("compare_id").val() + "','"+userComparesId+"');\"><i class='fa fa-remove'></i> Remove</a>";
+						var buttonRemove = "<a class='btn btn-danger' onclick=\"removeCompare('" + ss.child("compare_id").val() + "','" + userComparesId + "');\"><i class='fa fa-remove'></i> Remove</a>";
 
 						var buttonVoting = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-success' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Open</a>";
 
@@ -156,7 +186,11 @@ $(document).ready(function() {
 							buttonVoting = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Closed</a>";
 						}
 
-						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span class='label label-primary' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span class='label label-primary' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
+						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
+						$(".label").tooltip({
+							placement : "top"
+
+						});
 						setVotes(ss.child("compare_id").val(), snapshotvotes.child("vote_one").val(), snapshotvotes.child("vote_two").val());
 						listenOnChanges(ss.child("compare_id").val());
 					}, function(errorObject) {
