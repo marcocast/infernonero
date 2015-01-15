@@ -126,7 +126,7 @@ function setVotes(id, voteOne, voteTwo) {
 				} else {
 					voters_two = voters_two + "   " + usersnap.child(provider).child(usernameLocation).val();
 					$('#vote_two' + id).removeAttr("data-original-title");
-					$('#vote_two' + id).attr("data-original-title", voters_one);
+					$('#vote_two' + id).attr("data-original-title", voters_two);
 				}
 
 			});
