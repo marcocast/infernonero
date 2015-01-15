@@ -46,6 +46,9 @@ resize: none;
 box-sizing: border-box;
 }
 
+.embedly-embed {
+width:100%;
+}
 
 
 .form-control {

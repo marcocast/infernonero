@@ -15,7 +15,8 @@ function resizeTextarea(ev) {
 	this.style.height = this.scrollHeight + 14 + 'px';
 }
 
-var template = ['<div class="row">', '<div class="col-sm-4 columns">', '<img class="thumb" src="{{thumbnail_url}}"></img>', '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
+var template = ['<div class="row">', '<div class="col-sm-4 column">', '<img class="thumb" src="{{thumbnail_url}}"></img>',
+ '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
 
 var render1 = function(data, options) {
 	var preview = $('#txt_one_box').data('preview');
