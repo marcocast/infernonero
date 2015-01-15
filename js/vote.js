@@ -34,7 +34,6 @@ $(document).ready(function() {
 	}
 
 	if (hash === '') {
-		alert("hash === vuoto");
 		window.location.href = "/404.html";
 	} else {
 
@@ -53,6 +52,12 @@ $(document).ready(function() {
 			window.location.href = "/index.html";
 		});
 
+		f.once("value", function(snap) {
+			if (snap.child("txt_title").val() === null) {
+				window.location.href = "/404.html";
+			}
+		});
+
 		f.on('value', function(snap) {
 
 			if (snap.child("closed").val()) {
@@ -60,8 +65,8 @@ $(document).ready(function() {
 				$('#vote_two').hide();
 			} else {
 				if (authData) {
-					ref.child("votes").child(hash).child(authData.uid).once("value", function(snap) {
-						if (snap.child("vote").val() === null) {
+					ref.child("votes").child(hash).child(authData.uid).on("value", function(snapvotes) {
+						if (snapvotes.child("vote").val() === null) {
 							$('#vote_one').show();
 							$('#vote_two').show();
 						} else {
@@ -172,7 +177,7 @@ $(document).ready(function() {
 			$('#fileDisplayAreaOne').html("");
 			var payloadOne = snap.child("file_one").val();
 			$('#loadone').hide();
-			if (payloadOne !== null && payloadOne !=="") {
+			if (payloadOne !== null && payloadOne !== "") {
 				var img = new Image();
 				img.src = payloadOne;
 				document.getElementById("fileDisplayAreaOne").appendChild(img);
@@ -181,7 +186,7 @@ $(document).ready(function() {
 			$('#fileDisplayAreaTwo').html("");
 			var payloadTwo = snap.child("file_two").val();
 			$('#loadtwo').hide();
-			if (payloadTwo !== null && payloadTwo !=="") {
+			if (payloadTwo !== null && payloadTwo !== "") {
 				var img = new Image();
 				img.src = payloadTwo;
 				document.getElementById("fileDisplayAreaTwo").appendChild(img);
