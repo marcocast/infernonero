@@ -171,7 +171,6 @@ $(document).ready(function() {
 	}
 
 	if (hash === '') {
-		alert("hash === vuoto");
 		window.location.href = "/404.html";
 	} else {
 
