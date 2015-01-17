@@ -9,6 +9,12 @@ if (authData) {
 	}
 }
 
+var idx = window.location.href.indexOf('?');
+var previouspage = null;
+if (idx > 0) {
+	previouspage = (idx > 0) ? window.location.href.slice(idx + 1) : '';
+}
+
 var isNewUser = true;
 ref.onAuth(function(authData) {
 	if (authData && isNewUser) {
@@ -101,7 +107,12 @@ $(document).ready(function() {
 					}
 				});
 				console.log("Authenticated successfully with payload:", authData);
-				location.reload();
+				if(previouspage === null){
+					location.reload();
+				}else{
+					window.location.href = "https://infernonero.firebaseapp.com/"+previouspage;
+				}
+				
 			}
 		}, {
 			remember : rememberVal
@@ -280,7 +291,11 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				location.reload();
+				if(previouspage === null){
+					location.reload();
+				}else{
+					window.location.href = "https://infernonero.firebaseapp.com/"+previouspage;
+				}
 			}
 		}, {
 			remember : rememberVal,
@@ -302,7 +317,11 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				location.reload();
+				if(previouspage === null){
+					location.reload();
+				}else{
+					window.location.href = "https://infernonero.firebaseapp.com/"+previouspage;
+				}
 			}
 		}, {
 			remember : rememberVal,

@@ -28,12 +28,8 @@ $(document).ready(function() {
 		var authData = ref.getAuth();
 		if (authData) {
 			window.location.href = "/vote.html#"+hash;
-
-
-			
-
 		} else {
-			window.location.href = "/register.html";
+			window.location.href = "/register.html?vote.html#"+hash;
 		}
 
 

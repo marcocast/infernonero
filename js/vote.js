@@ -215,7 +215,7 @@ $(document).ready(function() {
 					}
 				});
 			} else {
-				window.location.href = "/register.html";
+				window.location.href = "/register.html?vote.html#"+hash;
 			}
 
 		});
@@ -241,7 +241,7 @@ $(document).ready(function() {
 					}
 				});
 			} else {
-				window.location.href = "/register.html";
+				window.location.href = "/register.html?vote.html#"+hash;
 			}
 
 		});

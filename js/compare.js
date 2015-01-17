@@ -4,7 +4,7 @@ var authData = ref.getAuth();
 if (authData) {
 
 } else {
-	window.location.href = "/register.html";
+	window.location.href = "/register.html?compare.html";
 }
 
 var te = document.querySelector('textarea');
