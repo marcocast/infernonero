@@ -6,7 +6,6 @@ function authDataCallback(authData) {
 		$('#social_media_wrapper').hide();
 		$('#sign').hide();
 		$('#logout').show();
-		setUserName();
 		$('#username').show();
 		$('#compare').show();
 		$('#manage').show();
@@ -20,6 +19,7 @@ function authDataCallback(authData) {
 		$('#sign').show();
 
 	}
+	setUserName();
 }
 
 $(document).ready(function() {

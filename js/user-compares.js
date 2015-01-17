@@ -149,6 +149,8 @@ $(document).ready(function() {
 		window.location.href = "/index.html";
 
 	});
+	
+	
 
 	var table = $("#example tbody");
 

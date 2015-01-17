@@ -37,18 +37,23 @@ function setUserName() {
 			ref.child("users").child(authData.uid).child("facebook").once("value", function(snap) {
 				username = snap.child("displayName").val();
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
+				$(".showAfterLoad").removeClass("hidden");
 			});
 		} else if (authData.provider === "google") {
 			ref.child("users").child(authData.uid).child("google").once("value", function(snap) {
 				username = snap.child("displayName").val();
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
+				$(".showAfterLoad").removeClass("hidden");
 			});
 		} else if (authData.provider === "password") {
 			ref.child("users").child(authData.uid).child("password").once("value", function(snap) {
 				email = snap.child("email").val();
 				$('#dropdownMenu1').html(email +" <span class='caret'></span>");
+				$(".showAfterLoad").removeClass("hidden");
 			});
 		}
 
+	}else{
+		$(".showAfterLoad").removeClass("hidden");
 	}
 }

@@ -7,8 +7,6 @@ var authData = ref.getAuth();
 var isNewUser = true;
 ref.onAuth(function(authData) {
 	if (authData && isNewUser) {
-		// save the user's profile into Firebase so we can list users,
-		// use them in Security and Firebase Rules, and show profiles
 		ref.child("users").child(authData.uid).set(authData);
 	}
 });
@@ -19,7 +17,6 @@ function authDataCallback(authData) {
 		$('#social_media_wrapper').hide();
 		$('#sign').hide();
 		$('#logout').show();
-		setUserName();
 		$('#username').show();
 		$('#compare').show();
 		$('#manage').show();
@@ -34,6 +31,8 @@ function authDataCallback(authData) {
 		$('#sign').show();
 
 	}
+	setUserName();
+
 }
 
 
@@ -80,5 +79,4 @@ $(document).ready(function() {
 	});
 
 
-
-}); 
+});
