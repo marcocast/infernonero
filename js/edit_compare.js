@@ -495,8 +495,6 @@ $(document).ready(function() {
 
 				$('#ask_submit_btn').click(function() {
 
-					$('#edit_submit_btn').hide();
-					$('#remove_submit_btn').hide();
 					$('#ask_submit_btn').hide();
 
 					var reader = new FileReader();
