@@ -47,7 +47,7 @@ $(document).ready(function() {
 					align : "center"
 				}
 			});
-
+			$('#txtEmail').focus();
 			return false;
 		} else {
 			var atpos = email.indexOf("@");
@@ -60,6 +60,7 @@ $(document).ready(function() {
 						align : "center"
 					}
 				});
+				$('#txtEmail').focus();
 				return false;
 			}
 		}
@@ -72,7 +73,7 @@ $(document).ready(function() {
 					align : "center"
 				}
 			});
-
+			$('#txtPass').focus();
 			return false;
 		}
 
@@ -107,12 +108,12 @@ $(document).ready(function() {
 					}
 				});
 				console.log("Authenticated successfully with payload:", authData);
-				if(previouspage === null){
+				if (previouspage === null) {
 					location.reload();
-				}else{
-					window.location.href = "https://infernonero.firebaseapp.com/"+previouspage;
+				} else {
+					window.location.href = "https://infernonero.firebaseapp.com/" + previouspage;
 				}
-				
+
 			}
 		}, {
 			remember : rememberVal
@@ -134,6 +135,7 @@ $(document).ready(function() {
 					align : "center"
 				}
 			});
+			$('#txtEmailr').focus();
 
 			return false;
 		} else {
@@ -149,6 +151,7 @@ $(document).ready(function() {
 						align : "center"
 					}
 				});
+				$('#txtEmailr').focus();
 				return false;
 			}
 		}
@@ -164,6 +167,7 @@ $(document).ready(function() {
 					align : "center"
 				}
 			});
+			$('#termsandcondition').focus();
 
 			return false;
 		}
@@ -231,6 +235,7 @@ $(document).ready(function() {
 					align : "center"
 				}
 			});
+			$('#txtEmail').focus();
 
 			return false;
 		} else {
@@ -246,6 +251,8 @@ $(document).ready(function() {
 						align : "center"
 					}
 				});
+				$('#txtEmail').focus();
+
 				return false;
 			}
 		}
@@ -291,10 +298,10 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				if(previouspage === null){
+				if (previouspage === null) {
 					location.reload();
-				}else{
-					window.location.href = "https://infernonero.firebaseapp.com/"+previouspage;
+				} else {
+					window.location.href = "https://infernonero.firebaseapp.com/" + previouspage;
 				}
 			}
 		}, {
@@ -317,10 +324,10 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				if(previouspage === null){
+				if (previouspage === null) {
 					location.reload();
-				}else{
-					window.location.href = "https://infernonero.firebaseapp.com/"+previouspage;
+				} else {
+					window.location.href = "https://infernonero.firebaseapp.com/" + previouspage;
 				}
 			}
 		}, {

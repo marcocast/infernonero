@@ -406,7 +406,7 @@ $(document).ready(function() {
 								align : "center"
 							}
 						});
-
+						$('#txt_title').focus();
 						return false;
 					}
 
@@ -418,7 +418,7 @@ $(document).ready(function() {
 								align : "center"
 							}
 						});
-
+						$('#txt_one_box').focus();
 						return false;
 					}
 
@@ -430,7 +430,7 @@ $(document).ready(function() {
 								align : "center"
 							}
 						});
-
+						$('#txt_two_box').focus();
 						return false;
 					}
 
