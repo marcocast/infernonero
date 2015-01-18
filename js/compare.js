@@ -125,6 +125,10 @@ $(document).ready(function() {
 
 	setUserName();
 
+	$('#txt_one_box').val("");
+	$('#txt_two_box').val("");
+	$('#txt_title').val("");
+
 	$('#edit_submit_btn').hide();
 	$('#remove_submit_btn').hide();
 	$('#ask_submit_btn').hide();
@@ -219,18 +223,28 @@ $(document).ready(function() {
 
 	});
 
-	$('#txt_one_box').keyup(function() {
-
-		var description = $('#txt_one_box').val();
-		$('#one_box').html(description);
-
+	$('#txt_one_box').blur(function() {
+		$('#one_box').html($('#txt_one_box').val());
 	});
 
-	$('#txt_two_box').keyup(function() {
+	$('#txt_one_box').keypress(function(e) {
+		if (e.which == 13) {
+			$('#one_box').html("");
+			$('#one_box').html($('#txt_one_box').val());
+			$( "#txt_two_box" ).focus();
+		}
+	});
 
-		var description = $('#txt_two_box').val();
-		$('#two_box').html(description);
-
+	$('#txt_two_box').blur(function() {
+		$('#two_box').html($('#txt_two_box').val());
+	});
+	
+	$('#txt_two_box').keypress(function(e) {
+		if (e.which == 13) {
+			$('#two_box').html("");
+			$('#two_box').html($('#txt_two_box').val());
+			$('#txt_two_box').blur();
+		}
 	});
 
 	var postID = "";
