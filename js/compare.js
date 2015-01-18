@@ -252,9 +252,9 @@ $(document).ready(function() {
 
 	$('#save_submit_btn').click(function() {
 
-		var txt_title = $('#txt_title').val();
-		var txt_one = $('#txt_one_box').val();
-		var txt_two = $('#txt_two_box').val();
+		var txt_title = $('#txt_title').val().trim();
+		var txt_one = $('#txt_one_box').val().trim();
+		var txt_two = $('#txt_two_box').val().trim();
 
 		if (txt_title === "") {
 			$.growl("Please enter a title for this compare", {
@@ -379,9 +379,9 @@ $(document).ready(function() {
 
 		var reader = new FileReader();
 
-		var txt_title = $('#txt_title').val();
-		var txt_one = $('#txt_one_box').val();
-		var txt_two = $('#txt_two_box').val();
+		var txt_title = $('#txt_title').val().trim();
+		var txt_one = $('#txt_one_box').val().trim();
+		var txt_two = $('#txt_two_box').val().trim();
 
 		if (txt_title === "") {
 			$.growl("Please enter a title for this compare", {
