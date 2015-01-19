@@ -224,6 +224,16 @@ $(document).ready(function() {
 		window.location.href = "/index.html";
 
 	});
+	
+	$('#txt_title').blur(function() {
+		$('#txt_one_box').focus();
+	});
+	
+	$('#txt_title').keypress(function(e) {
+		if (e.which == 13) {
+			$('#txt_one_box').focus();
+		}
+	});
 
 	$('#txt_one_box').blur(function() {
 		$('#one_box').html($('#txt_one_box').val());
