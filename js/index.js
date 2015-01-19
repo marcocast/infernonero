@@ -53,7 +53,7 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-
+				window.location.href = "https://infernonero.firebaseapp.com/compare.html";
 			}
 		}, {
 			remember : "default",
@@ -69,6 +69,24 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
+				window.location.href = "https://infernonero.firebaseapp.com/compare.html";
+
+			}
+		}, {
+			remember : "default",
+			scope : "email"
+		});
+
+	});
+	
+	$('#login_twitter_up').click(function() {
+
+		ref.authWithOAuthPopup("twitter", function(error, authData) {
+			if (error) {
+				console.log("Login Failed!", error);
+			} else {
+				console.log("Authenticated successfully with payload:", authData);
+				window.location.href = "https://infernonero.firebaseapp.com/compare.html";
 
 			}
 		}, {

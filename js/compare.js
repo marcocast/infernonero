@@ -124,6 +124,8 @@ var halfSize = function(i) {
 $(document).ready(function() {
 
 	setUserName();
+	
+	$('#txt_title').focus();
 
 	$('#txt_one_box').val("");
 	$('#txt_two_box').val("");

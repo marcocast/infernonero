@@ -18,6 +18,13 @@ function setUserNameWithDisqus(compare_id,title) {
 				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html?id=" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 				$('#disqus_thread').show();
 			});
+		}else if (authData.provider === "twitter") {
+			ref.child("users").child(authData.uid).child("twitter").once("value", function(snap) {
+				username = snap.child("displayName").val();
+				var useremail  = username + "@choozzy.com";
+				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html?id=" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
+				$('#disqus_thread').show();
+			});
 		} else if (authData.provider === "password") {
 			ref.child("users").child(authData.uid).child("password").once("value", function(snap) {
 				var useremail = snap.child("email").val();
@@ -41,6 +48,12 @@ function setUserName() {
 			});
 		} else if (authData.provider === "google") {
 			ref.child("users").child(authData.uid).child("google").once("value", function(snap) {
+				username = snap.child("displayName").val();
+				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
+				$(".showAfterLoad").removeClass("hidden");
+			});
+		}else if (authData.provider === "twitter") {
+			ref.child("users").child(authData.uid).child("twitter").once("value", function(snap) {
 				username = snap.child("displayName").val();
 				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
 				$(".showAfterLoad").removeClass("hidden");

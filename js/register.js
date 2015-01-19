@@ -336,5 +336,31 @@ $(document).ready(function() {
 		});
 
 	});
+	
+	$('#login_twitter').click(function() {
+
+		var rememberVal = "sessionOnly";
+
+		if ($("#rememberme").is(":checked")) {
+			rememberVal = "default";
+		}
+
+		ref.authWithOAuthPopup("twitter", function(error, authData) {
+			if (error) {
+				console.log("Login Failed!", error);
+			} else {
+				console.log("Authenticated successfully with payload:", authData);
+				if (previouspage === null) {
+					location.reload();
+				} else {
+					window.location.href = "https://infernonero.firebaseapp.com/" + previouspage;
+				}
+			}
+		}, {
+			remember : rememberVal,
+			scope : "email"
+		});
+
+	});
 
 });
