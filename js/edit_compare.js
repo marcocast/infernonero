@@ -449,33 +449,37 @@ $(document).ready(function() {
 						preview_two : $('#txt_two_box').data('preview')
 					}, function(error) {
 						if (error) {
-							alert("Data could not be saved." + error);
+							$.growl("Data could not be saved." + error, {
+								type : "danger",
+								placement : {
+									from : "top",
+									align : "center"
+								}
+							});
 						} else {
+							var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
 
-						}
-					});
+							if (filePayloadOne !== "") {
 
-					var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
+								postsRefImages.update({
+									file_one : $('#src1').attr('src')
+								});
+							}
 
-					if (filePayloadOne !== "") {
+							if (filePayloadTwo !== "") {
 
-						postsRefImages.update({
-							file_one : $('#src1').attr('src')
-						});
-					}
+								postsRefImages.update({
+									file_two : $('#src2').attr('src')
+								});
+							}
 
-					if (filePayloadTwo !== "") {
-
-						postsRefImages.update({
-							file_two : $('#src2').attr('src')
-						});
-					}
-
-					$.growl("Updated successfully", {
-						type : "success",
-						placement : {
-							from : "top",
-							align : "center"
+							$.growl("Updated successfully", {
+								type : "success",
+								placement : {
+									from : "top",
+									align : "center"
+								}
+							});
 						}
 					});
 

@@ -124,7 +124,7 @@ var halfSize = function(i) {
 $(document).ready(function() {
 
 	setUserName();
-	
+
 	$('#txt_title').focus();
 
 	$('#txt_one_box').val("");
@@ -224,7 +224,6 @@ $(document).ready(function() {
 		window.location.href = "/index.html";
 
 	});
-		
 
 	$('#txt_one_box').blur(function() {
 		$('#one_box').html($('#txt_one_box').val());
@@ -234,14 +233,14 @@ $(document).ready(function() {
 		if (e.which == 13) {
 			$('#one_box').html("");
 			$('#one_box').html($('#txt_one_box').val());
-			$( "#txt_two_box" ).focus();
+			$("#txt_two_box").focus();
 		}
 	});
 
 	$('#txt_two_box').blur(function() {
 		$('#two_box').html($('#txt_two_box').val());
 	});
-	
+
 	$('#txt_two_box').keypress(function(e) {
 		if (e.which == 13) {
 			$('#two_box').html("");
@@ -279,7 +278,7 @@ $(document).ready(function() {
 					align : "center"
 				}
 			});
-		$('#txt_one_box').focus();
+			$('#txt_one_box').focus();
 			return false;
 		}
 
@@ -291,7 +290,7 @@ $(document).ready(function() {
 					align : "center"
 				}
 			});
-		$('#txt_two_box').focus();
+			$('#txt_two_box').focus();
 			return false;
 		}
 
@@ -316,7 +315,16 @@ $(document).ready(function() {
 			preview_two : $('#txt_two_box').data('preview')
 		}, function(error) {
 			if (error) {
-				alert("Data could not be saved." + error);
+				$.growl("Data could not be saved." + error, {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+
+				$('#savediv').html("");
+				$('#save_submit_btn').show();
 			} else {
 
 				postID = newMessageRef.key();
@@ -327,13 +335,29 @@ $(document).ready(function() {
 					vote_two : parseInt(0)
 				}, function(error) {
 					if (error) {
-						alert("Data could not be saved." + error);
+						$.growl("Data could not be saved." + error, {
+							type : "danger",
+							placement : {
+								from : "top",
+								align : "center"
+							}
+						});
+						$('#savediv').html("");
+						$('#save_submit_btn').show();
 					} else {
 						userComparesRef.child(usersComparesID).set({
 							compare_id : postID
 						}, function(error) {
 							if (error) {
-								alert("Data could not be saved." + error);
+								$.growl("Data could not be saved." + error, {
+									type : "danger",
+									placement : {
+										from : "top",
+										align : "center"
+									}
+								});
+								$('#savediv').html("");
+								$('#save_submit_btn').show();
 							} else {
 								var description = txt_one + " VS " + txt_two;
 
@@ -351,13 +375,29 @@ $(document).ready(function() {
 									file_two : scr2scr //,filePayloadTwo
 								}, function(error) {
 									if (error) {
-										alert("Data could not be saved." + error);
+										$.growl("Data could not be saved." + error, {
+											type : "danger",
+											placement : {
+												from : "top",
+												align : "center"
+											}
+										});
+										$('#savediv').html("");
+										$('#save_submit_btn').show();
 									} else {
 										userComparesRef.child(usersComparesID).set({
 											compare_id : postID
 										}, function(error) {
 											if (error) {
-												alert("Data could not be saved." + error);
+												$.growl("Data could not be saved." + error, {
+													type : "danger",
+													placement : {
+														from : "top",
+														align : "center"
+													}
+												});
+												$('#savediv').html("");
+												$('#save_submit_btn').show();
 											} else {
 												$('#savediv').html("");
 												$('#edit_submit_btn').show();
@@ -435,33 +475,37 @@ $(document).ready(function() {
 			vote_two : parseInt(0)
 		}, function(error) {
 			if (error) {
-				alert("Data could not be saved." + error);
+				$.growl("Data could not be saved." + error, {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
 			} else {
+				var postsRefImages = ref.child("compares-images").child(postID);
 
-			}
-		});
+				if (filePayloadOne !== "") {
 
-		var postsRefImages = ref.child("compares-images").child(postID);
+					postsRefImages.update({
+						file_one : filePayloadOne
+					});
+				}
 
-		if (filePayloadOne !== "") {
+				if (filePayloadTwo !== "") {
 
-			postsRefImages.update({
-				file_one : filePayloadOne
-			});
-		}
+					postsRefImages.update({
+						file_two : filePayloadTwo
+					});
+				}
 
-		if (filePayloadTwo !== "") {
-
-			postsRefImages.update({
-				file_two : filePayloadTwo
-			});
-		}
-
-		$.growl("Updated successfully", {
-			type : "success",
-			placement : {
-				from : "top",
-				align : "center"
+				$.growl("Updated successfully", {
+					type : "success",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
 			}
 		});
 
