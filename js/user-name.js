@@ -7,7 +7,6 @@ function setUserNameWithDisqus(compare_id,title) {
 			ref.child("users").child(authData.uid).child("facebook").once("value", function(snap) {
 				username = snap.child("displayName").val();
 				var useremail  = snap.child("email").val();
-				https://infernonero.firebaseapp.com/edit_compare.html?txt_one_box=&txt_two_box=notexistent
 				reset(compare_id, "http://infernonero.firebaseapp.com/disqus.html?id=" + compare_id, title, 'en', disqusSignon(authData.uid,username,useremail ), getPubKey());
 				$('#disqus_thread').show();
 			});
@@ -43,25 +42,28 @@ function setUserName() {
 		if (authData.provider === "facebook") {
 			ref.child("users").child(authData.uid).child("facebook").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
+				var imageprofile = snap.child("cachedUserProfile").child("picture").child("data").child("url").val();
+				$('#dropdownMenu1').html("<img widht='24' height='24' src='"+imageprofile+"' /> " +username+" <span class='caret'></span>");
 				$(".showAfterLoad").removeClass("hidden");
 			});
 		} else if (authData.provider === "google") {
 			ref.child("users").child(authData.uid).child("google").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
+				var imageprofile = snap.child("cachedUserProfile").child("picture").val();
+				$('#dropdownMenu1').html("<img widht='24' height='24' src='"+imageprofile+"' /> " +username+" <span class='caret'></span>");
 				$(".showAfterLoad").removeClass("hidden");
 			});
 		}else if (authData.provider === "twitter") {
 			ref.child("users").child(authData.uid).child("twitter").once("value", function(snap) {
 				username = snap.child("displayName").val();
-				$('#dropdownMenu1').html(username +" <span class='caret'></span>");
+				var imageprofile = snap.child("cachedUserProfile").child("profile_image_url_https").val();
+				$('#dropdownMenu1').html("<img widht='24' height='24' src='"+imageprofile+"' /> " +username+" <span class='caret'></span>");
 				$(".showAfterLoad").removeClass("hidden");
 			});
 		} else if (authData.provider === "password") {
 			ref.child("users").child(authData.uid).child("password").once("value", function(snap) {
 				email = snap.child("email").val();
-				$('#dropdownMenu1').html(email +" <span class='caret'></span>");
+				$('#dropdownMenu1').html("<i class='fa fa-user'></i> " +email +" <span class='caret'></span>");
 				$(".showAfterLoad").removeClass("hidden");
 			});
 		}
