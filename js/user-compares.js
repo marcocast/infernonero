@@ -187,8 +187,25 @@ $(document).ready(function() {
 						if (snapshot.child("closed").val()) {
 							buttonVoting = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Closed</a>";
 						}
+						
+						var title = snapshot.child("txt_title").val();
+						var txt_one = snapshot.child("txt_one").val(); 
+						var txt_two = snapshot.child("txt_two").val();
+						
+						
+						if(title.length > 15){
+							title = title.substring(0, 10) + "...";
+						} 
+						
+						if(txt_one.length > 20){
+							txt_one = txt_one.substring(0, 15) + "...";
+						} 
+						
+						if(txt_two.length > 20){
+							txt_two = txt_two.substring(0, 15) + "...";
+						} 
 
-						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + snapshot.child("txt_title").val() + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + snapshot.child("txt_one").val() + " VS " + snapshot.child("txt_two").val() + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
+						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
 						$(".label").tooltip({
 							placement : "top"
 
