@@ -86,7 +86,7 @@ var startResize = function() {
  */
 var resize1 = function(image) {
 	mainCanvas = document.createElement("canvas");
-	WIDTH = 800;
+	WIDTH = 400;
 	if (image.width > WIDTH) {
 		ratio = image.width / image.height;
 		mainCanvas.width = WIDTH;
@@ -99,7 +99,7 @@ var resize1 = function(image) {
 
 var resize2 = function(image) {
 	mainCanvas = document.createElement("canvas");
-	WIDTH = 800;
+	WIDTH = 400;
 	if (image.width > WIDTH) {
 		ratio = image.width / image.height;
 		mainCanvas.width = WIDTH;
