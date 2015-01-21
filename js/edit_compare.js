@@ -366,6 +366,12 @@ $(document).ready(function() {
 				$('#remove_submit_btn').show();
 				$('#ask_submit_btn').show();
 
+				$('#txt_title').keypress(function(e) {
+					if (e.which == 13) {
+						$("#txt_one_box").focus();
+					}
+				});
+
 				$('#txt_one_box').blur(function() {
 					$('#one_box').html($('#txt_one_box').val());
 				});

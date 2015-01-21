@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 	$('#login_facebook_up').click(function() {
 
-		ref.authWithOAuthPopup("facebook", function(error, authData) {
+		ref.authWithOAuthRedirect("facebook", function(error, authData) {
 			if (error) {
 				console.log("Login Failed!", error);
 			} else {
@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 	$('#login_google_up').click(function() {
 
-		ref.authWithOAuthPopup("google", function(error, authData) {
+		ref.authWithOAuthRedirect("google", function(error, authData) {
 			if (error) {
 				console.log("Login Failed!", error);
 			} else {
@@ -81,7 +81,7 @@ $(document).ready(function() {
 	
 	$('#login_twitter_up').click(function() {
 
-		ref.authWithOAuthPopup("twitter", function(error, authData) {
+		ref.authWithOAuthRedirect("twitter", function(error, authData) {
 			if (error) {
 				console.log("Login Failed!", error);
 			} else {

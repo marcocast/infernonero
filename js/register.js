@@ -293,7 +293,7 @@ $(document).ready(function() {
 			rememberVal = "default";
 		}
 
-		ref.authWithOAuthPopup("facebook", function(error, authData) {
+		ref.authWithOAuthRedirect("facebook", function(error, authData) {
 			if (error) {
 				console.log("Login Failed!", error);
 			} else {
@@ -319,7 +319,7 @@ $(document).ready(function() {
 			rememberVal = "default";
 		}
 
-		ref.authWithOAuthPopup("google", function(error, authData) {
+		ref.authWithOAuthRedirect("google", function(error, authData) {
 			if (error) {
 				console.log("Login Failed!", error);
 			} else {
@@ -345,7 +345,7 @@ $(document).ready(function() {
 			rememberVal = "default";
 		}
 
-		ref.authWithOAuthPopup("twitter", function(error, authData) {
+		ref.authWithOAuthRedirect("twitter", function(error, authData) {
 			if (error) {
 				console.log("Login Failed!", error);
 			} else {
