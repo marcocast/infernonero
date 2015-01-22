@@ -6132,7 +6132,9 @@ header .container {
   display: inline-block;
   color: #777777;
 }
-
+.choozzycolor{
+	background: #568c75;
+}
 
 /* =Slider and Large Photo headers
 -------------------------------------------------------------- */
@@ -7266,7 +7268,7 @@ article.post .post_content .btn {
   line-height: 22px;
 }
 .social_sign a {
-  background-color: #428bca;
+  background-color: #568c75;
   color: #ffffff;
   text-align: center;
   display: inline-block;
