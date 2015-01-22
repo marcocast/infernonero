@@ -45,6 +45,16 @@ $(document).ready(function() {
 		ref.unauth();
 
 	});
+	
+	$('#comparenow').click(function() {
+		if (authData) {
+			window.location.href = "https://infernonero.firebaseapp.com/compare.html";
+		}else{
+			window.location.href = "https://infernonero.firebaseapp.com/register.html?compare.html";
+		}
+		
+
+	});
 
 	$('#login_facebook_up').click(function() {
 
