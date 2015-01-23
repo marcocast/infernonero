@@ -48,9 +48,9 @@ $(document).ready(function() {
 	
 	$('#comparenow').click(function() {
 		if (authData) {
-			window.location.href = "https://infernonero.firebaseapp.com/compare.html";
+			window.location.href = "compare.html";
 		}else{
-			window.location.href = "https://infernonero.firebaseapp.com/register.html?compare.html";
+			window.location.href = "register.html?compare.html";
 		}
 		
 
@@ -63,7 +63,7 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				window.location.href = "https://infernonero.firebaseapp.com/compare.html";
+				window.location.href = "compare.html";
 			}
 		}, {
 			remember : "default",
@@ -79,7 +79,7 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				window.location.href = "https://infernonero.firebaseapp.com/compare.html";
+				window.location.href = "compare.html";
 
 			}
 		}, {
@@ -96,7 +96,7 @@ $(document).ready(function() {
 				console.log("Login Failed!", error);
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				window.location.href = "https://infernonero.firebaseapp.com/compare.html";
+				window.location.href = "compare.html";
 
 			}
 		}, {

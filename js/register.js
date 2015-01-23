@@ -111,7 +111,7 @@ $(document).ready(function() {
 				if (previouspage === null) {
 					location.reload();
 				} else {
-					window.location.href = "https://infernonero.firebaseapp.com/" + previouspage;
+					window.location.href = previouspage;
 				}
 
 			}
@@ -301,7 +301,7 @@ $(document).ready(function() {
 				if (previouspage === null) {
 					location.reload();
 				} else {
-					window.location.href = "https://infernonero.firebaseapp.com/" + previouspage;
+					window.location.href = previouspage;
 				}
 			}
 		}, {
@@ -327,7 +327,7 @@ $(document).ready(function() {
 				if (previouspage === null) {
 					location.reload();
 				} else {
-					window.location.href = "https://infernonero.firebaseapp.com/" + previouspage;
+					window.location.href = previouspage;
 				}
 			}
 		}, {
@@ -353,7 +353,7 @@ $(document).ready(function() {
 				if (previouspage === null) {
 					location.reload();
 				} else {
-					window.location.href = "https://infernonero.firebaseapp.com/" + previouspage;
+					window.location.href =  previouspage;
 				}
 			}
 		}, {

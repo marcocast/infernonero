@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 							$.growl({
 								message : "<strong>You just received a vote for : " + refComparesnapshot.child("txt_title").val() + "</strong>",
-								url : "https://infernonero.firebaseapp.com/edit_compare.html#" + ss.key()
+								url : "https://choozzy.com/edit_compare.html#" + ss.key()
 							}, {
 								type : "warning",
 								delay: 10000,

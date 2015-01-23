@@ -527,7 +527,7 @@ $(document).ready(function() {
 
 					var postID = snap.child("compare_id").val();
 
-					var urlToShare = "https://infernonero.firebaseapp.com/vote.html#" + postID;
+					var urlToShare = "https://choozzy.com/vote.html#" + postID;
 
 					stWidget.addEntry({
 						"service" : "facebook",
@@ -536,7 +536,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+						"image" : "https://choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -547,7 +547,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+						"image" : "https://choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -558,7 +558,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+						"image" : "https://choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -569,7 +569,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+						"image" : "https://choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -580,7 +580,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+						"image" : "https://choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -591,7 +591,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+						"image" : "https://choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -602,7 +602,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+						"image" : "https://choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -613,7 +613,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://infernonero.firebaseapp.com/images/restart_logo.png",
+						"image" : "https://choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
