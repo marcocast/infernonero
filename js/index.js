@@ -6,13 +6,9 @@ var authData = ref.getAuth();
 
 var isNewUser = true;
 ref.onAuth(function(authData) {
-	if (authData && isNewUser) {
-		ref.child("users").child(authData.uid).set(authData);
-	}
-});
-
-function authDataCallback(authData) {
+	
 	if (authData) {
+		window.location.href = "compare.html";
 		console.log("User " + authData.uid + " is logged in with " + authData.provider);
 		$('#social_media_wrapper').hide();
 		$('#sign').hide();
@@ -32,27 +28,25 @@ function authDataCallback(authData) {
 
 	}
 	setUserName();
+	
+	
 
-}
-
+});
 
 $(document).ready(function() {
-
-	ref.onAuth(authDataCallback);
 
 	$('#loggingout').click(function() {
 
 		ref.unauth();
 
 	});
-	
+
 	$('#comparenow').click(function() {
 		if (authData) {
 			window.location.href = "compare.html";
-		}else{
+		} else {
 			window.location.href = "register.html?compare.html";
 		}
-		
 
 	});
 
@@ -60,7 +54,16 @@ $(document).ready(function() {
 
 		ref.authWithOAuthPopup("facebook", function(error, authData) {
 			if (error) {
-				console.log("Login Failed!", error);
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("facebook", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
 				window.location.href = "compare.html";
@@ -76,10 +79,18 @@ $(document).ready(function() {
 
 		ref.authWithOAuthPopup("google", function(error, authData) {
 			if (error) {
-				console.log("Login Failed!", error);
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("google", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				window.location.href = "compare.html";
 
 			}
 		}, {
@@ -88,15 +99,23 @@ $(document).ready(function() {
 		});
 
 	});
-	
+
 	$('#login_twitter_up').click(function() {
 
 		ref.authWithOAuthPopup("twitter", function(error, authData) {
 			if (error) {
-				console.log("Login Failed!", error);
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("twitter", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				window.location.href = "compare.html";
 
 			}
 		}, {
@@ -105,6 +124,5 @@ $(document).ready(function() {
 		});
 
 	});
-
 
 });

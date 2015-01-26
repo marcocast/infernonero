@@ -1,13 +1,6 @@
 var ref = new Firebase("https://infernonero.firebaseio.com");
 
 var authData = ref.getAuth();
-if (authData) {
-	if (authData.provider === "password") {
-		history.go(-1);
-	} else {
-		history.go(-2);
-	}
-}
 
 var idx = window.location.href.indexOf('?');
 var previouspage = null;
@@ -22,6 +15,15 @@ ref.onAuth(function(authData) {
 		// use them in Security and Firebase Rules, and show profiles
 		ref.child("users").child(authData.uid).set(authData);
 	}
+	if (authData) {
+		if (previouspage === null) {
+			window.location.href = "compare.html";
+		} else {
+			window.location.href = previouspage;
+		}
+
+	}
+
 });
 
 $(document).ready(function() {
@@ -108,11 +110,6 @@ $(document).ready(function() {
 					}
 				});
 				console.log("Authenticated successfully with payload:", authData);
-				if (previouspage === null) {
-					location.reload();
-				} else {
-					window.location.href = previouspage;
-				}
 
 			}
 		}, {
@@ -287,22 +284,23 @@ $(document).ready(function() {
 
 	$('#login_facebook').click(function() {
 
-		var rememberVal = "sessionOnly";
-
-		if ($("#rememberme").is(":checked")) {
-			rememberVal = "default";
-		}
+		var rememberVal = "default";
 
 		ref.authWithOAuthPopup("facebook", function(error, authData) {
 			if (error) {
-				console.log("Login Failed!", error);
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("facebook", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				if (previouspage === null) {
-					location.reload();
-				} else {
-					window.location.href = previouspage;
-				}
+
 			}
 		}, {
 			remember : rememberVal,
@@ -313,22 +311,23 @@ $(document).ready(function() {
 
 	$('#login_google').click(function() {
 
-		var rememberVal = "sessionOnly";
-
-		if ($("#rememberme").is(":checked")) {
-			rememberVal = "default";
-		}
+		var rememberVal = "default";
 
 		ref.authWithOAuthPopup("google", function(error, authData) {
 			if (error) {
-				console.log("Login Failed!", error);
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("google", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				if (previouspage === null) {
-					location.reload();
-				} else {
-					window.location.href = previouspage;
-				}
+
 			}
 		}, {
 			remember : rememberVal,
@@ -336,25 +335,26 @@ $(document).ready(function() {
 		});
 
 	});
-	
+
 	$('#login_twitter').click(function() {
 
-		var rememberVal = "sessionOnly";
-
-		if ($("#rememberme").is(":checked")) {
-			rememberVal = "default";
-		}
+		var rememberVal = "default";
 
 		ref.authWithOAuthPopup("twitter", function(error, authData) {
 			if (error) {
-				console.log("Login Failed!", error);
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("twitter", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				if (previouspage === null) {
-					location.reload();
-				} else {
-					window.location.href =  previouspage;
-				}
+
 			}
 		}, {
 			remember : rememberVal,
