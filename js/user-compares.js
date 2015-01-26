@@ -149,8 +149,6 @@ $(document).ready(function() {
 		window.location.href = "/index.html";
 
 	});
-	
-	
 
 	var table = $("#example tbody");
 
@@ -169,49 +167,70 @@ $(document).ready(function() {
 
 			var userComparesId = ss.key();
 
-			if (ss.child("compare_id").val() === null) {
+			var compareId = ss.child("compare_id").val();
+
+			if (compareId === null) {
 			} else {
-				var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.child("compare_id").val());
+				var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + compareId);
 
 				refCompare.once("value", function(snapshot) {
 
-					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + ss.child("compare_id").val());
+					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);
 					refCompareVotes.once("value", function(snapshotvotes) {
 
-						var dateOfCompare = new Date(snapshot.child("date").val());
+						var postsRefImages = ref.child("compares-images").child(compareId);
 
-						var buttonRemove = "<a class='btn btn-danger' onclick=\"removeCompare('" + ss.child("compare_id").val() + "','" + userComparesId + "');\"><i class='fa fa-remove'></i> Remove</a>";
+						postsRefImages.once("value", function(snapshotimages) {
+							var dateOfCompare = new Date(snapshot.child("date").val());
 
-						var buttonVoting = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-success' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Open</a>";
+							var buttonRemove = "<a class='btn btn-danger' onclick=\"removeCompare('" + compareId + "','" + userComparesId + "');\"><i class='fa fa-remove'></i> Remove</a>";
 
-						if (snapshot.child("closed").val()) {
-							buttonVoting = "<a id='action" + ss.child("compare_id").val() + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + ss.child("compare_id").val() + "');\"> Closed</a>";
-						}
-						
-						var title = snapshot.child("txt_title").val();
-						var txt_one = snapshot.child("txt_one").val(); 
-						var txt_two = snapshot.child("txt_two").val();
-						
-						
-						if(title.length > 15){
-							title = title.substring(0, 10) + "...";
-						} 
-						
-						if(txt_one.length > 20){
-							txt_one = txt_one.substring(0, 15) + "...";
-						} 
-						
-						if(txt_two.length > 20){
-							txt_two = txt_two.substring(0, 15) + "...";
-						} 
+							var buttonVoting = "<a id='action" + compareId + "' class='btn btn-success' onclick=\"closeOpenVotes('" + compareId + "');\"> Open</a>";
 
-						table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + ss.child("compare_id").val() + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
-						$(".label").tooltip({
-							placement : "top"
+							if (snapshot.child("closed").val()) {
+								buttonVoting = "<a id='action" + compareId + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + compareId + "');\"> Closed</a>";
+							}
+
+							var title = snapshot.child("txt_title").val();
+							var txt_one = snapshot.child("txt_one").val();
+							var txt_two = snapshot.child("txt_two").val();
+
+							if (title.length > 15) {
+								title = title.substring(0, 10) + "...";
+							}
+
+							if (txt_one.length > 20) {
+								txt_one = txt_one.substring(0, 15) + "...";
+							} else if (txt_one.length < 1) {
+								var payloadOne = snapshotimages.child("file_one").val();
+								if (payloadOne !== null && payloadOne !== "") {
+									var img = new Image();
+									img.src = payloadOne;
+									txt_one = "<img src='"+payloadOne+"' height='40' width='40'>";
+								}
+							}
+
+							if (txt_two.length > 20) {
+								txt_two = txt_two.substring(0, 15) + "...";
+							}else if (txt_two.length < 1) {
+								var payloadTwo = snapshotimages.child("file_two").val();
+								if (payloadTwo !== null && payloadTwo !== "") {
+									var img = new Image();
+									img.src = payloadTwo;
+									txt_two = "<img src='"+payloadTwo+"' height='40' width='40'>";
+								}
+							}
+
+							table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + compareId + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + compareId + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
+							$(".label").tooltip({
+								placement : "top"
+
+							});
+							setVotes(compareId, snapshotvotes.child("vote_one").val(), snapshotvotes.child("vote_two").val());
+							listenOnChanges(compareId);
 
 						});
-						setVotes(ss.child("compare_id").val(), snapshotvotes.child("vote_one").val(), snapshotvotes.child("vote_two").val());
-						listenOnChanges(ss.child("compare_id").val());
+
 					}, function(errorObject) {
 					});
 

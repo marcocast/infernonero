@@ -144,6 +144,9 @@ if (authData) {
 }
 
 $(document).ready(function() {
+	
+	var image1Exists = false;
+	var image2Exists = false;
 
 	setUserName();
 
@@ -277,6 +280,7 @@ $(document).ready(function() {
 					var payloadOne = snap.child("file_one").val();
 					$('#loadone').hide();
 					if (payloadOne !== null && payloadOne !== "") {
+						image1Exists = true;
 						var img = new Image();
 						img.src = payloadOne;
 						document.getElementById("fileDisplayAreaOne").appendChild(img);
@@ -284,6 +288,7 @@ $(document).ready(function() {
 					var payloadTwo = snap.child("file_two").val();
 					$('#loadtwo').hide();
 					if (payloadTwo !== null && payloadTwo !== "") {
+						image2Exists = true;
 						var img = new Image();
 						img.src = payloadTwo;
 						document.getElementById("fileDisplayAreaTwo").appendChild(img);
@@ -416,7 +421,7 @@ $(document).ready(function() {
 						return false;
 					}
 
-					if (txt_one === "") {
+					if (txt_one === "" && !image1Exists) {
 						$.growl("Please enter a value for the first compare", {
 							type : "danger",
 							placement : {
@@ -428,7 +433,7 @@ $(document).ready(function() {
 						return false;
 					}
 
-					if (txt_two === "") {
+					if (txt_two === "" && !image2Exists) {
 						$.growl("Please enter a value for the second compare", {
 							type : "danger",
 							placement : {

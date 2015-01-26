@@ -223,7 +223,6 @@ $(document).ready(function() {
 		window.location.href = "/index.html";
 
 	});
-	
 
 	$('#txt_title').keypress(function(e) {
 		if (e.which == 13) {
@@ -263,6 +262,15 @@ $(document).ready(function() {
 		var txt_title = $('#txt_title').val().trim();
 		var txt_one = $('#txt_one_box').val().trim();
 		var txt_two = $('#txt_two_box').val().trim();
+		var scr1scr = $('#src1').attr('src');
+		var scr2scr = $('#src2').attr('src');
+		if (scr1scr === undefined) {
+			scr1scr = "";
+		}
+
+		if (scr2scr === undefined) {
+			scr2scr = "";
+		}
 
 		if (txt_title === "") {
 			$.growl("Please enter a title for this compare", {
@@ -276,7 +284,7 @@ $(document).ready(function() {
 			return false;
 		}
 
-		if (txt_one === "") {
+		if (txt_one === "" && scr1scr === "") {
 			$.growl("Please enter a value for the first compare", {
 				type : "danger",
 				placement : {
@@ -288,7 +296,7 @@ $(document).ready(function() {
 			return false;
 		}
 
-		if (txt_two === "") {
+		if (txt_two === "" && scr2scr === "") {
 			$.growl("Please enter a value for the second compare", {
 				type : "danger",
 				placement : {
@@ -368,14 +376,7 @@ $(document).ready(function() {
 								var description = txt_one + " VS " + txt_two;
 
 								var postsRefImages = ref.child("compares-images").child(postID);
-								var scr1scr = $('#src1').attr('src');
-								if (scr1scr === undefined) {
-									scr1scr = "";
-								}
-								var scr2scr = $('#src2').attr('src');
-								if (scr2scr === undefined) {
-									scr2scr = "";
-								}
+
 								postsRefImages.set({
 									file_one : scr1scr, //filePayloadOne,
 									file_two : scr2scr //,filePayloadTwo
@@ -444,7 +445,7 @@ $(document).ready(function() {
 			return false;
 		}
 
-		if (txt_one === "") {
+		if (txt_one === "" && filePayloadOne === "") {
 			$.growl("Please enter a value for the first compare", {
 				type : "danger",
 				placement : {
@@ -456,7 +457,7 @@ $(document).ready(function() {
 			return false;
 		}
 
-		if (txt_two === "") {
+		if (txt_two === "" && filePayloadTwo === "") {
 			$.growl("Please enter a value for the second compare", {
 				type : "danger",
 				placement : {
