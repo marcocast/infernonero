@@ -327,6 +327,8 @@ $(document).ready(function() {
 						}
 
 						reader.readAsDataURL(file);
+						
+						image1Exists = true;
 					} else {
 						fileDisplayAreaOne.innerHTML = "File not supported!"
 					}
@@ -362,6 +364,7 @@ $(document).ready(function() {
 						}
 
 						reader.readAsDataURL(file);
+						image2Exists = true;
 					} else {
 						fileDisplayAreaTwo.innerHTML = "File not supported!"
 					}
