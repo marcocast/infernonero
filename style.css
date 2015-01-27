@@ -5967,13 +5967,13 @@ header .container {
   padding: 10px 0 0px 0;
   line-height: 42px;
   text-shadow: 1px 1px 0px #ffffff;
-  color: #568c75;
+  color: #4fb8a1;
 }
 .navbar a.navbar-brand span.logo_subtitle {
   font-size: 13px;
   font-weight: 300;
   display: block;
-  color: #568c75;
+  color: #dd5738;
   text-shadow: 1px 1px 0px #ffffff;
 }
 .navbar .nav {
@@ -6048,7 +6048,7 @@ header .container {
   border-bottom: solid 0px #428bca;
 }
 #social_media_wrapper {
-  background: #568c75;
+  background: #4fb8a1;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
   display: inline-block;
@@ -6070,7 +6070,7 @@ header .container {
   width: 30px;
   height: 30px;
   padding: 6px;
-  color: #568c75; 
+  color: #4fb8a1; 
   -webkit-transition: all 100ms linear;
   transition: all 100ms linear;
 }
@@ -6081,7 +6081,7 @@ header .container {
 #social_media_wrapper a:active {
   text-decoration: none;
   color: #fff;
-  background: #568c75;
+  background: #4fb8a1;
 }
 #sign {
   position: absolute;
@@ -6097,7 +6097,11 @@ header .container {
   font-size: 18px;
   padding: 0 6px;
   display: inline-block;
-  color: #568c75;
+  color: #4fb8a1;
+}
+
+#sign a {
+  color: #4fb8a1;
 }
 #logout {
   position: absolute;
@@ -6132,8 +6136,25 @@ header .container {
   display: inline-block;
   color: #777777;
 }
+
+
+.btn-compare {
+  color: #ffffff;
+  background-color: #4fb8a1;
+  border-color: #dd5738;
+}
+.btn-compare:hover,
+.btn-compare:focus,
+.btn-compare:active,
+.btn-compare.active,
+.open .dropdown-toggle.btn-compare {
+  color: #ffffff;
+  background-color: #dd5738;
+  border-color: #4fb8a1;
+}
+
 .choozzycolor{
-	background: #568c75;
+	background: #4fb8a1;
 }
 
 /* =Slider and Large Photo headers
@@ -7268,7 +7289,7 @@ article.post .post_content .btn {
   line-height: 22px;
 }
 .social_sign a {
-  background-color: #568c75;
+  background-color: #4fb8a1;
   color: #ffffff;
   text-align: center;
   display: inline-block;
@@ -7794,7 +7815,7 @@ blockquote p {
   #sign a:visited {
     color: #fff;
   }
-  color: #568c75; 
+  color: #4fb8a1; 
   #sign a:hover,
   #sign a:active {
     color: yellow;
