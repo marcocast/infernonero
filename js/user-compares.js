@@ -199,26 +199,24 @@ $(document).ready(function() {
 								title = title.substring(0, 10) + "...";
 							}
 
-							if (txt_one.length > 20) {
+							var payloadOne = snapshotimages.child("file_one").val();
+
+							if (payloadOne !== null && payloadOne !== "") {
+								var img = new Image();
+								img.src = payloadOne;
+								txt_one = "<img src='" + payloadOne + "' height='40' width='40'>";
+							} else if (txt_one.length > 20) {
 								txt_one = txt_one.substring(0, 15) + "...";
-							} else if (txt_one.length < 1) {
-								var payloadOne = snapshotimages.child("file_one").val();
-								if (payloadOne !== null && payloadOne !== "") {
-									var img = new Image();
-									img.src = payloadOne;
-									txt_one = "<img src='"+payloadOne+"' height='40' width='40'>";
-								}
 							}
 
-							if (txt_two.length > 20) {
+							var payloadTwo = snapshotimages.child("file_two").val();
+
+							if (payloadOne !== null && payloadOne !== "") {
+								var img = new Image();
+								img.src = payloadTwo;
+								txt_two = "<img src='" + payloadTwo + "' height='40' width='40'>";
+							} else if (txt_two.length > 20) {
 								txt_two = txt_two.substring(0, 15) + "...";
-							}else if (txt_two.length < 1) {
-								var payloadTwo = snapshotimages.child("file_two").val();
-								if (payloadTwo !== null && payloadTwo !== "") {
-									var img = new Image();
-									img.src = payloadTwo;
-									txt_two = "<img src='"+payloadTwo+"' height='40' width='40'>";
-								}
 							}
 
 							table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + compareId + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + compareId + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
