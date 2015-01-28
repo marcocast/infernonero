@@ -625,7 +625,7 @@ $(document).ready(function() {
 						"summary" : description
 					});
 					
-					$('#share_full_link').html("<input type='text' value='"+urlToShare+"' readonly style='width:350px;background:#eee3c5'>");
+					$('#share_full_link').html("<input type='text' value='"+urlToShare+"' style='width:350px;background:#eee3c5'>");
 
 				});
 
