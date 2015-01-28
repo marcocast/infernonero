@@ -641,7 +641,10 @@ $(document).ready(function() {
 			"image" : "https://choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
-
+		
+		
+		 $('#share_full_link').html("<input type='text' value='"+urlToShare+"' readonly style='width:350px;background:#eee3c5'>");
+		
 	});
 
 });
