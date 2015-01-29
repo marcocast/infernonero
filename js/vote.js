@@ -1,5 +1,7 @@
 var ref = new Firebase("https://infernonero.firebaseio.com");
 
+var followComparesRef = new Firebase('https://infernonero.firebaseio.com/follow-compares/');
+
 $('#disqus_thread').hide();
 
 var template = ['<div class="row">', '<div class="col-sm-4 columns">', '<img class="thumb" src="{{thumbnail_url}}"></img>', '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
@@ -18,6 +20,8 @@ function objToString(obj) {
 $(document).ready(function() {
 
 	setUserName();
+	$('#unfollow').hide();
+	$('#follow').hide();
 
 	$('#loggingout').click(function() {
 
@@ -39,6 +43,16 @@ $(document).ready(function() {
 
 		var authData = ref.getAuth();
 		if (authData) {
+
+			followComparesRef.child(authData.uid).child(hash).once("value", function(snap) {
+				if (snap.child("compare_id").val() === null) {
+					$('#unfollow').hide();
+					$('#follow').show();
+				} else {
+					$('#follow').hide();
+					$('#unfollow').show();
+				}
+			});
 
 		} else {
 			$('#logout').hide();
@@ -215,7 +229,7 @@ $(document).ready(function() {
 					}
 				});
 			} else {
-				window.location.href = "/register.html?vote.html#"+hash;
+				window.location.href = "/register.html?vote.html#" + hash;
 			}
 
 		});
@@ -241,7 +255,64 @@ $(document).ready(function() {
 					}
 				});
 			} else {
-				window.location.href = "/register.html?vote.html#"+hash;
+				window.location.href = "/register.html?vote.html#" + hash;
+			}
+
+		});
+
+		$('#follow').click(function() {
+
+			if (authData) {
+
+				followComparesRef.child(authData.uid).child(hash).set({
+					compare_id : hash
+				}, function(error) {
+					if (error) {
+						$.growl("Compare could not be followed." + error, {
+							type : "danger",
+							placement : {
+								from : "top",
+								align : "center"
+							}
+						});
+					} else {
+
+						$('#follow').hide();
+						$('#unfollow').show();
+						$.growl("Compare followed", {
+							type : "success",
+							placement : {
+								from : "top",
+								align : "right"
+							}
+						});
+					}
+				});
+
+			} else {
+				window.location.href = "/register.html?vote.html#" + hash;
+			}
+
+		});
+
+		$('#unfollow').click(function() {
+
+			if (authData) {
+
+				followComparesRef.child(authData.uid).child(hash).remove();
+
+				$('#follow').show();
+				$('#unfollow').hide();
+				$.growl("Compare unfollowed", {
+					type : "success",
+					placement : {
+						from : "top",
+						align : "right"
+					}
+				});
+
+			} else {
+				window.location.href = "/register.html?vote.html#" + hash;
 			}
 
 		});
