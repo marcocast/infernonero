@@ -27,23 +27,6 @@ function closeOpenVotes(id) {
 
 }
 
-function removeCompare(id, userComparesId) {
-	var comparesRef = ref.child("compares").child(id);
-	comparesRef.remove();
-
-	var comparesRef = ref.child("compares-votes").child(id);
-	comparesRef.remove();
-
-	var comparesImagesRef = ref.child("compares-images").child(id);
-	comparesImagesRef.remove();
-
-	var usersComparesRef = ref.child("users-compares").child(authData.uid).child(userComparesId);
-	usersComparesRef.remove();
-
-	var votesRef = ref.child("votes").child(id);
-	votesRef.remove();
-
-}
 
 function listenOnChanges(id) {
 
@@ -183,8 +166,6 @@ $(document).ready(function() {
 						postsRefImages.once("value", function(snapshotimages) {
 							var dateOfCompare = new Date(snapshot.child("date").val());
 
-							var buttonRemove = "<a class='btn btn-danger' onclick=\"removeCompare('" + compareId + "','" + userComparesId + "');\"><i class='fa fa-remove'></i> Remove</a>";
-
 							var buttonVoting = "<a id='action" + compareId + "' class='btn btn-success' onclick=\"closeOpenVotes('" + compareId + "');\"> Open</a>";
 
 							if (snapshot.child("closed").val()) {
@@ -219,7 +200,7 @@ $(document).ready(function() {
 								txt_two = txt_two.substring(0, 15) + "...";
 							}
 
-							table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + compareId + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + compareId + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td><td>" + buttonRemove + "</td></tr>");
+							table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + compareId + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + compareId + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td></tr>");
 							$(".label").tooltip({
 								placement : "top"
 
