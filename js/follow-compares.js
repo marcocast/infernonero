@@ -125,7 +125,8 @@ function populateTable() {
 
 							postsRefImages.once("value", function(snapshotimages) {
 								var dateOfCompare = new Date(snapshot.child("date").val());
-
+								
+								var fullTitle = snapshot.child("txt_title").val();
 								var txt_one = snapshot.child("txt_one").val();
 								var txt_two = snapshot.child("txt_two").val();
 
@@ -153,7 +154,7 @@ function populateTable() {
 									txt_two = txt_two.substring(0, 15) + "...";
 								}
 
-								table.prepend("<tr>" + "<td><a href='vote.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + compareId + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + compareId + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td></tr>");
+								table.prepend("<tr>" + "<td><a data-toggle='tooltip' data-placement='top' title='"+fullTitle+"' href='vote.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + compareId + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + compareId + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td></tr>");
 								$(".label").tooltip({
 									placement : "top"
 

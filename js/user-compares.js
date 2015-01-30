@@ -166,13 +166,14 @@ $(document).ready(function() {
 						postsRefImages.once("value", function(snapshotimages) {
 							var dateOfCompare = new Date(snapshot.child("date").val());
 
-							var buttonVoting = "<a id='action" + compareId + "' class='btn btn-success' onclick=\"closeOpenVotes('" + compareId + "');\"> Open</a>";
+							var buttonVoting = "<a data-toggle='tooltip' data-placement='top' title='Control the voting of your compares' id='action" + compareId + "' class='btn btn-success' onclick=\"closeOpenVotes('" + compareId + "');\"> Open</a>";
 
 							if (snapshot.child("closed").val()) {
-								buttonVoting = "<a id='action" + compareId + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + compareId + "');\"> Closed</a>";
+								buttonVoting = "<a data-toggle='tooltip' data-placement='top' title='Control the voting of your compares' id='action" + compareId + "' class='btn btn-danger' onclick=\"closeOpenVotes('" + compareId + "');\"> Closed</a>";
 							}
 
 							var title = snapshot.child("txt_title").val();
+							var fullTitle = snapshot.child("txt_title").val();
 							var txt_one = snapshot.child("txt_one").val();
 							var txt_two = snapshot.child("txt_two").val();
 
@@ -200,7 +201,7 @@ $(document).ready(function() {
 								txt_two = txt_two.substring(0, 15) + "...";
 							}
 
-							table.prepend("<tr>" + "<td><a href='edit_compare.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + compareId + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + compareId + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td></tr>");
+							table.prepend("<tr>" + "<td><a data-toggle='tooltip' data-placement='top' title='"+fullTitle+"' href='edit_compare.html#" + ss.key() + "'>" + title + "</a></td>" + "<td><span data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_one" + compareId + "'>" + snapshotvotes.child("vote_one").val() + "</span> " + txt_one + " VS " + txt_two + " <span  data-toggle='popover' title='' data-content='Voters' class='label label-primary' id='vote_two" + compareId + "'>" + snapshotvotes.child("vote_two").val() + "</span></td>" + "<td>" + dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear() + "</td><td>" + buttonVoting + "</td></tr>");
 							$(".label").tooltip({
 								placement : "top"
 
