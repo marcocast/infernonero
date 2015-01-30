@@ -6141,7 +6141,7 @@ header .container {
 .btn-compare {
   color: #ffffff;
   background-color: #4fb8a1;
-  border-color: #dd5738;
+  border-color: #4fb8a1;
 }
 .btn-compare:hover,
 .btn-compare:focus,
@@ -6150,7 +6150,7 @@ header .container {
 .open .dropdown-toggle.btn-compare {
   color: #ffffff;
   background-color: #dd5738;
-  border-color: #4fb8a1;
+  border-color: #dd5738;
 }
 
 .choozzycolor{
