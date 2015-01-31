@@ -6,9 +6,6 @@ if (authData) {
 	window.location.href = "/register.html?compare.html";
 }
 
-var te = document.querySelector('textarea');
-te.addEventListener('keydown', resizeTextarea);
-
 function resizeTextarea(ev) {
 	this.style.height = '24px';
 	this.style.height = this.scrollHeight + 14 + 'px';
@@ -123,6 +120,9 @@ var halfSize = function(i) {
 $(document).ready(function() {
 
 	setUserName();
+
+	var te = document.querySelector('textarea');
+	te.addEventListener('keydown', resizeTextarea);
 
 	$('#txt_title').focus();
 
@@ -641,10 +641,9 @@ $(document).ready(function() {
 			"image" : "https://choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
-		
-		
-		 $('#share_full_link').html("<input type='text' value='"+urlToShare+"' style='width:350px;background:#eee3c5'>");
-		
+
+		$('#share_full_link').html("<input type='text' value='" + urlToShare + "' style='width:350px;background:#eee3c5'>");
+
 	});
 
 });
