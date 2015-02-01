@@ -317,16 +317,7 @@ $(document).ready(function() {
 
 		});
 		
-		$('#logohref').click(function() {
-			
-			if (authData) {
-				window.location.href = "/vote.html#" + hash;
-				
-			} else {
-				window.location.href = "/index.html";
-			}
-
-		});
+		
 		
 	}
 

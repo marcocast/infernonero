@@ -2,7 +2,6 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 function authDataCallback(authData) {
 	if (authData) {
-		console.log("User " + authData.uid + " is logged in with " + authData.provider);
 		$('#social_media_wrapper').hide();
 		$('#sign').hide();
 		$('#logout').show();
@@ -10,7 +9,6 @@ function authDataCallback(authData) {
 		$('#compare').show();
 		$('#manage').show();
 	} else {
-		console.log("User is logged out");
 		$('#logout').hide();
 		$('#username').hide();
 		$('#compare').hide();
@@ -30,6 +28,81 @@ $(document).ready(function() {
 
 		ref.unauth();
 		window.location.href = "/index.html";
+
+	});
+	
+	$('#login_facebook_up').click(function() {
+
+		ref.authWithOAuthPopup("facebook", function(error, authData) {
+			if (error) {
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("facebook", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
+			} else {
+				console.log("Authenticated successfully with payload:", authData);
+				window.location.href = "compare.html";
+			}
+		}, {
+			remember : "default",
+			scope : "email"
+		});
+
+	});
+
+	$('#login_google_up').click(function() {
+
+		ref.authWithOAuthPopup("google", function(error, authData) {
+			if (error) {
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("google", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
+			} else {
+				console.log("Authenticated successfully with payload:", authData);
+
+			}
+		}, {
+			remember : "default",
+			scope : "email"
+		});
+
+	});
+
+	$('#login_twitter_up').click(function() {
+
+		ref.authWithOAuthPopup("twitter", function(error, authData) {
+			if (error) {
+				if (error.code === "TRANSPORT_UNAVAILABLE") {
+					// fall-back to browser redirects, and pick up the session
+					// automatically when we come back to the origin page
+					ref.authWithOAuthRedirect("twitter", function(error, authData) {
+						if (error) {
+							console.log("Login Failed!", error);
+						}
+					});
+				}
+
+			} else {
+				console.log("Authenticated successfully with payload:", authData);
+
+			}
+		}, {
+			remember : "default",
+			scope : "email"
+		});
 
 	});
 

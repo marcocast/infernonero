@@ -6,16 +6,19 @@ var authData = ref.getAuth();
 
 var isNewUser = true;
 ref.onAuth(function(authData) {
-	
+
 	if (authData) {
-		window.location.href = "compare.html";
-		console.log("User " + authData.uid + " is logged in with " + authData.provider);
-		$('#social_media_wrapper').hide();
-		$('#sign').hide();
-		$('#logout').show();
-		$('#username').show();
-		$('#compare').show();
-		$('#manage').show();
+		var idx = window.location.href.indexOf('?');
+		if (idx > 0) {
+			$('#social_media_wrapper').hide();
+			$('#sign').hide();
+			$('#logout').show();
+			$('#username').show();
+			$('#compare').show();
+			$('#manage').show();
+		} else {
+			window.location.href = "compare.html";
+		}
 
 	} else {
 		console.log("User is logged out");
@@ -28,8 +31,6 @@ ref.onAuth(function(authData) {
 
 	}
 	setUserName();
-	
-	
 
 });
 
