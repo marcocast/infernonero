@@ -535,7 +535,7 @@ $(document).ready(function() {
 
 					var postID = snap.child("compare_id").val();
 
-					var urlToShare = "https://choozzy.com/vote.html#" + postID;
+					var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
 
 					stWidget.addEntry({
 						"service" : "facebook",
@@ -544,7 +544,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://choozzy.com/choozzy_logo.png",
+						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -555,7 +555,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://choozzy.com/choozzy_logo.png",
+						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -566,7 +566,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://choozzy.com/choozzy_logo.png",
+						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -577,7 +577,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://choozzy.com/choozzy_logo.png",
+						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -588,7 +588,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://choozzy.com/choozzy_logo.png",
+						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -599,7 +599,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://choozzy.com/choozzy_logo.png",
+						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -610,7 +610,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://choozzy.com/choozzy_logo.png",
+						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 
@@ -621,7 +621,7 @@ $(document).ready(function() {
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
-						"image" : "https://choozzy.com/choozzy_logo.png",
+						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
 					

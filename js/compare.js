@@ -552,7 +552,7 @@ $(document).ready(function() {
 
 		var description = txt_one + " VS " + txt_two;
 
-		var urlToShare = "https://choozzy.com/vote.html#" + postID;
+		var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
 
 		stWidget.addEntry({
 			"service" : "facebook",
@@ -561,7 +561,7 @@ $(document).ready(function() {
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
-			"image" : "https://choozzy.com/images/restart_logo.png",
+			"image" : "https://www.choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
 
@@ -572,7 +572,7 @@ $(document).ready(function() {
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
-			"image" : "https://choozzy.com/images/restart_logo.png",
+			"image" : "https://www.choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
 
@@ -583,7 +583,7 @@ $(document).ready(function() {
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
-			"image" : "https://choozzy.com/images/restart_logo.png",
+			"image" : "https://www.choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
 
@@ -594,7 +594,7 @@ $(document).ready(function() {
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
-			"image" : "https://choozzy.com/images/restart_logo.png",
+			"image" : "https://www.choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
 
@@ -605,7 +605,7 @@ $(document).ready(function() {
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
-			"image" : "https://choozzy.com/images/restart_logo.png",
+			"image" : "https://www.choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
 
@@ -616,7 +616,7 @@ $(document).ready(function() {
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
-			"image" : "https://choozzy.com/images/restart_logo.png",
+			"image" : "https://www.choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
 
@@ -627,7 +627,7 @@ $(document).ready(function() {
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
-			"image" : "https://choozzy.com/images/restart_logo.png",
+			"image" : "https://www.choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
 
@@ -638,7 +638,7 @@ $(document).ready(function() {
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
-			"image" : "https://choozzy.com/images/restart_logo.png",
+			"image" : "https://www.choozzy.com/images/restart_logo.png",
 			"summary" : description
 		});
 
