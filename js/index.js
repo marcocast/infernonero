@@ -30,11 +30,14 @@ ref.onAuth(function(authData) {
 		$('#sign').show();
 
 	}
-	setUserName();
+	
 
 });
 
 $(document).ready(function() {
+	
+	
+	setUserName();
 
 	$('#loggingout').click(function() {
 
