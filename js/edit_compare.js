@@ -144,7 +144,7 @@ if (authData) {
 }
 
 $(document).ready(function() {
-	
+
 	var image1Exists = false;
 	var image2Exists = false;
 
@@ -327,7 +327,7 @@ $(document).ready(function() {
 						}
 
 						reader.readAsDataURL(file);
-						
+
 						image1Exists = true;
 					} else {
 						fileDisplayAreaOne.innerHTML = "File not supported!"
@@ -471,6 +471,11 @@ $(document).ready(function() {
 								}
 							});
 						} else {
+							
+							$('#socialrow').html("");
+							$('#share_full_link').html("");
+							$('#ask_submit_btn').show();
+							
 							var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
 
 							if (filePayloadOne !== "") {
@@ -524,6 +529,9 @@ $(document).ready(function() {
 				$('#ask_submit_btn').click(function() {
 
 					$('#ask_submit_btn').hide();
+					
+					$('#socialrow').html("<span id='share_facebook_button'></span><span id='share_googleplus_button'></span><span id='share_twitter_button'></span><span id='share_linkedin_button'></span><span id='share_pinterest_button'></span><span id='share_reddit_button'></span><span id='share_whatsapp_button'></span><span id='share_email_button'></span>");
+					
 
 					var reader = new FileReader();
 
@@ -531,7 +539,11 @@ $(document).ready(function() {
 					var txt_one = $('#txt_one_box').val();
 					var txt_two = $('#txt_two_box').val();
 
-					var description = txt_one + " VS " + txt_two;
+					var description = "";
+
+					if (txt_one != null && txt_one != "" && txt_two != null && txt_two != "") {
+						description = txt_one + " VS " + txt_two;
+					}
 
 					var postID = snap.child("compare_id").val();
 
@@ -624,8 +636,8 @@ $(document).ready(function() {
 						"image" : "https://www.choozzy.com/choozzy_logo.png",
 						"summary" : description
 					});
-					
-					$('#share_full_link').html("<input type='text' value='"+urlToShare+"' style='width:350px;background:#eee3c5'>");
+
+					$('#share_full_link').html("<input type='text' value='" + urlToShare + "' style='width:350px;background:#eee3c5'>");
 
 				});
 

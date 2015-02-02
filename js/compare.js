@@ -490,6 +490,11 @@ $(document).ready(function() {
 					}
 				});
 			} else {
+
+				$('#socialrow').html("");
+				$('#share_full_link').html("");
+				$('#ask_submit_btn').show();
+
 				var postsRefImages = ref.child("compares-images").child(postID);
 
 				if (filePayloadOne !== "") {
@@ -544,13 +549,19 @@ $(document).ready(function() {
 
 		$('#ask_submit_btn').hide();
 
+		$('#socialrow').html("<span id='share_facebook_button'></span><span id='share_googleplus_button'></span><span id='share_twitter_button'></span><span id='share_linkedin_button'></span><span id='share_pinterest_button'></span><span id='share_reddit_button'></span><span id='share_whatsapp_button'></span><span id='share_email_button'></span>");
+
 		var reader = new FileReader();
 
 		var txt_title = $('#txt_title').val();
 		var txt_one = $('#txt_one_box').val();
 		var txt_two = $('#txt_two_box').val();
 
-		var description = txt_one + " VS " + txt_two;
+		var description = "";
+
+		if (txt_one != null && txt_one != "" && txt_two != null && txt_two != "") {
+			description = txt_one + " VS " + txt_two;
+		}
 
 		var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
 
