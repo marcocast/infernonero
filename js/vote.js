@@ -105,6 +105,10 @@ $(document).ready(function() {
 
 			var txt_title = snap.child("txt_title").val();
 			if (txt_title != null) {
+				var txt_username = snap.child("txt_username").val();
+				if (txt_username != null) {
+					txt_title = txt_title + " <small> by "+txt_username+"</small>"
+				}
 				$('#txt_title').html(txt_title);
 			}
 
@@ -316,9 +320,7 @@ $(document).ready(function() {
 			}
 
 		});
-		
-		
-		
+
 	}
 
 });

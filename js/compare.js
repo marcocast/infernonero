@@ -119,7 +119,8 @@ var halfSize = function(i) {
 
 $(document).ready(function() {
 
-	setUserName();
+	setUserName();	
+	
 
 	var te = document.querySelector('textarea');
 	te.addEventListener('keydown', resizeTextarea);
@@ -258,7 +259,7 @@ $(document).ready(function() {
 	var usersComparesID = "";
 
 	$('#save_submit_btn').click(function() {
-
+		
 		var txt_title = $('#txt_title').val().trim();
 		var txt_one = $('#txt_one_box').val().trim();
 		var txt_two = $('#txt_two_box').val().trim();
@@ -325,6 +326,7 @@ $(document).ready(function() {
 			closed : false,
 			txt_one : txt_one,
 			txt_two : txt_two,
+			txt_username : getUserName(),
 			preview_one : $('#txt_one_box').data('preview'),
 			preview_two : $('#txt_two_box').data('preview')
 		}, function(error) {
