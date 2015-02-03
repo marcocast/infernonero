@@ -41,8 +41,8 @@ function setUserData() {
 		});
 	} else if (authData.provider === "password") {
 		ref.child("users").child(authData.uid).child("password").once("value", function(snap) {
-			username = snap.child("email").val();
 			useremail = snap.child("email").val();
+			username = useremail.substring(0,(useremail.indexOf('@')));
 			imageprofile = null;
 		});
 	}
