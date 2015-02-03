@@ -2,7 +2,6 @@ var ref = new Firebase("https://infernonero.firebaseio.com");
 
 function authDataCallback(authData) {
 	if (authData) {
-		console.log("User " + authData.uid + " is logged in with " + authData.provider);
 		$('#social_media_wrapper').hide();
 		$('#sign').hide();
 		$('#logout').show();
@@ -10,7 +9,6 @@ function authDataCallback(authData) {
 		$('#compare').show();
 		$('#manage').show();
 	} else {
-		console.log("User is logged out");
 		$('#logout').hide();
 		$('#username').hide();
 		$('#compare').hide();

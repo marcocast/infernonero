@@ -7,9 +7,7 @@ var useremail = null;
 var authData = ref.getAuth();
 if (authData) {
 	setUserData();
-} else {
-	window.location.href = "/register.html?compare.html";
-}
+} 
 
 function getUserName() {
 	if (username !== null) {
