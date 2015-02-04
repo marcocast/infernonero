@@ -42,6 +42,9 @@ $(document).ready(function() {
 	} else {
 
 		var authData = ref.getAuth();
+		
+		var secret = "";
+		
 		if (authData) {
 
 			followComparesRef.child(authData.uid).child(hash).once("value", function(snap) {
@@ -98,6 +101,15 @@ $(document).ready(function() {
 				$('#one_box').html(txt_one);
 			}
 
+			var txt_secret = snap.child("txt_secret").val();
+			if (txt_secret != null && txt_secret != "") {
+				$('#section_secret').removeClass("hidden");
+				secret = txt_secret;
+			} else {
+				$("#all_content").removeClass('hidden');
+				$("#comments_content").removeClass('hidden');
+			}
+
 			var txt_two = snap.child("txt_two").val();
 			if (txt_two != null) {
 				$('#two_box').html(txt_two);
@@ -107,7 +119,7 @@ $(document).ready(function() {
 			if (txt_title != null) {
 				var txt_username = snap.child("txt_username").val();
 				if (txt_username != null) {
-					txt_title = txt_title + " <small> by "+txt_username+"</small>"
+					txt_title = txt_title + " <small> by " + txt_username + "</small>"
 				}
 				$('#txt_title').html(txt_title);
 			}
@@ -211,6 +223,28 @@ $(document).ready(function() {
 			}
 
 		});
+		
+		
+		
+		$('#secret_button').click(function() {
+			
+			if(secret == $('#txt_secret_input').val()){
+				$('#section_secret').addClass("hidden");
+				$("#all_content").removeClass('hidden');
+				$("#comments_content").removeClass('hidden');
+			}else{
+				$.growl("Sorry, wrong secret", {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+			}
+			
+
+		});
+
 
 		$('#vote_one').click(function() {
 

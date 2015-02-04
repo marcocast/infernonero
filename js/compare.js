@@ -119,8 +119,7 @@ var halfSize = function(i) {
 
 $(document).ready(function() {
 
-	setUserName();	
-	
+	setUserName();
 
 	var te = document.querySelector('textarea');
 	te.addEventListener('keydown', resizeTextarea);
@@ -130,6 +129,8 @@ $(document).ready(function() {
 	$('#txt_one_box').val("");
 	$('#txt_two_box').val("");
 	$('#txt_title').val("");
+	
+	$("#privateCheck").removeAttr('checked');
 
 	$('#edit_submit_btn').hide();
 	$('#remove_submit_btn').hide();
@@ -254,15 +255,26 @@ $(document).ready(function() {
 			$('#txt_two_box').blur();
 		}
 	});
+	
+	$('#privateCheck').click(function() {
+		if ($("#privateCheck").is(":checked")) {
+			$('#txt_secret').removeClass("hidden");
+		}else{
+			$('#txt_secret').addClass("hidden");
+			$('#txt_secret').val("");
+		}
+
+	});
 
 	var postID = "";
 	var usersComparesID = "";
 
 	$('#save_submit_btn').click(function() {
-		
+
 		var txt_title = $('#txt_title').val().trim();
 		var txt_one = $('#txt_one_box').val().trim();
 		var txt_two = $('#txt_two_box').val().trim();
+		var txt_secret = $('#txt_secret').val().trim();
 		var scr1scr = $('#src1').attr('src');
 		var scr2scr = $('#src2').attr('src');
 		if (scr1scr === undefined) {
@@ -309,6 +321,20 @@ $(document).ready(function() {
 			return false;
 		}
 
+		if ($("#privateCheck").is(":checked")) {
+			if (txt_secret === "" ) {
+				$.growl("Please enter a secret key", {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+				$('#txt_secret').focus();
+				return false;
+			}
+		}
+		
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
 
 		$('#save_submit_btn').hide();
@@ -326,6 +352,7 @@ $(document).ready(function() {
 			closed : false,
 			txt_one : txt_one,
 			txt_two : txt_two,
+			txt_secret : txt_secret,
 			txt_username : getUserName(),
 			preview_one : $('#txt_one_box').data('preview'),
 			preview_two : $('#txt_two_box').data('preview')
@@ -434,6 +461,7 @@ $(document).ready(function() {
 		var txt_title = $('#txt_title').val().trim();
 		var txt_one = $('#txt_one_box').val().trim();
 		var txt_two = $('#txt_two_box').val().trim();
+		var txt_secret = $('#txt_secret').val().trim();
 
 		if (txt_title === "") {
 			$.growl("Please enter a title for this compare", {
@@ -470,6 +498,20 @@ $(document).ready(function() {
 
 			return false;
 		}
+		
+		if ($("#privateCheck").is(":checked")) {
+			if (txt_secret === "" ) {
+				$.growl("Please enter a secret key", {
+					type : "danger",
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+				$('#txt_secret').focus();
+				return false;
+			}
+		}
 
 		var now = new Date().getTime();
 
@@ -480,6 +522,7 @@ $(document).ready(function() {
 			txt_title : txt_title,
 			txt_one : txt_one,
 			txt_two : txt_two,
+			txt_secret : txt_secret,
 			vote_one : parseInt(0),
 			vote_two : parseInt(0)
 		}, function(error) {

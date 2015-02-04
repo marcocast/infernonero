@@ -206,6 +206,17 @@ $(document).ready(function() {
 						$('#txt_title').val(txt_title);
 					}
 
+					var txt_secret = snap.child("txt_secret").val();
+					if (txt_secret != null && txt_secret != "") {
+						$("#privateCheck").attr('checked', 'checked');
+						$("#txt_secret").val(txt_secret);
+						$('#txt_secret').removeClass("hidden");
+
+					} else {
+						$("#privateCheck").removeAttr('checked');
+						$("#txt_secret").val("");
+					}
+
 					var p1 = snap.child("preview_one").val();
 					if (p1 != null) {
 
@@ -404,6 +415,16 @@ $(document).ready(function() {
 					}
 				});
 
+				$('#privateCheck').click(function() {
+					if ($("#privateCheck").is(":checked")) {
+						$('#txt_secret').removeClass("hidden");
+					} else {
+						$('#txt_secret').addClass("hidden");
+						$('#txt_secret').val("");
+					}
+
+				});
+
 				$('#edit_submit_btn').click(function() {
 
 					var reader = new FileReader();
@@ -411,6 +432,7 @@ $(document).ready(function() {
 					var txt_title = $('#txt_title').val().trim();
 					var txt_one = $('#txt_one_box').val().trim();
 					var txt_two = $('#txt_two_box').val().trim();
+					var txt_secret = $('#txt_secret').val().trim();
 
 					if (txt_title === "") {
 						$.growl("Please enter a title for this compare", {
@@ -448,6 +470,20 @@ $(document).ready(function() {
 						return false;
 					}
 
+					if ($("#privateCheck").is(":checked")) {
+						if (txt_secret === "") {
+							$.growl("Please enter a secret key", {
+								type : "danger",
+								placement : {
+									from : "top",
+									align : "center"
+								}
+							});
+							$('#txt_secret').focus();
+							return false;
+						}
+					}
+
 					var now = new Date().getTime();
 
 					var postsRef = ref.child("compares").child(snap.child("compare_id").val());
@@ -457,6 +493,7 @@ $(document).ready(function() {
 						txt_title : txt_title,
 						txt_one : txt_one,
 						txt_two : txt_two,
+						txt_secret : txt_secret,
 						vote_one : parseInt(0),
 						vote_two : parseInt(0),
 						preview_one : $('#txt_one_box').data('preview'),
@@ -471,11 +508,11 @@ $(document).ready(function() {
 								}
 							});
 						} else {
-							
+
 							$('#socialrow').html("");
 							$('#share_full_link').html("");
 							$('#ask_submit_btn').show();
-							
+
 							var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
 
 							if (filePayloadOne !== "") {
@@ -529,9 +566,8 @@ $(document).ready(function() {
 				$('#ask_submit_btn').click(function() {
 
 					$('#ask_submit_btn').hide();
-					
+
 					$('#socialrow').html("<span id='share_facebook_button'></span><span id='share_googleplus_button'></span><span id='share_twitter_button'></span><span id='share_linkedin_button'></span><span id='share_pinterest_button'></span><span id='share_reddit_button'></span><span id='share_whatsapp_button'></span><span id='share_email_button'></span>");
-					
 
 					var reader = new FileReader();
 
