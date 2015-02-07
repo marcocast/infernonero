@@ -5883,7 +5883,7 @@ img {
 /* =Header
 -------------------------------------------------------------- */
 header {
-  background: none #fff;
+  background: url(images/header_Background.png);
   border-bottom: solid 1px #cccccc;
 }
 header .container {
@@ -6048,7 +6048,7 @@ header .container {
   border-bottom: solid 0px #428bca;
 }
 #social_media_wrapper {
-  background: #4fb8a1;
+  background: #ede1c2;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
   display: inline-block;
