@@ -6152,8 +6152,18 @@ header .container {
   border-color: #dd5738;
 }
 
-.choozzycolor{
+.choozzybackgroundcolor{
 	background: #4fb8a1;
+}
+
+.choozzycolor{
+	color: #4fb8a1;
+	font-weight: bold;
+}
+
+.choozzycolorsub{
+	color: #dd5738;
+	font-weight: bold;
 }
 
 /* =Slider and Large Photo headers
