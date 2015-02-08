@@ -8,6 +8,7 @@ var isNewUser = true;
 ref.onAuth(function(authData) {
 
 	if (authData) {
+		ref.child("users").child(authData.uid).set(authData);
 		var idx = window.location.href.indexOf('?');
 		if (idx > 0) {
 			$('#social_media_wrapper').hide();
@@ -125,6 +126,107 @@ $(document).ready(function() {
 		}, {
 			remember : "default",
 			scope : "email"
+		});
+
+	});
+	
+	$('#register_submit_btn').click(function() {
+
+		var email = $('#txtEmailr').val();
+
+		if (email === "") {
+			$.growl("Please enter an email", {
+				type : "danger",
+				delay : 10000,
+				timer : 1000,
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			$('#txtEmailr').focus();
+
+			return false;
+		} else {
+			var atpos = email.indexOf("@");
+			var dotpos = email.lastIndexOf(".");
+			if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+				$.growl("Please enter a valid email", {
+					type : "danger",
+					delay : 10000,
+					timer : 1000,
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+				$('#txtEmailr').focus();
+				return false;
+			}
+		}
+
+		if ($("#termsandcondition").is(":checked")) {
+		} else {
+			$.growl("Please read and accept the terms and conditions", {
+				type : "danger",
+				delay : 10000,
+				timer : 1000,
+				placement : {
+					from : "top",
+					align : "center"
+				}
+			});
+			$('#termsandcondition').focus();
+
+			return false;
+		}
+
+		var rememberVal = "sessionOnly";
+
+		ref.createUser({
+			email : $('#txtEmailr').val(),
+			password : "tempPassword"
+		}, function(error) {
+			if (error === null) {
+				ref.resetPassword({
+					email : $('#txtEmailr').val()
+				}, function(error) {
+					if (error === null) {
+						console.log("Email confirmtion sent successfully.");
+						$.growl("Email confirmtion sent successfully. Follow the instruction in the email to activate your account", {
+							type : "success",
+							delay : 35000,
+							timer : 1000,
+							placement : {
+								from : "top",
+								align : "center"
+							}
+						});
+					} else {
+						$.growl("Error sending Email confirmtion : " + error, {
+							type : "danger",
+							delay : 10000,
+							timer : 1000,
+							placement : {
+								from : "top",
+								align : "center"
+							}
+						});
+						console.log("Error sending Email confirmtion:", error);
+					}
+				});
+			} else {
+				$.growl("Error creating user : " + error, {
+					type : "danger",
+					delay : 10000,
+					timer : 1000,
+					placement : {
+						from : "top",
+						align : "center"
+					}
+				});
+				console.log("Error creating user:", error);
+			}
 		});
 
 	});

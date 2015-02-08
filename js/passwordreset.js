@@ -1,9 +1,7 @@
 var ref = new Firebase("https://infernonero.firebaseio.com");
 
 var authData = ref.getAuth();
-if (authData) {
-	window.location.href = "/index.html";
-}
+
 
 var isNewUser = true;
 ref.onAuth(function(authData) {
