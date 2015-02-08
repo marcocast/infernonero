@@ -113,8 +113,8 @@ $(document).ready(function() {
 								align : "center"
 							}
 						});
+						window.location.href = "compare.html";
 						console.log("Authenticated successfully with payload:", authData);
-						location.reload();
 					}
 				}, {
 					remember : rememberVal
