@@ -6166,6 +6166,27 @@ header .container {
 	font-weight: bold;
 }
 
+.wall{
+	padding: 15px;
+}
+	
+	
+.wall .item{
+	border-bottom: solid 1px #cccccc;
+	margin-bottom: 10px;
+	margin-right: 10px;
+  	float: left;
+ 	margin-bottom: 10px;
+}
+.item { width: 25%; }
+.item.w2 { width: 50%; }
+.item.w3 { width: 75%; }
+.item.w4 { width: 90%; }
+
+
+
+
+
 /* =Slider and Large Photo headers
 -------------------------------------------------------------- */
 .flexslider {

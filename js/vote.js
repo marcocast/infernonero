@@ -44,6 +44,7 @@ $(document).ready(function() {
 		var authData = ref.getAuth();
 		
 		var secret = "";
+		var following = false;
 		
 		if (authData) {
 
@@ -51,9 +52,11 @@ $(document).ready(function() {
 				if (snap.child("compare_id").val() === null) {
 					$('#unfollow').hide();
 					$('#follow').show();
+					following = false;
 				} else {
 					$('#follow').hide();
 					$('#unfollow').show();
+					following = true;
 				}
 			});
 
@@ -102,7 +105,8 @@ $(document).ready(function() {
 			}
 
 			var txt_secret = snap.child("txt_secret").val();
-			if (txt_secret != null && txt_secret != "") {
+						
+			if (!following && txt_secret != null && txt_secret != "") {
 				$('#section_secret').removeClass("hidden");
 				secret = txt_secret;
 			} else {
@@ -119,7 +123,7 @@ $(document).ready(function() {
 			if (txt_title != null) {
 				var txt_username = snap.child("txt_username").val();
 				if (txt_username != null) {
-					txt_title = txt_title + " <small> by " + txt_username + "</small>"
+					txt_title = txt_title + " <small> by " + txt_username + "</small>";
 				}
 				$('#txt_title').html(txt_title);
 			}
@@ -317,6 +321,7 @@ $(document).ready(function() {
 
 						$('#follow').hide();
 						$('#unfollow').show();
+						following = true;
 						$.growl("Compare followed", {
 							type : "success",
 							placement : {
@@ -341,6 +346,7 @@ $(document).ready(function() {
 
 				$('#follow').show();
 				$('#unfollow').hide();
+				following = false;
 				$.growl("Compare unfollowed", {
 					type : "success",
 					placement : {

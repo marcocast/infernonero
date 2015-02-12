@@ -8,18 +8,8 @@ var isNewUser = true;
 ref.onAuth(function(authData) {
 
 	if (authData) {
-		ref.child("users").child(authData.uid).set(authData);
-		var idx = window.location.href.indexOf('?');
-		if (idx > 0) {
-			$('#social_media_wrapper').hide();
-			$('#sign').hide();
-			$('#logout').show();
-			$('#username').show();
-			$('#compare').show();
-			$('#manage').show();
-		} else {
-			window.location.href = "compare.html";
-		}
+
+		window.location.href = "wall.html";
 
 	} else {
 		console.log("User is logged out");
@@ -31,13 +21,11 @@ ref.onAuth(function(authData) {
 		$('#sign').show();
 
 	}
-	
 
 });
 
 $(document).ready(function() {
-	
-	
+
 	setUserName();
 
 	$('#loggingout').click(function() {
@@ -129,7 +117,7 @@ $(document).ready(function() {
 		});
 
 	});
-	
+
 	$('#register_submit_btn').click(function() {
 
 		var email = $('#txtEmailr').val();
