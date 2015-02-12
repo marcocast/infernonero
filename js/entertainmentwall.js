@@ -236,7 +236,7 @@ function populatePopular() {
 	var table = $("#container2");
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/compares");
-	refCompares.limitToLast(100).on("value", function(followsnapshot) {
+	refCompares.limitToLast(50).on("value", function(followsnapshot) {
 
 		// iterate all the elements :((
 		followsnapshot.forEach(function(ss) {
