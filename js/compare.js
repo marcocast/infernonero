@@ -275,6 +275,8 @@ $(document).ready(function() {
 		var txt_one = $('#txt_one_box').val().trim();
 		var txt_two = $('#txt_two_box').val().trim();
 		var txt_secret = $('#txt_secret').val().trim();
+		var txt_tags = $('#txt_tags').val().trim();
+		
 		var scr1scr = $('#src1').attr('src');
 		var scr2scr = $('#src2').attr('src');
 		if (scr1scr === undefined) {
@@ -355,6 +357,7 @@ $(document).ready(function() {
 			date : usersComparesID,
 			txt_title : txt_title,
 			closed : false,
+			txt_tags : txt_tags,
 			published : published,
 			txt_one : txt_one,
 			txt_two : txt_two,
@@ -468,6 +471,7 @@ $(document).ready(function() {
 		var txt_one = $('#txt_one_box').val().trim();
 		var txt_two = $('#txt_two_box').val().trim();
 		var txt_secret = $('#txt_secret').val().trim();
+		var txt_tags = $('#txt_tags').val().trim();
 
 		if (txt_title === "") {
 			$.growl("Please enter a title for this compare", {
@@ -534,6 +538,7 @@ $(document).ready(function() {
 			published : published,
 			txt_one : txt_one,
 			txt_two : txt_two,
+			txt_tags : txt_tags,
 			txt_secret : txt_secret,
 			vote_one : parseInt(0),
 			vote_two : parseInt(0)

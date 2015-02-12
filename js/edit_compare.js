@@ -205,6 +205,11 @@ $(document).ready(function() {
 					if (txt_title != null) {
 						$('#txt_title').val(txt_title);
 					}
+					
+					var txt_tags = snap.child("txt_tags").val();
+					if (txt_tags != null) {
+						$('#txt_tags').val(txt_tags);
+					}
 
 					var txt_secret = snap.child("txt_secret").val();
 					if (txt_secret != null && txt_secret != "") {
@@ -440,6 +445,7 @@ $(document).ready(function() {
 					var txt_one = $('#txt_one_box').val().trim();
 					var txt_two = $('#txt_two_box').val().trim();
 					var txt_secret = $('#txt_secret').val().trim();
+					var txt_tags = $('#txt_tags').val().trim();
 
 					if (txt_title === "") {
 						$.growl("Please enter a title for this compare", {
@@ -505,6 +511,7 @@ $(document).ready(function() {
 						txt_title : txt_title,
 						txt_one : txt_one,
 						txt_two : txt_two,
+						txt_tags : txt_tags,
 						published : published,
 						txt_secret : txt_secret,
 						vote_one : parseInt(0),
