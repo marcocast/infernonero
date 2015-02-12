@@ -1,22 +1,19 @@
 var ref = new Firebase('https://infernonero.firebaseio.com');
 
+var followUsersRef = new Firebase('https://infernonero.firebaseio.com/follow-users/');
+
 $('#logout').hide();
 
 var authData = ref.getAuth();
 
-
-
 var idx = window.location.href.indexOf('#');
 var useridhash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
-
 
 if (authData) {
 	populateTable();
 } else {
 	window.location.href = "/index.html";
 }
-
-
 
 ref.onAuth(function(authData) {
 
@@ -144,7 +141,7 @@ function populateTable() {
 							var txt_username = snapshot.child("txt_username").val();
 							if (txt_username === null) {
 								txt_username = "";
-							}else{
+							} else {
 								$("#username").text(txt_username);
 							}
 							var img_one = "";
@@ -205,6 +202,20 @@ function populateTable() {
 
 $(document).ready(function() {
 
+	if (authData) {
+
+		followUsersRef.child(authData.uid).child(useridhash).once("value", function(snap) {
+			if (snap.child("user_id").val() === null) {
+				$('#unfollow').hide();
+				$('#follow').show();
+			} else {
+				$('#follow').hide();
+				$('#unfollow').show();
+			}
+		});
+
+	}
+
 	setUserName();
 
 	$('#loggingout').click(function() {
@@ -214,6 +225,59 @@ $(document).ready(function() {
 
 	});
 
-	
+	$('#follow').click(function() {
+
+		if (authData) {
+
+			followUsersRef.child(authData.uid).child(useridhash).set({
+				user_id : useridhash
+			}, function(error) {
+				if (error) {
+					$.growl("Compare could not be followed." + error, {
+						type : "danger",
+						placement : {
+							from : "top",
+							align : "center"
+						}
+					});
+				} else {
+
+					$('#follow').hide();
+					$('#unfollow').show();
+					following = true;
+					$.growl("User followed", {
+						type : "success",
+						placement : {
+							from : "top",
+							align : "right"
+						}
+					});
+				}
+			});
+
+		}
+
+	});
+
+	$('#unfollow').click(function() {
+
+		if (authData) {
+
+			followUsersRef.child(authData.uid).child(useridhash).remove();
+
+			$('#follow').show();
+			$('#unfollow').hide();
+			following = false;
+			$.growl("User unfollowed", {
+				type : "success",
+				placement : {
+					from : "top",
+					align : "right"
+				}
+			});
+
+		}
+
+	});
 
 });
