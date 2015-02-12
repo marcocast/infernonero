@@ -17,7 +17,7 @@ ref.onAuth(function(authData) {
 	}
 	if (authData) {
 		if (previouspage === null) {
-			window.location.href = "compare.html";
+			window.location.href = "wall.html";
 		} else {
 			window.location.href = previouspage;
 		}

@@ -36,9 +36,9 @@ $(document).ready(function() {
 
 	$('#comparenow').click(function() {
 		if (authData) {
-			window.location.href = "compare.html";
+			window.location.href = "wall.html";
 		} else {
-			window.location.href = "register.html?compare.html";
+			window.location.href = "register.html?wall.html";
 		}
 
 	});
@@ -59,7 +59,7 @@ $(document).ready(function() {
 
 			} else {
 				console.log("Authenticated successfully with payload:", authData);
-				window.location.href = "compare.html";
+				window.location.href = "wall.html";
 			}
 		}, {
 			remember : "default",
