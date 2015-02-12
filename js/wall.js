@@ -324,8 +324,9 @@ function populateTableByUserId(useridhash) {
 				var title = snapshot.child("txt_title").val();
 				var txt_secret = snapshot.child("txt_secret").val();
 				var user_id = snapshot.child("user_id").val();
+				var published = snapshot.child("published").val();
 
-				if (title === null || (txt_secret != null && txt_secret != "")) {
+				if (published === null || published != true  || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);
@@ -424,8 +425,9 @@ function populatePopular() {
 
 				var title = snapshot.child("txt_title").val();
 				var txt_secret = snapshot.child("txt_secret").val();
+				var published = snapshot.child("published").val();
 
-				if (title === null || (txt_secret != null && txt_secret != "")) {
+				if (published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);

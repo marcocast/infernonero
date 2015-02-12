@@ -120,8 +120,8 @@ function populateTable() {
 				var title = snapshot.child("txt_title").val();
 				var txt_secret = snapshot.child("txt_secret").val();
 				var user_id = snapshot.child("user_id").val();
-
-				if (title === null || (txt_secret != null && txt_secret != "")) {
+				var published = snapshot.child("published").val();	
+				if (published === null || published != true ||title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);

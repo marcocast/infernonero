@@ -335,6 +335,11 @@ $(document).ready(function() {
 			}
 		}
 		
+		var published = false;
+		if ($("#publicCheck").is(":checked")) {
+			published = true;
+		}
+		
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
 
 		$('#save_submit_btn').hide();
@@ -350,6 +355,7 @@ $(document).ready(function() {
 			date : usersComparesID,
 			txt_title : txt_title,
 			closed : false,
+			published : published,
 			txt_one : txt_one,
 			txt_two : txt_two,
 			txt_secret : txt_secret,
@@ -512,6 +518,11 @@ $(document).ready(function() {
 				return false;
 			}
 		}
+		
+		var published = false;
+		if ($("#publicCheck").is(":checked")) {
+			published = true;
+		}
 
 		var now = new Date().getTime();
 
@@ -520,6 +531,7 @@ $(document).ready(function() {
 			user_id : authData.uid,
 			date : now,
 			txt_title : txt_title,
+			published : published,
 			txt_one : txt_one,
 			txt_two : txt_two,
 			txt_secret : txt_secret,

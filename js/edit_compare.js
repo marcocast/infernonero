@@ -217,6 +217,13 @@ $(document).ready(function() {
 						$("#txt_secret").val("");
 					}
 
+					var published = snap.child("published").val();
+					if (published === null || published != true) {
+						$("#publicCheck").removeAttr('checked');
+					} else {
+						$("#publicCheck").attr('checked', 'checked');
+					}
+
 					var p1 = snap.child("preview_one").val();
 					if (p1 != null) {
 
@@ -484,6 +491,11 @@ $(document).ready(function() {
 						}
 					}
 
+					var published = false;
+					if ($("#publicCheck").is(":checked")) {
+						published = true;
+					}
+
 					var now = new Date().getTime();
 
 					var postsRef = ref.child("compares").child(snap.child("compare_id").val());
@@ -493,6 +505,7 @@ $(document).ready(function() {
 						txt_title : txt_title,
 						txt_one : txt_one,
 						txt_two : txt_two,
+						published : published,
 						txt_secret : txt_secret,
 						vote_one : parseInt(0),
 						vote_two : parseInt(0),
