@@ -43,15 +43,16 @@ function createArticlePopular(img, title, link, text1, text2, txtusername, fullD
 
 	var article = "";
 	article += "<div class='item w4'>";
+	article += "<p>";
 	if (img != "") {
-		article += "<p>";
+
 		article += "<a href='" + link + "' >";
 		article += "<div style='position:relative;float: right;margin: 0px 0px 15px 15px;'>";
 		article += img;
 		article += "</div> </a>";
-		article += "<p>";
-	}
 
+	}
+	article += "<p>";
 	article += "<b><a href='" + link + "' >";
 	article += title;
 	article += "</a></b>";
@@ -73,17 +74,17 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 	} else {
 		article += "<div class='item w4'>";
 	}
-
+	article += "<p>";
 	if (img != "") {
-		article += "<p>";
+
 		article += "<a href='" + link + "' >";
 		article += "<div style='position:relative;float: left;margin: 0px 15px 15px 0px;'>";
 		article += img;
 		article += "</div> </a>";
-		article += "<p>";
-	}
 
-	article += "<h2 class='' style=''><a href='" + link + "' >";
+	}
+	article += "<p>";
+	article += "<h2 style=''><a href='" + link + "' >";
 	article += title;
 	article += "</a></h2>";
 	article += "</p>";

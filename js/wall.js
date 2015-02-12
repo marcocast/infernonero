@@ -5,11 +5,7 @@ $('#logout').hide();
 var authData = ref.getAuth();
 
 if (authData) {
-	populatePopular();
 
-	populateTableByUser();
-
-	populateTable();
 } else {
 	window.location.href = "/index.html";
 }
@@ -45,15 +41,15 @@ function createArticlePopular(img, title, link, text1, text2, txtusername, fullD
 
 	var article = "";
 	article += "<div class='item w4'>";
+	article += "<p>";
 	if (img != "") {
-		article += "<p>";
 		article += "<a href='" + link + "' >";
 		article += "<div style='position:relative;float: right;margin: 0px 0px 15px 15px;'>";
 		article += img;
 		article += "</div> </a>";
-		article += "<p>";
-	}
 
+	}
+	article += "<p>";
 	article += "<b><a href='" + link + "' >";
 	article += title;
 	article += "</a></b>";
@@ -70,22 +66,25 @@ function createArticlePopular(img, title, link, text1, text2, txtusername, fullD
 function createArticle(img, title, link, text1, text2, txtusername, fullDate, vote1, vote2, userlink) {
 
 	var article = "";
+	article += "<a href='" + link + "' >";
 	if (img === "") {
 		article += "<div class='item w3'>";
 	} else {
 		article += "<div class='item w4'>";
 	}
 
+	article += "<p>";
 	if (img != "") {
-		article += "<p>";
+
 		article += "<a href='" + link + "' >";
 		article += "<div style='position:relative;float: left;margin: 0px 15px 15px 0px;'>";
 		article += img;
 		article += "</div> </a>";
-		article += "<p>";
+
 	}
 
-	article += "<h2 class='' style=''><a href='" + link + "' >";
+	article += "<p>";
+	article += "<h2 style=''><a href='" + link + "' >";
 	article += title;
 	article += "</a></h2>";
 	article += "</p>";
@@ -120,6 +119,7 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 	article += "<br style='clear: both;' />";
 	article += "</p>";
 	article += "</div>";
+	article += "</a>";
 
 	return article;
 
@@ -263,12 +263,12 @@ function populateTable() {
 
 								var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
 
-								var userlink = "userwall.html#" + user_id;
-								var choozzelink = "vote.html#" + ss.key();
+								var userlink = "https://www.choozzy.com/userwall.html#" + user_id;
+								var choozzelink = "https://www.choozzy.com/vote.html#" + ss.key();
 
 								var newDiv = createArticle(img_one + img_two, title, choozzelink, txt_one, txt_two, txt_username, fullDate, voteone, votetwo, userlink);
 
-								table.prepend(newDiv).masonry('appended', newDiv);
+								table.prepend(newDiv).masonry('appended', newDiv).fadeIn();
 							});
 
 						}, function(errorObject) {
@@ -326,7 +326,7 @@ function populateTableByUserId(useridhash) {
 				var user_id = snapshot.child("user_id").val();
 				var published = snapshot.child("published").val();
 
-				if (published === null || published != true  || title === null || (txt_secret != null && txt_secret != "")) {
+				if (published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);
@@ -386,12 +386,12 @@ function populateTableByUserId(useridhash) {
 
 							var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
 
-							var userlink = "userwall.html#" + useridhash;
-							var choozzelink = "vote.html#" + compareId;
+							var userlink = "https://www.choozzy.com/userwall.html#" + useridhash;
+							var choozzelink = "https://www.choozzy.com/vote.html#" + compareId;
 
 							var newDiv = createArticlePerUsers(img_one + img_two, title, choozzelink, txt_one, txt_two, txt_username, fullDate, voteone, votetwo, userlink);
 
-							table.prepend(newDiv).masonry('appended', newDiv);
+							table.prepend(newDiv).masonry('appended', newDiv).fadeIn();
 						});
 
 					}, function(errorObject) {
@@ -489,7 +489,7 @@ function populatePopular() {
 
 								var newDiv = createArticlePopular(img_one + img_two, title, "vote.html#" + ss.key(), txt_one, txt_two, txt_username, fullDate, voteone, votetwo);
 
-								table.prepend(newDiv).masonry('appended', newDiv);
+								table.prepend(newDiv).masonry('appended', newDiv).fadeIn();
 							});
 						}
 					}, function(errorObject) {
@@ -509,6 +509,15 @@ function populatePopular() {
 $(document).ready(function() {
 
 	setUserName();
+
+	if (authData) {
+
+		populateTableByUser();
+
+		populateTable();
+
+		populatePopular();
+	}
 
 	$('#loggingout').click(function() {
 
