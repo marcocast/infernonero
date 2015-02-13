@@ -210,7 +210,7 @@ function populateTable() {
 								var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
 
 								var userlink = "userwall.html#" + user_id;
-								var choozzelink = "vote.html#" + ss.key();
+								var choozzelink = "vote.html#" + compareId;
 
 								var newDiv = createArticle(img_one + img_two, title, choozzelink, txt_one, txt_two, txt_username, fullDate, voteone, votetwo, userlink);
 								table.prepend(newDiv).masonry('appended', newDiv);
@@ -316,7 +316,7 @@ function populatePopular() {
 
 								var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
 
-								var newDiv = createArticlePopular(img_one + img_two, title, "vote.html#" + ss.key(), txt_one, txt_two, txt_username, fullDate, voteone, votetwo);
+								var newDiv = createArticlePopular(img_one + img_two, title, "vote.html#" + compareId, txt_one, txt_two, txt_username, fullDate, voteone, votetwo);
 
 								table.prepend(newDiv).masonry('appended', newDiv);
 							});
