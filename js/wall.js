@@ -433,61 +433,64 @@ function populatePopular() {
 						var voteone = snapshotvotes.child("vote_one").val();
 						var votetwo = snapshotvotes.child("vote_two").val();
 
-						var postsRefImages = ref.child("compares-images").child(compareId);
+						if (parseInt(voteone) > 20 || parseInt(votetwo) > 20) {
 
-						postsRefImages.once("value", function(snapshotimages) {
-							var dateOfCompare = new Date(snapshot.child("date").val());
+							var postsRefImages = ref.child("compares-images").child(compareId);
 
-							var fullTitle = snapshot.child("txt_title").val();
-							var txt_one = snapshot.child("txt_one").val();
-							var txt_two = snapshot.child("txt_two").val();
-							var txt_username = snapshot.child("txt_username").val();
-							if (txt_username === null) {
-								txt_username = "";
-							} else {
-								$("#username").text(txt_username);
-							}
-							var img_one = "";
-							var img_two = "";
+							postsRefImages.once("value", function(snapshotimages) {
+								var dateOfCompare = new Date(snapshot.child("date").val());
 
-							var payloadOne = snapshotimages.child("file_one").val();
-
-							if (payloadOne !== null && payloadOne !== "") {
-								var img = new Image();
-								img.src = payloadOne;
-								img_one = "<img src='" + payloadOne + "' height='120' width='120'>";
-							} else {
-								if (txt_one.indexOf("www.youtube") > -1) {
-									img_one = "<img src='images/youtube.png' height='120' width='120'>";
-								} else if (txt_one.indexOf("www.ebay") > -1) {
-									img_one = "<img src='images/ebay.png' height='120' width='120'>";
-								} else if (txt_one.indexOf("www.amazon") > -1) {
-									img_one = "<img src='images/amazon.png' height='120' width='120'>";
+								var fullTitle = snapshot.child("txt_title").val();
+								var txt_one = snapshot.child("txt_one").val();
+								var txt_two = snapshot.child("txt_two").val();
+								var txt_username = snapshot.child("txt_username").val();
+								if (txt_username === null) {
+									txt_username = "";
+								} else {
+									$("#username").text(txt_username);
 								}
-							}
+								var img_one = "";
+								var img_two = "";
 
-							var payloadTwo = snapshotimages.child("file_two").val();
+								var payloadOne = snapshotimages.child("file_one").val();
 
-							if (payloadOne !== null && payloadOne !== "") {
-								var img = new Image();
-								img.src = payloadTwo;
-								img_two = "<img src='" + payloadTwo + "' height='120' width='120'>";
-							} else {
-								if (img_two.indexOf("www.youtube") > -1) {
-									img_two = "<img src='images/youtube.png' height='120' width='120'>";
-								} else if (img_two.indexOf("www.ebay") > -1) {
-									img_two = "<img src='images/ebay.png' height='120' width='120'>";
-								} else if (img_two.indexOf("www.amazon") > -1) {
-									img_two = "<img src='images/amazon.png' height='120' width='120'>";
+								if (payloadOne !== null && payloadOne !== "") {
+									var img = new Image();
+									img.src = payloadOne;
+									img_one = "<img src='" + payloadOne + "' height='120' width='120'>";
+								} else {
+									if (txt_one.indexOf("www.youtube") > -1) {
+										img_one = "<img src='images/youtube.png' height='120' width='120'>";
+									} else if (txt_one.indexOf("www.ebay") > -1) {
+										img_one = "<img src='images/ebay.png' height='120' width='120'>";
+									} else if (txt_one.indexOf("www.amazon") > -1) {
+										img_one = "<img src='images/amazon.png' height='120' width='120'>";
+									}
 								}
-							}
 
-							var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
+								var payloadTwo = snapshotimages.child("file_two").val();
 
-							var newDiv = createArticlePopular(img_one + img_two, title, "vote.html#" + compareId, txt_one, txt_two, txt_username, fullDate, voteone, votetwo);
+								if (payloadOne !== null && payloadOne !== "") {
+									var img = new Image();
+									img.src = payloadTwo;
+									img_two = "<img src='" + payloadTwo + "' height='120' width='120'>";
+								} else {
+									if (img_two.indexOf("www.youtube") > -1) {
+										img_two = "<img src='images/youtube.png' height='120' width='120'>";
+									} else if (img_two.indexOf("www.ebay") > -1) {
+										img_two = "<img src='images/ebay.png' height='120' width='120'>";
+									} else if (img_two.indexOf("www.amazon") > -1) {
+										img_two = "<img src='images/amazon.png' height='120' width='120'>";
+									}
+								}
 
-							table.prepend(newDiv).masonry('appended', newDiv);
-						});
+								var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
+
+								var newDiv = createArticlePopular(img_one + img_two, title, "vote.html#" + compareId, txt_one, txt_two, txt_username, fullDate, voteone, votetwo);
+
+								table.prepend(newDiv).masonry('appended', newDiv);
+							});
+						}
 
 					}, function(errorObject) {
 					});
