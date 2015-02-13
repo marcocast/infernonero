@@ -130,9 +130,9 @@ function populateTable() {
 		// iterate all the elements :((
 		followsnapshot.forEach(function(ss) {
 
-			var compareId = ss.key();
+			var compareId = ss.child("compare_id").val();
 
-			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.child("compare_id").val());
+			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + compareId);
 
 			refCompare.once("value", function(snapshot) {
 
