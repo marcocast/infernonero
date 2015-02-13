@@ -47,7 +47,7 @@ function createArticlePopular(img, title, link, text1, text2, txtusername, fullD
 	if (img != "") {
 
 		article += "<a href='" + link + "' >";
-		article += "<div style='position:relative;float: right;margin: 0px 0px 15px 15px;'>";
+		article += "<div>";
 		article += img;
 		article += "</div> </a>";
 
