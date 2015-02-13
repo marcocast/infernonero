@@ -5,9 +5,8 @@ $('#logout').hide();
 var authData = ref.getAuth();
 
 if (authData) {
-	populatePopular();
-
 	populateTable();
+	populatePopular();
 } else {
 	window.location.href = "/index.html";
 }
@@ -47,7 +46,7 @@ function createArticlePopular(img, title, link, text1, text2, txtusername, fullD
 	if (img != "") {
 
 		article += "<a href='" + link + "' >";
-		article += "<div>";
+		article += "<div'>";
 		article += img;
 		article += "</div> </a>";
 

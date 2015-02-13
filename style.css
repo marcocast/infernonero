@@ -6167,16 +6167,15 @@ header .container {
 }
 
 .wall{
-	padding: 15px;
+	padding: 1em;
 }
 	
 	
 .wall .item{
 	border-bottom: solid 1px #cccccc;
-	margin-bottom: 10px;
-	margin-right: 10px;
+	margin-bottom: 0.625em;
+	margin-right: 0.625em;
   	float: left;
- 	margin-bottom: 10px;
 }
 .item { width: 25%; }
 .item.w2 { width: 50%; }
@@ -8153,6 +8152,7 @@ blockquote p {
     display: none;
   }
 }
+
 .compare-container {
 width: 100%;
 }

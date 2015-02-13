@@ -386,8 +386,8 @@ function populateTableByUserId(useridhash) {
 
 							var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
 
-							var userlink = "https://www.choozzy.com/userwall.html#" + useridhash;
-							var choozzelink = "https://www.choozzy.com/vote.html#" + compareId;
+							var userlink = "userwall.html#" + useridhash;
+							var choozzelink = "vote.html#" + compareId;
 
 							var newDiv = createArticlePerUsers(img_one + img_two, title, choozzelink, txt_one, txt_two, txt_username, fullDate, voteone, votetwo, userlink);
 
