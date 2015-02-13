@@ -69,11 +69,8 @@ function createArticlePopular(img, title, link, text1, text2, txtusername, fullD
 function createArticle(img, title, link, text1, text2, txtusername, fullDate, vote1, vote2, userlink) {
 
 	var article = "";
-	if (img === "") {
-		article += "<div class='item w3'>";
-	} else {
-		article += "<div class='item w4'>";
-	}
+	article += "<div class='item w4'>";
+
 	article += "<p>";
 	if (img != "") {
 
@@ -128,15 +125,15 @@ function populateTable() {
 
 	var table = $("#container1");
 
-	var refCompares = new Firebase("https://infernonero.firebaseio.com/compares");
+	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/simplelogin:53");
 	refCompares.limitToLast(100).on("value", function(followsnapshot) {
 
 		// iterate all the elements :((
 		followsnapshot.forEach(function(ss) {
 
-			var compareId = ss.key();
+			var compareId = ss.child("compare_id").val();
 
-			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.key());
+			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + compareId);
 
 			refCompare.once("value", function(snapshot) {
 
@@ -236,15 +233,15 @@ function populatePopular() {
 
 	var table = $("#container2");
 
-	var refCompares = new Firebase("https://infernonero.firebaseio.com/compares");
+	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/simplelogin:53");
 	refCompares.limitToLast(100).on("value", function(followsnapshot) {
 
 		// iterate all the elements :((
 		followsnapshot.forEach(function(ss) {
 
-			var compareId = ss.key();
+			var compareId = ss.child("compare_id").val();
 
-			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.key());
+			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + compareId);
 
 			refCompare.once("value", function(snapshot) {
 

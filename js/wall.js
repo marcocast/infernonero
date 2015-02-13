@@ -67,11 +67,8 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 
 	var article = "";
 	article += "<a href='" + link + "' >";
-	if (img === "") {
-		article += "<div class='item w3'>";
-	} else {
-		article += "<div class='item w4'>";
-	}
+
+	article += "<div class='item w4'>";
 
 	article += "<p>";
 	if (img != "") {
@@ -84,7 +81,7 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 	}
 
 	article += "<p>";
-	article += "<h2 style=''><a href='" + link + "' >";
+	article += "<h2 ><a href='" + link + "' >";
 	article += title;
 	article += "</a></h2>";
 	article += "</p>";
@@ -128,22 +125,19 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 function createArticlePerUsers(img, title, link, text1, text2, txtusername, fullDate, vote1, vote2, userlink) {
 
 	var article = "";
-	if (img === "") {
-		article += "<div class='item'>";
-	} else {
-		article += "<div class='item'>";
-	}
+
+	article += "<div class='item w3'>";
 
 	if (img != "") {
 		article += "<p>";
 		article += "<a href='" + link + "' >";
-		article += "<div style='position:relative;float: right;margin: 0px 15px 15px 0px;'>";
+		article += "<div style='position:relative;float: left;margin: 0px 15px 15px 0px;'>";
 		article += img;
 		article += "</div> </a>";
 		article += "<p>";
 	}
 
-	article += "<h4 class='' style=''><a href='" + link + "' >";
+	article += "<h4 ><a href='" + link + "' >";
 	article += title;
 	article += "</a></h4>";
 	article += "</p>";
@@ -304,7 +298,7 @@ function populateTableByUser() {
 
 function populateTableByUserId(useridhash) {
 
-	var table = $("#container1");
+	var table = $("#container3");
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/" + useridhash);
 	// Attach an asynchronous callback to read the data at our posts reference
@@ -411,22 +405,25 @@ function populatePopular() {
 
 	var table = $("#container2");
 
-	var refCompares = new Firebase("https://infernonero.firebaseio.com/compares");
-	refCompares.limitToLast(100).on("value", function(followsnapshot) {
+	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/simplelogin:53");
+	// Attach an asynchronous callback to read the data at our posts reference
+	refCompares.on("value", function(snapshot) {
 
 		// iterate all the elements :((
-		followsnapshot.forEach(function(ss) {
+		snapshot.forEach(function(ss) {
 
-			var compareId = ss.key();
+			var userComparesId = ss.key();
 
-			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + ss.key());
+			var compareId = ss.child("compare_id").val();
+
+			var refCompare = new Firebase("https://infernonero.firebaseio.com/compares/" + compareId);
 
 			refCompare.once("value", function(snapshot) {
 
 				var title = snapshot.child("txt_title").val();
 				var txt_secret = snapshot.child("txt_secret").val();
+				var user_id = snapshot.child("user_id").val();
 				var published = snapshot.child("published").val();
-
 				if (published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
@@ -436,64 +433,65 @@ function populatePopular() {
 						var voteone = snapshotvotes.child("vote_one").val();
 						var votetwo = snapshotvotes.child("vote_two").val();
 
-						if (parseInt(voteone) > 20 || parseInt(votetwo) > 20) {
+						var postsRefImages = ref.child("compares-images").child(compareId);
 
-							var postsRefImages = ref.child("compares-images").child(compareId);
+						postsRefImages.once("value", function(snapshotimages) {
+							var dateOfCompare = new Date(snapshot.child("date").val());
 
-							postsRefImages.once("value", function(snapshotimages) {
-								var dateOfCompare = new Date(snapshot.child("date").val());
+							var fullTitle = snapshot.child("txt_title").val();
+							var txt_one = snapshot.child("txt_one").val();
+							var txt_two = snapshot.child("txt_two").val();
+							var txt_username = snapshot.child("txt_username").val();
+							if (txt_username === null) {
+								txt_username = "";
+							} else {
+								$("#username").text(txt_username);
+							}
+							var img_one = "";
+							var img_two = "";
 
-								var fullTitle = snapshot.child("txt_title").val();
-								var txt_one = snapshot.child("txt_one").val();
-								var txt_two = snapshot.child("txt_two").val();
-								var txt_username = snapshot.child("txt_username").val();
-								if (txt_username === null) {
-									txt_username = "";
+							var payloadOne = snapshotimages.child("file_one").val();
+
+							if (payloadOne !== null && payloadOne !== "") {
+								var img = new Image();
+								img.src = payloadOne;
+								img_one = "<img src='" + payloadOne + "' height='120' width='120'>";
+							} else {
+								if (txt_one.indexOf("www.youtube") > -1) {
+									img_one = "<img src='images/youtube.png' height='120' width='120'>";
+								} else if (txt_one.indexOf("www.ebay") > -1) {
+									img_one = "<img src='images/ebay.png' height='120' width='120'>";
+								} else if (txt_one.indexOf("www.amazon") > -1) {
+									img_one = "<img src='images/amazon.png' height='120' width='120'>";
 								}
-								var img_one = "";
-								var img_two = "";
+							}
 
-								var payloadOne = snapshotimages.child("file_one").val();
+							var payloadTwo = snapshotimages.child("file_two").val();
 
-								if (payloadOne !== null && payloadOne !== "") {
-									var img = new Image();
-									img.src = payloadOne;
-									img_one = "<img src='" + payloadOne + "' height='80' width='80'>";
-								} else {
-									if (txt_one.indexOf("www.youtube") > -1) {
-										img_one = "<img src='images/youtube.png' height='80' width='80'>";
-									} else if (txt_one.indexOf("www.ebay") > -1) {
-										img_one = "<img src='images/ebay.png' height='80' width='80'>";
-									} else if (txt_one.indexOf("www.amazon") > -1) {
-										img_one = "<img src='images/amazon.png' height='80' width='80'>";
-									}
+							if (payloadOne !== null && payloadOne !== "") {
+								var img = new Image();
+								img.src = payloadTwo;
+								img_two = "<img src='" + payloadTwo + "' height='120' width='120'>";
+							} else {
+								if (img_two.indexOf("www.youtube") > -1) {
+									img_two = "<img src='images/youtube.png' height='120' width='120'>";
+								} else if (img_two.indexOf("www.ebay") > -1) {
+									img_two = "<img src='images/ebay.png' height='120' width='120'>";
+								} else if (img_two.indexOf("www.amazon") > -1) {
+									img_two = "<img src='images/amazon.png' height='120' width='120'>";
 								}
+							}
 
-								var payloadTwo = snapshotimages.child("file_two").val();
+							var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
 
-								if (payloadOne !== null && payloadOne !== "") {
-									var img = new Image();
-									img.src = payloadTwo;
-									img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
-								} else {
-									if (img_two.indexOf("www.youtube") > -1) {
-										img_two = "<img src='images/youtube.png' height='80' width='80'>";
-									} else if (img_two.indexOf("www.ebay") > -1) {
-										img_two = "<img src='images/ebay.png' height='80' width='80'>";
-									} else if (img_two.indexOf("www.amazon") > -1) {
-										img_two = "<img src='images/amazon.png' height='80' width='80'>";
-									}
-								}
+							var newDiv = createArticlePopular(img_one + img_two, title, "vote.html#" + ss.key(), txt_one, txt_two, txt_username, fullDate, voteone, votetwo);
 
-								var fullDate = dateOfCompare.getDate() + "/" + (parseInt(dateOfCompare.getMonth()) + parseInt(1)) + "/" + dateOfCompare.getFullYear();
+							table.prepend(newDiv).masonry('appended', newDiv);
+						});
 
-								var newDiv = createArticlePopular(img_one + img_two, title, "vote.html#" + ss.key(), txt_one, txt_two, txt_username, fullDate, voteone, votetwo);
-
-								table.prepend(newDiv).masonry('appended', newDiv).fadeIn();
-							});
-						}
 					}, function(errorObject) {
 					});
+
 				}
 
 			}, function(errorObject) {
