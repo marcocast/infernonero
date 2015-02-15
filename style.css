@@ -5888,7 +5888,7 @@ img {
 /* =Header
 -------------------------------------------------------------- */
 header {
-  background: url(images/header_Background.png);
+  background-color: #ffffff;
   border-bottom: solid 1px #cccccc;
 }
 header .container {
