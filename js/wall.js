@@ -66,43 +66,40 @@ function createArticlePopular(img, title, link, text1, text2, txtusername, fullD
 function createArticle(img, title, link, text1, text2, txtusername, fullDate, vote1, vote2, userlink) {
 
 	var article = "";
-	article += "<a href='" + link + "' >";
-
 	article += "<div class='item w4'>";
-
+	article += "<div class='wallleft'>";
+	article += "<a href='" + link + "' >";
+	article += img;
+	article += "</a>";
+	article += "</div>";
+	article += "<div class='wallright'>";
 	article += "<p>";
-	if (img != "") {
-
-		article += "<a href='" + link + "' >";
-		article += "<div style='position:relative;float: left;margin: 0px 15px 15px 0px;'>";
-		article += img;
-		article += "</div> </a>";
-
-	}
-
-	article += "<p>";
-	article += "<h2 ><a href='" + link + "' >";
+	article += "<a href='" + link + "' >";
+	article += "<b>";
 	article += title;
-	article += "</a></h2>";
+	article += "</b>";
+	article += "</a>";
 	article += "</p>";
+
 	if (text1 != "") {
 		article += "<p>";
 		article += text1;
 		article += "</p>";
+
 	}
 	if (text2 != "") {
 		article += "<p>";
 		article += text2;
 		article += "</p>";
+
 	}
-	article += "<p style='position:relative;float: right;'>";
+	article += "<p>";
 	if (txtusername != "") {
 		article += "<span><i class='fa fa-user'></i> </span>";
 		article += "<a  href='" + userlink + "'  >";
 		article += txtusername;
 		article += "</a>";
 	}
-
 	article += " <span ><i class='fa fa-clock-o'></i> </span><span>";
 	article += fullDate;
 	article += "</span>";
@@ -112,65 +109,8 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 	article += " - ";
 	article += vote2;
 	article += "</span> votes";
-	article += "</p>";
-	article += "<br style='clear: both;' />";
 	article += "</p>";
 	article += "</div>";
-	article += "</a>";
-
-	return article;
-
-}
-
-function createArticlePerUsers(img, title, link, text1, text2, txtusername, fullDate, vote1, vote2, userlink) {
-
-	var article = "";
-
-	article += "<div class='item w3'>";
-
-	if (img != "") {
-		article += "<p>";
-		article += "<a href='" + link + "' >";
-		article += "<div style='position:relative;float: left;margin: 0px 15px 15px 0px;'>";
-		article += img;
-		article += "</div> </a>";
-		article += "<p>";
-	}
-
-	article += "<h4 ><a href='" + link + "' >";
-	article += title;
-	article += "</a></h4>";
-	article += "</p>";
-	if (text1 != "") {
-		article += "<p>";
-		article += text1;
-		article += "</p>";
-	}
-	if (text2 != "") {
-		article += "<p>";
-		article += text2;
-		article += "</p>";
-	}
-	article += "<p style='position:relative;float: right;'>";
-	if (txtusername != "") {
-		article += "<span><i class='fa fa-user'></i> </span>";
-		article += "<a  href='" + userlink + "'  >";
-		article += txtusername;
-		article += "</a>";
-	}
-
-	article += " <span ><i class='fa fa-clock-o'></i> </span><span>";
-	article += fullDate;
-	article += "</span>";
-
-	article += " <span ><i class='fa fa-thumbs-o-up'></i> </span> <span >";
-	article += vote1;
-	article += " - ";
-	article += vote2;
-	article += "</span> votes";
-	article += "</p>";
-	article += "<br style='clear: both;' />";
-	article += "</p>";
 	article += "</div>";
 
 	return article;
@@ -399,7 +339,7 @@ function populateTableByUserId(useridhash) {
 							var userlink = "userwall.html#" + useridhash;
 							var choozzelink = "vote.html#" + compareId;
 
-							var newDiv = createArticlePerUsers(img_one + img_two, title, choozzelink, txt_one, txt_two, txt_username, fullDate, voteone, votetwo, userlink);
+							var newDiv = createArticle(img_one + img_two, title, choozzelink, txt_one, txt_two, txt_username, fullDate, voteone, votetwo, userlink);
 
 							table.prepend(newDiv).masonry('appended', newDiv).fadeIn();
 						});

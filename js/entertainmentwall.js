@@ -69,39 +69,39 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 
 	var article = "";
 	article += "<div class='item w4'>";
-
+	article += "<div class='wallleft'>";
+	article += "<a href='" + link + "' >";
+	article += img;
+	article += "</a>";
+	article += "</div>";
+	article += "<div class='wallright'>";
 	article += "<p>";
-	if (img != "") {
-
-		article += "<a href='" + link + "' >";
-		article += "<div style='position:relative;float: left;margin: 0px 15px 15px 0px;'>";
-		article += img;
-		article += "</div> </a>";
-
-	}
-	article += "<p>";
-	article += "<h2 style=''><a href='" + link + "' >";
+	article += "<a href='" + link + "' >";
+	article += "<b>";
 	article += title;
-	article += "</a></h2>";
+	article += "</b>";
+	article += "</a>";
 	article += "</p>";
+
 	if (text1 != "") {
 		article += "<p>";
 		article += text1;
 		article += "</p>";
+
 	}
 	if (text2 != "") {
 		article += "<p>";
 		article += text2;
 		article += "</p>";
+
 	}
-	article += "<p style='position:relative;float: right;'>";
+	article += "<p>";
 	if (txtusername != "") {
 		article += "<span><i class='fa fa-user'></i> </span>";
 		article += "<a  href='" + userlink + "'  >";
 		article += txtusername;
 		article += "</a>";
 	}
-
 	article += " <span ><i class='fa fa-clock-o'></i> </span><span>";
 	article += fullDate;
 	article += "</span>";
@@ -112,8 +112,7 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 	article += vote2;
 	article += "</span> votes";
 	article += "</p>";
-	article += "<br style='clear: both;' />";
-	article += "</p>";
+	article += "</div>";
 	article += "</div>";
 
 	return article;

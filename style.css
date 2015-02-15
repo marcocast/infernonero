@@ -6191,10 +6191,25 @@ header .container {
 .item { width: 25%; }
 .item.w2 { width: 50%; }
 .item.w3 { width: 75%; }
-.item.w4 { width: 90%; }
+.item.w4 { width: 100%; }
 
 
+.wallleft {
+  float: left;
+  display: inline;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
+.wallright {
+  float: left;
+  text-align: left;
+  display: inline;
+  margin: 2px 10px;
+  word-wrap: break-word;
+}
 
 
 /* =Slider and Large Photo headers
