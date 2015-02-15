@@ -226,14 +226,18 @@ function populateTable() {
 								if (payloadOne !== null && payloadOne !== "") {
 									var img = new Image();
 									img.src = payloadOne;
-									img_one = "<img src='" + payloadOne + "' height='120' width='120'>";
+									img_one = "<img src='" + payloadOne + "' height='80' width='80'>";
 								} else {
 									if (txt_one.indexOf("www.youtube") > -1) {
-										img_one = "<img src='images/youtube.png' height='120' width='120'>";
+										img_one = "<img src='images/youtube.png' height='80' width='80' >";
 									} else if (txt_one.indexOf("www.ebay") > -1) {
-										img_one = "<img src='images/ebay.png' height='120' width='120'>";
+										img_one = "<img src='images/ebay.png' height='80' width='80' >";
 									} else if (txt_one.indexOf("www.amazon") > -1) {
-										img_one = "Collignon<img src='images/amazon.png' height='120' width='120'>";
+										img_one = "Collignon<img src='images/amazon.png' height='80' width='80' >";
+									} else if (txt_one.indexOf("www.") > -1 || txt_one.indexOf("http:") > -1 || txt_one.indexOf("https:") > -1) {
+										img_one = "<img src='images/link.png' height='80' width='80' >";
+									} else {
+										img_one = "<img src='images/abc.png' height='80' width='80' >";
 									}
 								}
 
@@ -242,14 +246,18 @@ function populateTable() {
 								if (payloadOne !== null && payloadOne !== "") {
 									var img = new Image();
 									img.src = payloadTwo;
-									img_two = "<img src='" + payloadTwo + "' height='120' width='120'>";
+									img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
 								} else {
-									if (img_two.indexOf("www.youtube") > -1) {
-										img_two = "<img src='images/youtube.png' height='120' width='120'>";
-									} else if (img_two.indexOf("www.ebay") > -1) {
-										img_two = "<img src='images/ebay.png' height='120' width='120'>";
-									} else if (img_two.indexOf("www.amazon") > -1) {
-										img_two = "<img src='images/amazon.png' height='120' width='120'>";
+									if (txt_two.indexOf("youtube.com") > -1) {
+										img_two = "<img src='images/youtube.png' height='80' width='80' >";
+									} else if (txt_two.indexOf("www.ebay") > -1) {
+										img_two = "<img src='images/ebay.png' height='80' width='80' >";
+									} else if (txt_two.indexOf("www.amazon") > -1) {
+										img_two = "<img src='images/amazon.png' height='80' width='80' >";
+									} else if (txt_two.indexOf("www.") > -1 || txt_two.indexOf("http:") > -1 || txt_two.indexOf("https:") > -1) {
+										img_two = "<img src='images/link.png' height='80' width='80' >";
+									} else {
+										img_two = "<img src='images/abc.png' height='80' width='80' >";
 									}
 								}
 								var voteone = snapshotvotes.child("vote_one").val();
@@ -351,14 +359,18 @@ function populateTableByUserId(useridhash) {
 							if (payloadOne !== null && payloadOne !== "") {
 								var img = new Image();
 								img.src = payloadOne;
-								img_one = "<img src='" + payloadOne + "' height='60' width='60'>";
+								img_one = "<img src='" + payloadOne + "' height='80' width='80'>";
 							} else {
 								if (txt_one.indexOf("www.youtube") > -1) {
-									img_one = "<img src='images/youtube.png' height='60' width='60'>";
+									img_one = "<img src='images/youtube.png' height='80' width='80' >";
 								} else if (txt_one.indexOf("www.ebay") > -1) {
-									img_one = "<img src='images/ebay.png' height='60' width='60'>";
+									img_one = "<img src='images/ebay.png' height='80' width='80' >";
 								} else if (txt_one.indexOf("www.amazon") > -1) {
-									img_one = "<img src='images/amazon.png' height='60' width='60'>";
+									img_one = "<img src='images/amazon.png' height='80' width='80' >";
+								} else if (txt_one.indexOf("www.") > -1 || txt_one.indexOf("http:") > -1 || txt_one.indexOf("https:") > -1) {
+									img_one = "<img src='images/link.png' height='80' width='80'  >";
+								} else {
+									img_one = "<img src='images/abc.png' height='80' width='80' >";
 								}
 							}
 
@@ -367,14 +379,18 @@ function populateTableByUserId(useridhash) {
 							if (payloadOne !== null && payloadOne !== "") {
 								var img = new Image();
 								img.src = payloadTwo;
-								img_two = "<img src='" + payloadTwo + "' height='60' width='60'>";
+								img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
 							} else {
-								if (img_two.indexOf("www.youtube") > -1) {
-									img_two = "<img src='images/youtube.png' height='60' width='60'>";
-								} else if (img_two.indexOf("www.ebay") > -1) {
-									img_two = "<img src='images/ebay.png' height='60' width='60'>";
-								} else if (img_two.indexOf("www.amazon") > -1) {
-									img_two = "<img src='images/amazon.png' height='60' width='60'>";
+								if (txt_two.indexOf("www.youtube") > -1) {
+									img_two = "<img src='images/youtube.png' height='80' width='80' >";
+								} else if (txt_two.indexOf("www.ebay") > -1) {
+									img_two = "<img src='images/ebay.png' height='80' width='80' >";
+								} else if (txt_two.indexOf("www.amazon") > -1) {
+									img_two = "<img src='images/amazon.png' height='80' width='80' >";
+								} else if (txt_two.indexOf("www.") > -1 || txt_two.indexOf("http:") > -1 || txt_two.indexOf("https:") > -1) {
+									img_two = "<img src='images/link.png' height='80' width='80' >";
+								} else {
+									img_two = "<img src='images/abc.png' height='80' width='80' >";
 								}
 							}
 
@@ -457,14 +473,18 @@ function populatePopular() {
 								if (payloadOne !== null && payloadOne !== "") {
 									var img = new Image();
 									img.src = payloadOne;
-									img_one = "<img src='" + payloadOne + "' height='120' width='120'>";
+									img_one = "<img src='" + payloadOne + "' height='80' width='80'>";
 								} else {
 									if (txt_one.indexOf("www.youtube") > -1) {
-										img_one = "<img src='images/youtube.png' height='120' width='120'>";
+										img_one = "<img src='images/youtube.png' height='80' width='80' >";
 									} else if (txt_one.indexOf("www.ebay") > -1) {
-										img_one = "<img src='images/ebay.png' height='120' width='120'>";
+										img_one = "<img src='images/ebay.png' height='80' width='80' >";
 									} else if (txt_one.indexOf("www.amazon") > -1) {
-										img_one = "<img src='images/amazon.png' height='120' width='120'>";
+										img_one = "<img src='images/amazon.png' height='80' width='80' >";
+									} else if (txt_one.indexOf("www.") > -1 || txt_one.indexOf("http:") > -1 || txt_one.indexOf("https:") > -1) {
+										img_one = "<img src='images/link.png' height='80' width='80' >";
+									} else {
+										img_one = "<img src='images/abc.png' height='80' width='80' >";
 									}
 								}
 
@@ -473,14 +493,18 @@ function populatePopular() {
 								if (payloadOne !== null && payloadOne !== "") {
 									var img = new Image();
 									img.src = payloadTwo;
-									img_two = "<img src='" + payloadTwo + "' height='120' width='120'>";
+									img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
 								} else {
-									if (img_two.indexOf("www.youtube") > -1) {
-										img_two = "<img src='images/youtube.png' height='120' width='120'>";
-									} else if (img_two.indexOf("www.ebay") > -1) {
-										img_two = "<img src='images/ebay.png' height='120' width='120'>";
-									} else if (img_two.indexOf("www.amazon") > -1) {
-										img_two = "<img src='images/amazon.png' height='120' width='120'>";
+									if (txt_two.indexOf("www.youtube") > -1) {
+										img_two = "<img src='images/youtube.png' height='80' width='80' >";
+									} else if (txt_two.indexOf("www.ebay") > -1) {
+										img_two = "<img src='images/ebay.png' height='80' width='80' >";
+									} else if (txt_two.indexOf("www.amazon") > -1) {
+										img_two = "<img src='images/amazon.png' height='80' width='80' >";
+									} else if (txt_two.indexOf("www.") > -1 || txt_two.indexOf("http:") > -1 || txt_two.indexOf("https:") > -1) {
+										img_two = "<img src='images/link.png' height='80' width='80' >";
+									} else {
+										img_two = "<img src='images/abc.png' height='80' width='80' >";
 									}
 								}
 

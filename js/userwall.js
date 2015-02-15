@@ -51,12 +51,12 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 	}
 	article += "<p>";
 	if (img != "") {
-		
+
 		article += "<a href='" + link + "' >";
 		article += "<div style='position:relative;float: left;margin: 0px 15px 15px 0px;'>";
 		article += img;
 		article += "</div> </a>";
-		
+
 	}
 	article += "<p>";
 
@@ -122,8 +122,8 @@ function populateTable() {
 				var title = snapshot.child("txt_title").val();
 				var txt_secret = snapshot.child("txt_secret").val();
 				var user_id = snapshot.child("user_id").val();
-				var published = snapshot.child("published").val();	
-				if (published === null || published != true ||title === null || (txt_secret != null && txt_secret != "")) {
+				var published = snapshot.child("published").val();
+				if (published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);
@@ -154,14 +154,18 @@ function populateTable() {
 							if (payloadOne !== null && payloadOne !== "") {
 								var img = new Image();
 								img.src = payloadOne;
-								img_one = "<img src='" + payloadOne + "' height='120' width='120'>";
+								img_one = "<img src='" + payloadOne + "' height='80' width='80'>";
 							} else {
 								if (txt_one.indexOf("www.youtube") > -1) {
-									img_one = "<img src='images/youtube.png' height='120' width='120'>";
+									img_one = "<img src='images/youtube.png' height='80' width='80'>";
 								} else if (txt_one.indexOf("www.ebay") > -1) {
-									img_one = "<img src='images/ebay.png' height='120' width='120'>";
+									img_one = "<img src='images/ebay.png' height='80' width='80'>";
 								} else if (txt_one.indexOf("www.amazon") > -1) {
-									img_one = "<img src='images/amazon.png' height='120' width='120'>";
+									img_one = "<img src='images/amazon.png' height='80' width='80'>";
+								} else if (txt_one.indexOf("www.") > -1 || txt_one.indexOf("http:") > -1 || txt_one.indexOf("https:") > -1) {
+									img_one = "<img src='images/link.png' height='80' width='80' >";
+								} else {
+									img_one = "<img src='images/abc.png' height='80' width='80' >";
 								}
 							}
 
@@ -170,14 +174,18 @@ function populateTable() {
 							if (payloadOne !== null && payloadOne !== "") {
 								var img = new Image();
 								img.src = payloadTwo;
-								img_two = "<img src='" + payloadTwo + "' height='120' width='120'>";
+								img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
 							} else {
-								if (img_two.indexOf("www.youtube") > -1) {
-									img_two = "<img src='images/youtube.png' height='120' width='120'>";
-								} else if (img_two.indexOf("www.ebay") > -1) {
-									img_two = "<img src='images/ebay.png' height='120' width='120'>";
-								} else if (img_two.indexOf("www.amazon") > -1) {
-									img_two = "<img src='images/amazon.png' height='120' width='120'>";
+								if (txt_two.indexOf("www.youtube") > -1) {
+									img_two = "<img src='images/youtube.png' height='80' width='80'>";
+								} else if (txt_two.indexOf("www.ebay") > -1) {
+									img_two = "<img src='images/ebay.png' height='80' width='80'>";
+								} else if (txt_two.indexOf("www.amazon") > -1) {
+									img_two = "<img src='images/amazon.png' height='80' width='80'>";
+								} else if (txt_two.indexOf("www.") > -1 || txt_two.indexOf("http:") > -1 || txt_two.indexOf("https:") > -1) {
+									img_two = "<img src='images/link.png' height='80' width='80' >";
+								} else {
+									img_two = "<img src='images/abc.png' height='80' width='80' >";
 								}
 							}
 

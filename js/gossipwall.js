@@ -187,6 +187,10 @@ function populateTable() {
 										img_one = "<img src='images/ebay.png' height='80' width='80'>";
 									} else if (txt_one.indexOf("www.amazon") > -1) {
 										img_one = "<img src='images/amazon.png' height='80' width='80'>";
+									} else if (txt_one.indexOf("www.") > -1 || txt_one.indexOf("http:") > -1 || txt_one.indexOf("https:") > -1) {
+										img_one = "<img src='images/link.png' height='80' width='80' >";
+									} else {
+										img_one = "<img src='images/abc.png' height='80' width='80' >";
 									}
 								}
 
@@ -197,12 +201,16 @@ function populateTable() {
 									img.src = payloadTwo;
 									img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
 								} else {
-									if (img_two.indexOf("www.youtube") > -1) {
+									if (txt_two.indexOf("www.youtube") > -1) {
 										img_two = "<img src='images/youtube.png' height='80' width='80'>";
-									} else if (img_two.indexOf("www.ebay") > -1) {
+									} else if (txt_two.indexOf("www.ebay") > -1) {
 										img_two = "<img src='images/ebay.png' height='80' width='80'>";
-									} else if (img_two.indexOf("www.amazon") > -1) {
+									} else if (txt_two.indexOf("www.amazon") > -1) {
 										img_two = "<img src='images/amazon.png' height='80' width='80'>";
+									} else if (txt_two.indexOf("www.") > -1 || txt_two.indexOf("http:") > -1 || txt_two.indexOf("https:") > -1) {
+										img_two = "<img src='images/link.png' height='80' width='80' >";
+									} else {
+										img_two = "<img src='images/abc.png' height='80' width='80' >";
 									}
 								}
 
@@ -294,6 +302,10 @@ function populatePopular() {
 										img_one = "<img src='images/ebay.png' height='80' width='80'>";
 									} else if (txt_one.indexOf("www.amazon") > -1) {
 										img_one = "<img src='images/amazon.png' height='80' width='80'>";
+									} else if (txt_one.indexOf("www.") > -1 || txt_one.indexOf("http:") > -1 || txt_one.indexOf("https:") > -1) {
+										img_one = "<img src='images/link.png' height='80' width='80' >";
+									} else {
+										img_one = "<img src='images/abc.png' height='80' width='80' >";
 									}
 								}
 
@@ -304,12 +316,16 @@ function populatePopular() {
 									img.src = payloadTwo;
 									img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
 								} else {
-									if (img_two.indexOf("www.youtube") > -1) {
+									if (txt_two.indexOf("www.youtube") > -1) {
 										img_two = "<img src='images/youtube.png' height='80' width='80'>";
-									} else if (img_two.indexOf("www.ebay") > -1) {
+									} else if (txt_two.indexOf("www.ebay") > -1) {
 										img_two = "<img src='images/ebay.png' height='80' width='80'>";
-									} else if (img_two.indexOf("www.amazon") > -1) {
+									} else if (txt_two.indexOf("www.amazon") > -1) {
 										img_two = "<img src='images/amazon.png' height='80' width='80'>";
+									} else if (txt_two.indexOf("www.") > -1 || txt_two.indexOf("http:") > -1 || txt_two.indexOf("https:") > -1) {
+										img_two = "<img src='images/link.png' height='80' width='80' >";
+									} else {
+										img_two = "<img src='images/abc.png' height='80' width='80' >";
 									}
 								}
 
