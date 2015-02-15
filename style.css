@@ -2078,16 +2078,16 @@ fieldset[disabled] .btn-default.active {
 .btn-primary {
   color: #ffffff;
   background-color: #428bca;
-  border-color: #357ebd;
+  border-color: #428bca;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  color: #dd5738;
-  background-color: transparent;
-  border-color: transparent;
+  color: #ffffff;
+  background-color: #357ebd;
+  border-color: #428bca;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3047,7 +3047,7 @@ input[type="button"].btn-block {
   clear: both;
   font-weight: normal;
   line-height: 1.42857143;
-  color: #333333;
+  color: #dd5738;
   white-space: nowrap;
 }
 .dropdown-menu > li > a:hover,
