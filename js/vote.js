@@ -118,12 +118,19 @@ $(document).ready(function() {
 			if (txt_two != null) {
 				$('#two_box').html(txt_two);
 			}
+			
+			var userlink = "#";
+			var user_id = snap.child("user_id").val();
+			if (user_id != null) {
+				userlink = "https://www.choozzy.com/userwall.html#" + user_id;
+
+			}
 
 			var txt_title = snap.child("txt_title").val();
 			if (txt_title != null) {
 				var txt_username = snap.child("txt_username").val();
 				if (txt_username != null) {
-					txt_title = txt_title + " <small> by " + txt_username + "</small>";
+					txt_title = txt_title + " <small><a href='"+userlink+"'> by " + txt_username + "</a></small>";
 				}
 				$('#txt_title').html(txt_title);
 			}
