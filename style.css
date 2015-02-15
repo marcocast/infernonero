@@ -2032,24 +2032,27 @@ fieldset[disabled] .btn {
   box-shadow: none;
 }
 .btn-default {
-  color: #333333;
-  background-color: #ffffff;
-  border-color: #cccccc;
+  color: #4fb8a1;
+  background-color: transparent;
+  border-color: transparent;
 }
 .btn-default:hover,
 .btn-default:focus,
 .btn-default:active,
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
-  color: #333333;
-  background-color: #ebebeb;
-  border-color: #adadad;
+  color: #dd5738;
+  background-color: transparent;
+  border-color: transparent;
 }
 .btn-default:active,
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
   background-image: none;
+  background-color: transparent;
+  border-color: transparent;
 }
+
 .btn-default.disabled,
 .btn-default[disabled],
 fieldset[disabled] .btn-default,
@@ -2065,8 +2068,8 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-  background-color: #ffffff;
-  border-color: #cccccc;
+  background-color: transparent;
+  border-color: transparent;
 }
 .btn-default .badge {
   color: #ffffff;
@@ -2082,14 +2085,16 @@ fieldset[disabled] .btn-default.active {
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  color: #ffffff;
-  background-color: #3276b1;
-  border-color: #285e8e;
+  color: #dd5738;
+  background-color: transparent;
+  border-color: transparent;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   background-image: none;
+  background-color: transparent;
+  border-color: transparent;
 }
 .btn-primary.disabled,
 .btn-primary[disabled],
@@ -2123,7 +2128,7 @@ fieldset[disabled] .btn-primary.active {
 .btn-success:active,
 .btn-success.active,
 .open .dropdown-toggle.btn-success {
-  color: #ffffff;
+  color: #dd5738;
   background-color: #47a447;
   border-color: #398439;
 }
@@ -6094,6 +6099,8 @@ header .container {
   height: 50px;
   line-height: 40px;
   padding-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
 }
 #sign i {
   font-size: 18px;
@@ -6105,6 +6112,7 @@ header .container {
 #sign a {
   color: #4fb8a1;
 }
+
 #logout {
   position: absolute;
   top: 7px;
@@ -6119,7 +6127,7 @@ header .container {
   font-size: 18px;
   padding: 0 6px;
   display: inline-block;
-  color: #777777;
+  color: #4fb8a1;
 }
 
 #username {
