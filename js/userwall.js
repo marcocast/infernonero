@@ -211,11 +211,9 @@ $(document).ready(function() {
 
 		followUsersRef.child(authData.uid).child(useridhash).once("value", function(snap) {
 			if (snap.child("user_id").val() === null) {
-				$('#unfollow').hide();
-				$('#follow').show();
+				$('#follow').removeClass("hidden");
 			} else {
-				$('#follow').hide();
-				$('#unfollow').show();
+				$('#unfollow').removeClass("hidden");
 			}
 		});
 
@@ -247,8 +245,8 @@ $(document).ready(function() {
 					});
 				} else {
 
-					$('#follow').hide();
-					$('#unfollow').show();
+					$('#follow').addClass("hidden");
+					$('#unfollow').removeClass("hidden");
 					following = true;
 					$.growl("User followed", {
 						type : "success",
@@ -270,8 +268,8 @@ $(document).ready(function() {
 
 			followUsersRef.child(authData.uid).child(useridhash).remove();
 
-			$('#follow').show();
-			$('#unfollow').hide();
+			$('#unfollow').addClass("hidden");
+			$('#follow').removeClass("hidden");
 			following = false;
 			$.growl("User unfollowed", {
 				type : "success",
