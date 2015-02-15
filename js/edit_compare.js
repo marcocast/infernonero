@@ -149,6 +149,10 @@ $(document).ready(function() {
 	var image2Exists = false;
 
 	setUserName();
+	
+	if(authData.uid === "simplelogin:53"){
+		$('#tags-row').removeClass("hidden");	
+	}
 
 	$('#edit_submit_btn').hide();
 	$('#remove_submit_btn').hide();

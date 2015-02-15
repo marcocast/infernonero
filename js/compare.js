@@ -120,6 +120,11 @@ var halfSize = function(i) {
 $(document).ready(function() {
 
 	setUserName();
+	
+	if(authData.uid === "simplelogin:53"){
+		$('#tags-row').removeClass("hidden");	
+	}
+		
 
 	var te = document.querySelector('textarea');
 	te.addEventListener('keydown', resizeTextarea);
