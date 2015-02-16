@@ -41,7 +41,7 @@ ref.onAuth(function(authData) {
 
 });
 
-function createArticle(img, title, link, text1, text2, txtusername, fullDate, vote1, vote2, userlink) {
+function createArticle(img, title, link, text1, text2, txtusername, fullDate, vote1, vote2) {
 
 	var article = "";
 	article += "<div class='item w4'>";
@@ -74,7 +74,7 @@ function createArticle(img, title, link, text1, text2, txtusername, fullDate, vo
 	article += "<p>";
 	if (txtusername != "") {
 		article += "<span><i class='fa fa-user'></i> </span>";
-		article += "<a  href='" + userlink + "'  >";
+		article += "<a  href='#'  >";
 		article += txtusername;
 		article += "</a>";
 	}
