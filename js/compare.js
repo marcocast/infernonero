@@ -631,11 +631,12 @@ $(document).ready(function() {
 		}
 
 		var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
+		var urlToSharePhp = "http://www.yarenty.com/choozzy/vote.php?q=" +postID;
 
 		stWidget.addEntry({
 			"service" : "facebook",
 			"element" : document.getElementById('share_facebook_button'),
-			"url" : urlToShare,
+			"url" : urlToSharePhp,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -646,7 +647,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "twitter",
 			"element" : document.getElementById('share_twitter_button'),
-			"url" : urlToShare,
+			"url" : urlToSharePhp,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -657,7 +658,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "linkedin",
 			"element" : document.getElementById('share_linkedin_button'),
-			"url" : urlToShare,
+			"url" : urlToSharePhp,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -669,7 +670,7 @@ $(document).ready(function() {
 			"service" : "whatsapp",
 			"element" : document.getElementById('share_whatsapp_button'),
 			"url" : urlToShare,
-			"title" : txt_title,
+			"title" : urlToSharePhp,
 			"type" : "large",
 			"text" : txt_title,
 			"image" : "https://www.choozzy.com/images/restart_logo.png",
@@ -679,7 +680,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "email",
 			"element" : document.getElementById('share_email_button'),
-			"url" : urlToShare,
+			"url" : urlToSharePhp,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -690,7 +691,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "googleplus",
 			"element" : document.getElementById('share_googleplus_button'),
-			"url" : urlToShare,
+			"url" : urlToSharePhp,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -701,7 +702,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "pinterest",
 			"element" : document.getElementById('share_pinterest_button'),
-			"url" : urlToShare,
+			"url" : urlToSharePhp,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -712,7 +713,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "reddit",
 			"element" : document.getElementById('share_reddit_button'),
-			"url" : urlToShare,
+			"url" : urlToSharePhp,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
