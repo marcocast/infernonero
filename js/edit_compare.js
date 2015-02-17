@@ -608,7 +608,7 @@ $(document).ready(function() {
 					var postID = snap.child("compare_id").val();
 
 					var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
-					var urlToSharePhp = "http://www.yarenty.com/choozzy/vote.php?q=" +postID;
+					var urlToSharePhp = "http://choozzy.yarenty.com/vote.php?q=" +postID;
 
 					stWidget.addEntry({
 						"service" : "facebook",
