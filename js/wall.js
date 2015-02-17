@@ -25,7 +25,7 @@ ref.onAuth(function(authData) {
 		$('#manage').show();
 
 	} else {
-		
+
 		window.location.href = "/index.html";
 		console.log("User is logged out");
 		$('#logout').hide();
@@ -160,47 +160,58 @@ function populateTable() {
 								if (txt_username === null) {
 									txt_username = "";
 								}
+								var img_mix = "";
 								var img_one = "";
 								var img_two = "";
 
-								var payloadOne = snapshotimages.child("file_one").val();
-
-								if (payloadOne !== null && payloadOne !== "") {
-									var img = new Image();
-									img.src = payloadOne;
-									img_one = "<img src='" + payloadOne + "' height='80' width='80'>";
+								var payloadMixed = snapshotimages.child("file_one_and_two").val();
+								if (payloadMixed !== null && payloadMixed !== "") {
+									
+									img_mix = "<img src='" + payloadMixed + "' height='100' width='200'>";
 								} else {
-									if (txt_one.indexOf("www.youtube") > -1) {
-										img_one = "<img src='images/youtube.png' height='80' width='80' >";
-									} else if (txt_one.indexOf("www.ebay") > -1) {
-										img_one = "<img src='images/ebay.png' height='80' width='80' >";
-									} else if (txt_one.indexOf("www.amazon") > -1) {
-										img_one = "Collignon<img src='images/amazon.png' height='80' width='80' >";
-									} else if (txt_one.indexOf("www.") > -1 || txt_one.indexOf("http:") > -1 || txt_one.indexOf("https:") > -1) {
-										img_one = "<img src='images/link.png' height='80' width='80' >";
-									} else {
-										img_one = "<img src='images/abc.png' height='80' width='80' >";
-									}
-								}
 
-								var payloadTwo = snapshotimages.child("file_two").val();
+									var payloadOne = snapshotimages.child("file_one").val();
 
-								if (payloadOne !== null && payloadOne !== "") {
-									var img = new Image();
-									img.src = payloadTwo;
-									img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
-								} else {
-									if (txt_two.indexOf("youtube.com") > -1) {
-										img_two = "<img src='images/youtube.png' height='80' width='80' >";
-									} else if (txt_two.indexOf("www.ebay") > -1) {
-										img_two = "<img src='images/ebay.png' height='80' width='80' >";
-									} else if (txt_two.indexOf("www.amazon") > -1) {
-										img_two = "<img src='images/amazon.png' height='80' width='80' >";
-									} else if (txt_two.indexOf("www.") > -1 || txt_two.indexOf("http:") > -1 || txt_two.indexOf("https:") > -1) {
-										img_two = "<img src='images/link.png' height='80' width='80' >";
+									if (payloadOne !== null && payloadOne !== "") {
+										var img = new Image();
+										img.src = payloadOne;
+										img_one = "<img src='" + payloadOne + "' height='80' width='80'>";
 									} else {
-										img_two = "<img src='images/abc.png' height='80' width='80' >";
+										if (txt_one.indexOf("www.youtube") > -1) {
+											img_one = "<img src='images/youtube.png' height='80' width='80' >";
+										} else if (txt_one.indexOf("www.ebay") > -1) {
+											img_one = "<img src='images/ebay.png' height='80' width='80' >";
+										} else if (txt_one.indexOf("www.amazon") > -1) {
+											img_one = "Collignon<img src='images/amazon.png' height='80' width='80' >";
+										} else if (txt_one.indexOf("www.") > -1 || txt_one.indexOf("http:") > -1 || txt_one.indexOf("https:") > -1) {
+											img_one = "<img src='images/link.png' height='80' width='80' >";
+										} else {
+											img_one = "<img src='images/abc.png' height='80' width='80' >";
+										}
 									}
+
+									var payloadTwo = snapshotimages.child("file_two").val();
+
+									if (payloadOne !== null && payloadOne !== "") {
+										var img = new Image();
+										img.src = payloadTwo;
+										img_two = "<img src='" + payloadTwo + "' height='80' width='80'>";
+									} else {
+										if (txt_two.indexOf("youtube.com") > -1) {
+											img_two = "<img src='images/youtube.png' height='80' width='80' >";
+										} else if (txt_two.indexOf("www.ebay") > -1) {
+											img_two = "<img src='images/ebay.png' height='80' width='80' >";
+										} else if (txt_two.indexOf("www.amazon") > -1) {
+											img_two = "<img src='images/amazon.png' height='80' width='80' >";
+										} else if (txt_two.indexOf("www.") > -1 || txt_two.indexOf("http:") > -1 || txt_two.indexOf("https:") > -1) {
+											img_two = "<img src='images/link.png' height='80' width='80' >";
+										} else {
+											img_two = "<img src='images/abc.png' height='80' width='80' >";
+										}
+									}
+
+									img_mix = img_one + img_two;
+
 								}
 								var voteone = snapshotvotes.child("vote_one").val();
 								var votetwo = snapshotvotes.child("vote_two").val();
@@ -210,7 +221,7 @@ function populateTable() {
 								var userlink = "https://www.choozzy.com/userwall.html#" + user_id;
 								var choozzelink = "https://www.choozzy.com/vote.html#" + ss.key();
 
-								var newDiv = createArticle(img_one + img_two, title, choozzelink, txt_one, txt_two, txt_username, fullDate, voteone, votetwo, userlink);
+								var newDiv = createArticle(img_mix, title, choozzelink, txt_one, txt_two, txt_username, fullDate, voteone, votetwo, userlink);
 
 								table.prepend(newDiv).masonry('appended', newDiv).fadeIn();
 							});

@@ -120,11 +120,10 @@ var halfSize = function(i) {
 $(document).ready(function() {
 
 	setUserName();
-	
-	if(authData.uid === "simplelogin:53"){
-		$('#tags-row').removeClass("hidden");	
+
+	if (authData.uid === "simplelogin:53") {
+		$('#tags-row').removeClass("hidden");
 	}
-		
 
 	var te = document.querySelector('textarea');
 	te.addEventListener('keydown', resizeTextarea);
@@ -134,7 +133,7 @@ $(document).ready(function() {
 	$('#txt_one_box').val("");
 	$('#txt_two_box').val("");
 	$('#txt_title').val("");
-	
+
 	$("#privateCheck").removeAttr('checked');
 
 	$('#edit_submit_btn').hide();
@@ -260,11 +259,11 @@ $(document).ready(function() {
 			$('#txt_two_box').blur();
 		}
 	});
-	
+
 	$('#privateCheck').click(function() {
 		if ($("#privateCheck").is(":checked")) {
 			$('#txt_secret').removeClass("hidden");
-		}else{
+		} else {
 			$('#txt_secret').addClass("hidden");
 			$('#txt_secret').val("");
 		}
@@ -281,7 +280,7 @@ $(document).ready(function() {
 		var txt_two = $('#txt_two_box').val().trim();
 		var txt_secret = $('#txt_secret').val().trim();
 		var txt_tags = $('#txt_tags').val().trim();
-		
+
 		var scr1scr = $('#src1').attr('src');
 		var scr2scr = $('#src2').attr('src');
 		if (scr1scr === undefined) {
@@ -329,7 +328,7 @@ $(document).ready(function() {
 		}
 
 		if ($("#privateCheck").is(":checked")) {
-			if (txt_secret === "" ) {
+			if (txt_secret === "") {
 				$.growl("Please enter a secret key", {
 					type : "danger",
 					placement : {
@@ -341,12 +340,12 @@ $(document).ready(function() {
 				return false;
 			}
 		}
-		
+
 		var published = false;
 		if ($("#publicCheck").is(":checked")) {
 			published = true;
 		}
-		
+
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
 
 		$('#save_submit_btn').hide();
@@ -420,9 +419,12 @@ $(document).ready(function() {
 
 								var postsRefImages = ref.child("compares-images").child(postID);
 
+								var mixedPayload = convertImagesToSingleImage(txt_one, txt_two, scr1scr, scr2scr);
+
 								postsRefImages.set({
 									file_one : scr1scr, //filePayloadOne,
-									file_two : scr2scr //,filePayloadTwo
+									file_two : scr2scr, //,filePayloadTwo
+									file_one_and_two : mixedPayload
 								}, function(error) {
 									if (error) {
 										$.growl("Data could not be saved." + error, {
@@ -477,6 +479,15 @@ $(document).ready(function() {
 		var txt_two = $('#txt_two_box').val().trim();
 		var txt_secret = $('#txt_secret').val().trim();
 		var txt_tags = $('#txt_tags').val().trim();
+		var scr1scr = $('#src1').attr('src');
+		var scr2scr = $('#src2').attr('src');
+		if (scr1scr === undefined) {
+			scr1scr = "";
+		}
+
+		if (scr2scr === undefined) {
+			scr2scr = "";
+		}
 
 		if (txt_title === "") {
 			$.growl("Please enter a title for this compare", {
@@ -513,9 +524,9 @@ $(document).ready(function() {
 
 			return false;
 		}
-		
+
 		if ($("#privateCheck").is(":checked")) {
-			if (txt_secret === "" ) {
+			if (txt_secret === "") {
 				$.growl("Please enter a secret key", {
 					type : "danger",
 					placement : {
@@ -527,7 +538,7 @@ $(document).ready(function() {
 				return false;
 			}
 		}
-		
+
 		var published = false;
 		if ($("#publicCheck").is(":checked")) {
 			published = true;
@@ -567,17 +578,28 @@ $(document).ready(function() {
 				if (filePayloadOne !== "") {
 
 					postsRefImages.update({
-						file_one : filePayloadOne
+						file_one : scr1scr
 					});
 				}
 
 				if (filePayloadTwo !== "") {
 
 					postsRefImages.update({
-						file_two : filePayloadTwo
+						file_two : scr2scr
 					});
 				}
 
+				if (scr1scr !== "" || scr2scr !== "") {
+
+					var mixedPayload = convertImagesToSingleImage(txt_one, txt_two, scr1scr, scr2scr);
+
+					if (mixedPayload !== "") {
+
+						postsRefImages.update({
+							file_one_and_two : mixedPayload
+						});
+					}
+				}
 				$.growl("Updated successfully", {
 					type : "success",
 					placement : {
@@ -631,7 +653,7 @@ $(document).ready(function() {
 		}
 
 		var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
-		var urlToSharePhp = "http://choozzy.yarenty.com/vote.php?q=" +postID;
+		var urlToSharePhp = "http://choozzy.yarenty.com/vote.php?q=" + postID;
 		urlToShare = urlToSharePhp;
 
 		stWidget.addEntry({

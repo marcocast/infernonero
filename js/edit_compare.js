@@ -149,9 +149,9 @@ $(document).ready(function() {
 	var image2Exists = false;
 
 	setUserName();
-	
-	if(authData.uid === "simplelogin:53"){
-		$('#tags-row').removeClass("hidden");	
+
+	if (authData.uid === "simplelogin:53") {
+		$('#tags-row').removeClass("hidden");
 	}
 
 	$('#edit_submit_btn').hide();
@@ -209,7 +209,7 @@ $(document).ready(function() {
 					if (txt_title != null) {
 						$('#txt_title').val(txt_title);
 					}
-					
+
 					var txt_tags = snap.child("txt_tags").val();
 					if (txt_tags != null) {
 						$('#txt_tags').val(txt_tags);
@@ -450,6 +450,15 @@ $(document).ready(function() {
 					var txt_two = $('#txt_two_box').val().trim();
 					var txt_secret = $('#txt_secret').val().trim();
 					var txt_tags = $('#txt_tags').val().trim();
+					var scr1scr = $('#src1').attr('src');
+					var scr2scr = $('#src2').attr('src');
+					if (scr1scr === undefined) {
+						scr1scr = "";
+					}
+
+					if (scr2scr === undefined) {
+						scr2scr = "";
+					}
 
 					if (txt_title === "") {
 						$.growl("Please enter a title for this compare", {
@@ -539,18 +548,30 @@ $(document).ready(function() {
 
 							var postsRefImages = ref.child("compares-images").child(snap.child("compare_id").val());
 
-							if (filePayloadOne !== "") {
+							if (scr1scr !== "") {
 
 								postsRefImages.update({
-									file_one : $('#src1').attr('src')
+									file_one : scr1scr
 								});
 							}
 
-							if (filePayloadTwo !== "") {
+							if (scr2scr !== "") {
 
 								postsRefImages.update({
-									file_two : $('#src2').attr('src')
+									file_two :scr2scr
 								});
+							}
+
+							if (scr1scr !== "" || scr2scr !== "") {
+
+								var mixedPayload = convertImagesToSingleImage(txt_one, txt_two, scr1scr, scr2scr);
+
+								if (mixedPayload !== "") {
+
+									postsRefImages.update({
+										file_one_and_two : mixedPayload
+									});
+								}
 							}
 
 							$.growl("Updated successfully", {
@@ -608,7 +629,7 @@ $(document).ready(function() {
 					var postID = snap.child("compare_id").val();
 
 					var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
-					var urlToSharePhp = "http://choozzy.yarenty.com/vote.php?q=" +postID;
+					var urlToSharePhp = "http://choozzy.yarenty.com/vote.php?q=" + postID;
 					urlToShare = urlToSharePhp;
 
 					stWidget.addEntry({
