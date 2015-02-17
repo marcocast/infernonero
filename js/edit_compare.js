@@ -609,6 +609,7 @@ $(document).ready(function() {
 
 					var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
 					var urlToSharePhp = "http://choozzy.yarenty.com/vote.php?q=" +postID;
+					urlToShare = urlToSharePhp;
 
 					stWidget.addEntry({
 						"service" : "facebook",
