@@ -647,7 +647,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "twitter",
 			"element" : document.getElementById('share_twitter_button'),
-			"url" : urlToSharePhp,
+			"url" : urlToShare,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -670,7 +670,7 @@ $(document).ready(function() {
 			"service" : "whatsapp",
 			"element" : document.getElementById('share_whatsapp_button'),
 			"url" : urlToShare,
-			"title" : urlToSharePhp,
+			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
 			"image" : "https://www.choozzy.com/images/restart_logo.png",
@@ -680,7 +680,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "email",
 			"element" : document.getElementById('share_email_button'),
-			"url" : urlToSharePhp,
+			"url" : urlToShare,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -713,7 +713,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "reddit",
 			"element" : document.getElementById('share_reddit_button'),
-			"url" : urlToSharePhp,
+			"url" : urlToShare,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,

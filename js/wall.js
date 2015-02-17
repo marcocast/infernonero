@@ -25,6 +25,8 @@ ref.onAuth(function(authData) {
 		$('#manage').show();
 
 	} else {
+		
+		window.location.href = "/index.html";
 		console.log("User is logged out");
 		$('#logout').hide();
 		$('#username').hide();

@@ -624,7 +624,7 @@ $(document).ready(function() {
 					stWidget.addEntry({
 						"service" : "twitter",
 						"element" : document.getElementById('share_twitter_button'),
-						"url" : urlToSharePhp,
+						"url" : urlToShare,
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
@@ -646,7 +646,7 @@ $(document).ready(function() {
 					stWidget.addEntry({
 						"service" : "whatsapp",
 						"element" : document.getElementById('share_whatsapp_button'),
-						"url" : urlToSharePhp,
+						"url" : urlToShare,
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
@@ -657,7 +657,7 @@ $(document).ready(function() {
 					stWidget.addEntry({
 						"service" : "email",
 						"element" : document.getElementById('share_email_button'),
-						"url" : urlToSharePhp,
+						"url" : urlToShare,
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
@@ -679,7 +679,7 @@ $(document).ready(function() {
 					stWidget.addEntry({
 						"service" : "pinterest",
 						"element" : document.getElementById('share_pinterest_button'),
-						"url" : urlToShare,
+						"url" : urlToSharePhp,
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
@@ -690,7 +690,7 @@ $(document).ready(function() {
 					stWidget.addEntry({
 						"service" : "reddit",
 						"element" : document.getElementById('share_reddit_button'),
-						"url" : urlToSharePhp,
+						"url" : urlToShare,
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
