@@ -652,14 +652,12 @@ $(document).ready(function() {
 			description = txt_one + " VS " + txt_two;
 		}
 
-		var urlToShare = "https://www.choozzy.com/vote.html#" + postID;
-		var urlToSharePhp = "http://choozzy.yarenty.com/vote.php?q=" + postID;
-		urlToShare = urlToSharePhp;
+		var urlToShare = "http://share.choozzy.com/vote.php?q=" + postID;
 
 		stWidget.addEntry({
 			"service" : "facebook",
 			"element" : document.getElementById('share_facebook_button'),
-			"url" : urlToSharePhp,
+			"url" : urlToShare,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -681,7 +679,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "linkedin",
 			"element" : document.getElementById('share_linkedin_button'),
-			"url" : urlToSharePhp,
+			"url" : urlToShare,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -714,7 +712,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "googleplus",
 			"element" : document.getElementById('share_googleplus_button'),
-			"url" : urlToSharePhp,
+			"url" : urlToShare,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
@@ -725,7 +723,7 @@ $(document).ready(function() {
 		stWidget.addEntry({
 			"service" : "pinterest",
 			"element" : document.getElementById('share_pinterest_button'),
-			"url" : urlToSharePhp,
+			"url" : urlToShare,
 			"title" : txt_title,
 			"type" : "large",
 			"text" : txt_title,
