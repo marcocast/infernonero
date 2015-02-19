@@ -124,7 +124,7 @@ function populateTable() {
 	var table = $("#container1");
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/simplelogin:53");
-	refCompares.limitToLast(100).on("value", function(followsnapshot) {
+	refCompares.limitToLast(100).once("value", function(followsnapshot) {
 
 		// iterate all the elements :((
 		followsnapshot.forEach(function(ss) {
@@ -140,7 +140,7 @@ function populateTable() {
 				var published = snapshot.child("published").val();
 				var txt_tags = snapshot.child("txt_tags").val();
 
-				if (txt_tags === null || published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
+				if (txt_tags === null || published === false || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var thisContext = false;
@@ -240,7 +240,7 @@ function populatePopular() {
 	var table = $("#container2");
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/simplelogin:53");
-	refCompares.limitToLast(100).on("value", function(followsnapshot) {
+	refCompares.limitToLast(100).once("value", function(followsnapshot) {
 
 		// iterate all the elements :((
 		followsnapshot.forEach(function(ss) {
@@ -256,7 +256,7 @@ function populatePopular() {
 				var published = snapshot.child("published").val();
 				var txt_tags = snapshot.child("txt_tags").val();
 
-				if (txt_tags === null || published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
+				if (txt_tags === null || published === false || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);

@@ -101,7 +101,7 @@ function populateTable() {
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/" + useridhash);
 	// Attach an asynchronous callback to read the data at our posts reference
-	refCompares.on("value", function(snapshot) {
+	refCompares.once("value", function(snapshot) {
 
 		// iterate all the elements :((
 		snapshot.forEach(function(ss) {
@@ -118,7 +118,7 @@ function populateTable() {
 				var txt_secret = snapshot.child("txt_secret").val();
 				var user_id = snapshot.child("user_id").val();
 				var published = snapshot.child("published").val();
-				if (published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
+				if (published === false || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);

@@ -124,7 +124,7 @@ function populateTable() {
 	var table = $("#container1");
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/follow-compares/" + authData.uid);
-	refCompares.on("value", function(followsnapshot) {
+	refCompares.once("value", function(followsnapshot) {
 
 		// iterate all the elements :((
 		followsnapshot.forEach(function(ss) {
@@ -234,7 +234,7 @@ function populateTableByUser() {
 	var table = $("#container1");
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/follow-users/" + authData.uid);
-	refCompares.on("value", function(followsnapshot) {
+	refCompares.once("value", function(followsnapshot) {
 
 		// iterate all the elements :((
 		followsnapshot.forEach(function(ss) {
@@ -252,7 +252,7 @@ function populateTableByUserId(useridhash) {
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/" + useridhash);
 	// Attach an asynchronous callback to read the data at our posts reference
-	refCompares.on("value", function(snapshot) {
+	refCompares.once("value", function(snapshot) {
 
 		// iterate all the elements :((
 		snapshot.forEach(function(ss) {
@@ -270,7 +270,7 @@ function populateTableByUserId(useridhash) {
 				var user_id = snapshot.child("user_id").val();
 				var published = snapshot.child("published").val();
 
-				if (published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
+				if (published === false || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);
@@ -365,7 +365,7 @@ function populatePopular() {
 
 	var refCompares = new Firebase("https://infernonero.firebaseio.com/users-compares/simplelogin:53");
 	// Attach an asynchronous callback to read the data at our posts reference
-	refCompares.on("value", function(snapshot) {
+	refCompares.once("value", function(snapshot) {
 
 		// iterate all the elements :((
 		snapshot.forEach(function(ss) {
@@ -382,7 +382,7 @@ function populatePopular() {
 				var txt_secret = snapshot.child("txt_secret").val();
 				var user_id = snapshot.child("user_id").val();
 				var published = snapshot.child("published").val();
-				if (published === null || published != true || title === null || (txt_secret != null && txt_secret != "")) {
+				if (published === false || title === null || (txt_secret != null && txt_secret != "")) {
 
 				} else {
 					var refCompareVotes = new Firebase("https://infernonero.firebaseio.com/compares-votes/" + compareId);
