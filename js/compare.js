@@ -326,24 +326,12 @@ $(document).ready(function() {
 			$('#txt_two_box').focus();
 			return false;
 		}
-
+		
+		
+		var published = true;
 		if ($("#privateCheck").is(":checked")) {
-			if (txt_secret === "") {
-				$.growl("Please enter a secret key", {
-					type : "danger",
-					placement : {
-						from : "top",
-						align : "center"
-					}
-				});
-				$('#txt_secret').focus();
-				return false;
-			}
-		}
-
-		var published = false;
-		if ($("#publicCheck").is(":checked")) {
-			published = true;
+			published = false;
+			
 		}
 
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
@@ -524,26 +512,15 @@ $(document).ready(function() {
 
 			return false;
 		}
-
+		
+		var published = true;
 		if ($("#privateCheck").is(":checked")) {
-			if (txt_secret === "") {
-				$.growl("Please enter a secret key", {
-					type : "danger",
-					placement : {
-						from : "top",
-						align : "center"
-					}
-				});
-				$('#txt_secret').focus();
-				return false;
-			}
+			published = false;
+			
 		}
 
-		var published = false;
-		if ($("#publicCheck").is(":checked")) {
-			published = true;
-		}
-
+		
+		
 		var now = new Date().getTime();
 
 		var postsRef = ref.child("compares").child(postID);

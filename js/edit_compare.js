@@ -214,23 +214,22 @@ $(document).ready(function() {
 					if (txt_tags != null) {
 						$('#txt_tags').val(txt_tags);
 					}
+					
+					var published = snap.child("published").val();
+					if (published === false) {
+						$("#privateCheck").attr('checked', 'checked');
+						$('#txt_secret').removeClass("hidden");
+					} else {
+						$("#privateCheck").removeAttr('checked');
+					}
 
 					var txt_secret = snap.child("txt_secret").val();
 					if (txt_secret != null && txt_secret != "") {
-						$("#privateCheck").attr('checked', 'checked');
 						$("#txt_secret").val(txt_secret);
-						$('#txt_secret').removeClass("hidden");
+						
 
 					} else {
-						$("#privateCheck").removeAttr('checked');
 						$("#txt_secret").val("");
-					}
-
-					var published = snap.child("published").val();
-					if (published === null || published != true) {
-						$("#publicCheck").removeAttr('checked');
-					} else {
-						$("#publicCheck").attr('checked', 'checked');
 					}
 
 					var p1 = snap.child("preview_one").val();
@@ -495,25 +494,13 @@ $(document).ready(function() {
 						$('#txt_two_box').focus();
 						return false;
 					}
-
+					
+					var published = true;
 					if ($("#privateCheck").is(":checked")) {
-						if (txt_secret === "") {
-							$.growl("Please enter a secret key", {
-								type : "danger",
-								placement : {
-									from : "top",
-									align : "center"
-								}
-							});
-							$('#txt_secret').focus();
-							return false;
-						}
+						published = false;
 					}
 
-					var published = false;
-					if ($("#publicCheck").is(":checked")) {
-						published = true;
-					}
+					
 
 					var now = new Date().getTime();
 
