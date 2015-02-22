@@ -6,117 +6,6 @@ if (authData) {
 	window.location.href = "/register.html?compare.html";
 }
 
-function resizeTextarea(ev) {
-	this.style.height = '24px';
-	this.style.height = this.scrollHeight + 14 + 'px';
-}
-
-var template = ['<div class="row">', '<div class="col-sm-4 column">', '<img class="thumb" src="{{thumbnail_url}}"></img>', '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
-
-var render1 = function(data, options) {
-	var preview = $('#txt_one_box').data('preview');
-	html = $(Mustache.to_html(template, preview));
-	html.data('preview', preview);
-	html.on('click', function() {
-		var data = $(this).data('preview');
-		// Insert the video or rich object.
-		if (data.media.type === 'video' || data.media.type === 'rich') {
-			$(this).html(data.media.html);
-			return false;
-		}
-		return true;
-	});
-	// Display the item in the feed.
-	$('#feed1').append(html);
-	return false;
-};
-
-var render2 = function(data, options) {
-	var preview = $('#txt_two_box').data('preview');
-	html = $(Mustache.to_html(template, preview));
-	html.data('preview', preview);
-	html.on('click', function() {
-		var data = $(this).data('preview');
-		// Insert the video or rich object.
-		if (data.media.type === 'video' || data.media.type === 'rich') {
-			$(this).html(data.media.html);
-			return false;
-		}
-		return true;
-	});
-	// Display the item in the feed.
-	$('#feed2').append(html);
-	return false;
-};
-
-var mainCanvas;
-
-/*
- * Creates a new image object from the src
- * Uses the deferred pattern
- */
-var createImage = function(src) {
-	var deferred = $.Deferred();
-	var img = new Image();
-
-	img.onload = function() {
-		deferred.resolve(img);
-	};
-	img.src = src;
-	return deferred.promise();
-};
-
-/*
- * Create an Image, when loaded pass it on to the resizer
- */
-var startResize = function() {
-	$.when(createImage($("#inputImage").attr('src'))).then(resize, function() {
-		console.log('error')
-	});
-};
-
-/*
- * Draw the image object on a new canvas and half the size of the canvas
- * until the darget size has been reached
- * Afterwards put the base64 data into the target image
- */
-var resize1 = function(image) {
-	mainCanvas = document.createElement("canvas");
-	WIDTH = 400;
-	if (image.width > WIDTH) {
-		ratio = image.width / image.height;
-		mainCanvas.width = WIDTH;
-		mainCanvas.height = WIDTH / ratio;
-		var ctx = mainCanvas.getContext("2d");
-		ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
-		$('#src1').attr('src', mainCanvas.toDataURL("image/jpeg"));
-	}
-};
-
-var resize2 = function(image) {
-	mainCanvas = document.createElement("canvas");
-	WIDTH = 400;
-	if (image.width > WIDTH) {
-		ratio = image.width / image.height;
-		mainCanvas.width = WIDTH;
-		mainCanvas.height = WIDTH / ratio;
-		var ctx = mainCanvas.getContext("2d");
-		ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
-		$('#src2').attr('src', mainCanvas.toDataURL("image/jpeg"));
-	}
-};
-/*
- * Draw initial canvas on new canvas and half it's size
- */
-var halfSize = function(i) {
-	var canvas = document.createElement("canvas");
-	canvas.width = i.width / 2;
-	canvas.height = i.height / 2;
-	var ctx = canvas.getContext("2d");
-	ctx.drawImage(i, 0, 0, canvas.width, canvas.height);
-	return canvas;
-};
-
 $(document).ready(function() {
 
 	setUserName();
@@ -151,77 +40,12 @@ $(document).ready(function() {
 		key : '0079fbf00cf74fdc8204cc8c611c2c08',
 		render : render2
 	});
+	
+	
+	loadPayload(document.getElementById('fileInputOne'), document.getElementById('fileDisplayAreaOne'), "src1", resize1);
+	loadPayload(document.getElementById('fileInputTwo'), document.getElementById('fileDisplayAreaTwo'), "src2", resize2);
 
-	var filePayloadOne = "";
-	var fileInputOne = document.getElementById('fileInputOne');
-	fileInputOne.files[0] = null;
-	var fileDisplayAreaOne = document.getElementById('fileDisplayAreaOne');
-
-	fileInputOne.addEventListener('change', function(e) {
-		var file = fileInputOne.files[0];
-		var imageType = /image.*/;
-
-		if (file.type.match(imageType)) {
-			var reader = new FileReader();
-
-			reader.onload = function(e) {
-				fileDisplayAreaOne.innerHTML = "";
-
-				var img = new Image();
-
-				filePayloadOne = reader.result;
-
-				img.src = reader.result;
-				img.id = "src1";
-
-				fileDisplayAreaOne.appendChild(img);
-
-				$.when(createImage(img.src)).then(resize1, function() {
-					console.log('error')
-				});
-
-			}
-
-			reader.readAsDataURL(file);
-		} else {
-			fileDisplayAreaOne.innerHTML = "File not supported!"
-		}
-	});
-
-	var filePayloadTwo = "";
-	var fileInputTwo = document.getElementById('fileInputTwo');
-	var fileDisplayAreaTwo = document.getElementById('fileDisplayAreaTwo');
-
-	fileInputTwo.addEventListener('change', function(e) {
-		var file = fileInputTwo.files[0];
-		var imageType = /image.*/;
-
-		if (file.type.match(imageType)) {
-			var reader = new FileReader();
-
-			reader.onload = function(e) {
-				fileDisplayAreaTwo.innerHTML = "";
-
-				var img = new Image();
-
-				filePayloadTwo = reader.result;
-
-				img.src = reader.result;
-
-				img.id = "src2";
-
-				fileDisplayAreaTwo.appendChild(img);
-
-				$.when(createImage(img.src)).then(resize2, function() {
-					console.log('error')
-				});
-			}
-
-			reader.readAsDataURL(file);
-		} else {
-			fileDisplayAreaTwo.innerHTML = "File not supported!"
-		}
-	});
+	
 
 	$('#loggingout').click(function() {
 
@@ -326,12 +150,11 @@ $(document).ready(function() {
 			$('#txt_two_box').focus();
 			return false;
 		}
-		
-		
+
 		var published = true;
 		if ($("#privateCheck").is(":checked")) {
 			published = false;
-			
+
 		}
 
 		var userComparesRef = ref.child("users-compares").child(authData.uid);
@@ -512,15 +335,13 @@ $(document).ready(function() {
 
 			return false;
 		}
-		
+
 		var published = true;
 		if ($("#privateCheck").is(":checked")) {
 			published = false;
-			
+
 		}
 
-		
-		
 		var now = new Date().getTime();
 
 		var postsRef = ref.child("compares").child(postID);

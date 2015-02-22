@@ -6,17 +6,6 @@ $('#disqus_thread').hide();
 
 var template = ['<div class="row">', '<div class="col-sm-4 columns">', '<img class="thumb" src="{{thumbnail_url}}"></img>', '</div>', '<div class="col-sm-7 column">', '<a href="{{original_url}}">{{title}}</a>', '<p>{{description}}</p>', '</div>', '</div>'].join('');
 
-function objToString(obj) {
-	var str = '';
-	for (var p in obj) {
-		if (obj.hasOwnProperty(p)) {
-			str += p + '::' + obj[p] + '\n';
-		}
-	}
-	return str;
-}
-
-
 $(document).ready(function() {
 
 	setUserName();
@@ -42,10 +31,10 @@ $(document).ready(function() {
 	} else {
 
 		var authData = ref.getAuth();
-		
+
 		var secret = "";
 		var following = false;
-		
+
 		if (authData) {
 
 			followComparesRef.child(authData.uid).child(hash).once("value", function(snap) {
@@ -105,7 +94,7 @@ $(document).ready(function() {
 			}
 
 			var txt_secret = snap.child("txt_secret").val();
-						
+
 			if (!following && txt_secret != null && txt_secret != "") {
 				$('#section_secret').removeClass("hidden");
 				secret = txt_secret;
@@ -118,7 +107,7 @@ $(document).ready(function() {
 			if (txt_two != null) {
 				$('#two_box').html(txt_two);
 			}
-			
+
 			var userlink = "#";
 			var user_id = snap.child("user_id").val();
 			if (user_id != null) {
@@ -130,44 +119,19 @@ $(document).ready(function() {
 			if (txt_title != null) {
 				var txt_username = snap.child("txt_username").val();
 				if (txt_username != null) {
-					txt_title = txt_title + " <small><a href='"+userlink+"'> by " + txt_username + "</a></small>";
+					txt_title = txt_title + " <small><a href='" + userlink + "'> by " + txt_username + "</a></small>";
 				}
 				$('#txt_title').html(txt_title);
 			}
 
 			var p1 = snap.child("preview_one").val();
 			if (p1 != null) {
-
-				html = $(Mustache.to_html(template, p1));
-				html.data('preview', p1);
-				html.on('click', function() {
-					var data = $(this).data('preview');
-					// Insert the video or rich object.
-					if (data.media.type === 'video' || data.media.type === 'rich') {
-						$(this).html(data.media.html);
-						return false;
-					}
-					return true;
-				});
-				$('#feed1').empty();
-				$('#feed1').append(html);
+				renderImage(null, null, p1, $('#feed1'));
 			}
 
 			var p2 = snap.child("preview_two").val();
 			if (p2 != null) {
-				html = $(Mustache.to_html(template, p2));
-				html.data('preview', p2);
-				html.on('click', function() {
-					var data = $(this).data('preview');
-					// Insert the video or rich object.
-					if (data.media.type === 'video' || data.media.type === 'rich') {
-						$(this).html(data.media.html);
-						return false;
-					}
-					return true;
-				});
-				$('#feed2').empty();
-				$('#feed2').append(html);
+				renderImage(null, null, p2, $('#feed2'));
 			}
 
 		});
@@ -234,16 +198,14 @@ $(document).ready(function() {
 			}
 
 		});
-		
-		
-		
+
 		$('#secret_button').click(function() {
-			
-			if(secret == $('#txt_secret_input').val()){
+
+			if (secret == $('#txt_secret_input').val()) {
 				$('#section_secret').addClass("hidden");
 				$("#all_content").removeClass('hidden');
 				$("#comments_content").removeClass('hidden');
-			}else{
+			} else {
 				$.growl("Sorry, wrong secret", {
 					type : "danger",
 					placement : {
@@ -252,10 +214,8 @@ $(document).ready(function() {
 					}
 				});
 			}
-			
 
 		});
-
 
 		$('#vote_one').click(function() {
 
