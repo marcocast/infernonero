@@ -392,7 +392,8 @@ $(document).ready(function() {
 
 					var postID = snap.child("compare_id").val();
 
-					var urlToShare = "http://share.choozzy.com/vote.php?q=" + postID;
+					var urlToShare = "share.choozzy.com/vote.php?q=" + postID;
+					var urlToShareStatic = "www.choozzy.com/vote.html#" + postID;
 
 					stWidget.addEntry({
 						"service" : "facebook",
@@ -408,7 +409,7 @@ $(document).ready(function() {
 					stWidget.addEntry({
 						"service" : "twitter",
 						"element" : document.getElementById('share_twitter_button'),
-						"url" : urlToShare,
+						"url" : urlToShareStatic,
 						"title" : txt_title,
 						"type" : "large",
 						"text" : txt_title,
