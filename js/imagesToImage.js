@@ -14,12 +14,24 @@ function convertImagesToSingleImage(text1, text2, src1, src2) {
 		var imgVS = new Image();
 		img1.src = src1;
 		img2.src = src2;
-		imgVS.src = "vs.png";
+		imgVS.src = document.getElementById("choozzy");
 		ctx.drawImage(img1, 0, 0, 250, 250);
-		ctx.drawImage(imgVS, 200, 80, 100, 40);
 		ctx.drawImage(img2, 250, 0, 250, 250);
-
-		return canvas.toDataURL("image/png");
+		ctx.drawImage(imgVS, 200, 80, 100, 40);
+		
+		var txt = "Choozze-it!";
+		ctx.font="bold 30px Arial";
+		ctx.fillStyle="#FFFFFF";
+		//shadow ;-)
+		ctx.fillText(txt,180,110);
+		ctx.fillText(txt,184,114);
+		ctx.fillText(txt,180,114);
+		ctx.fillText(txt,184,110);
+		
+		ctx.fillStyle="#4fb8a1";
+		ctx.fillText(txt,182,112);
+		
+		return canvas.toDataURL("image/jpeg");
 
 	} else {
 		return "";
