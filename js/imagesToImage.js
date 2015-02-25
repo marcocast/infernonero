@@ -2,7 +2,7 @@ function convertImagesToSingleImage(text1, text2, src1, src2) {
 
 	if (src1 !== null && src1 !== "" && src2 !== null && src2 !== "") {
 		x = 500;
-		y = 200;
+		y = 250;
 
 		var canvas = document.createElement('CANVAS');
 
@@ -15,9 +15,9 @@ function convertImagesToSingleImage(text1, text2, src1, src2) {
 		img1.src = src1;
 		img2.src = src2;
 		imgVS.src = "vs.png";
-		ctx.drawImage(img1, 0, 0, 200, 200);
+		ctx.drawImage(img1, 0, 0, 250, 250);
 		ctx.drawImage(imgVS, 200, 80, 100, 40);
-		ctx.drawImage(img2, 300, 0, 200, 200);
+		ctx.drawImage(img2, 250, 0, 250, 250);
 
 		return canvas.toDataURL("image/png");
 
